@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HotelService} from "../hotel/hotel.service";
+import {Hotel} from "../hotel/hotel";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+
 })
-export class AppComponent {
-  title = 'freedom-of-travel';
+export class AppComponent implements OnInit {
+
+  ngOnInit(){
+
+  }
 }
+
