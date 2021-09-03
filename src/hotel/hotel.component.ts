@@ -23,4 +23,5 @@ export class HotelComponent implements OnInit{
 
   displayedColumns: string[] = ['id', 'hotelName', 'city', 'rating'];
 
+
 }

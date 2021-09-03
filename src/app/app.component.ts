@@ -3,15 +3,24 @@ import {HotelService} from "../hotel/hotel.service";
 import {Hotel} from "../hotel/hotel";
 import {Apartment} from "../apartment/apartment";
 import {ApartmentService} from "../apartment/apartment.service";
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 
 })
+
+
 export class AppComponent implements OnInit {
 
-  ngOnInit(){
+  constructor(
+    private router:Router //instanciate a router
+  ){}
+
+  ngOnInit() {
 
   }
-}
 
+}
