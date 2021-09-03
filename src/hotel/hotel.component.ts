@@ -14,7 +14,6 @@ import {HotelService} from "./hotel.service";
 export class HotelComponent implements OnInit{
    hotels: Hotel[]=[];
 
-
   constructor(private httpService: HotelService){}
 
   ngOnInit(){
