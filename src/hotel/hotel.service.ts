@@ -16,13 +16,6 @@ export class HotelService {
   public getAllHotelPage(): Observable<Hotel[]> {
     console.log("getAllHotelPage invoked");
     return this.http.get<Hotel[]>(this.hotelUrlAll);
-    /*.pipe(map((data: any) =>{
-      let hotelList = data[""];
-      return hotelList.map(function (hotel: any): Hotel{
-        return new Hotel(hotel.id,hotel.hotelName, hotel.city,hotel.rating)
-     })*/
-    //return this.http.get<Hotel[]>(this.hotelUrlAll).pipe(id =>id, hotelName =>hotelName, city => city, rating => rating)
-    //return this.http.get<Hotel[]>(this.hotelUrlAll).pipe(map((response: any) => response.json()));
   }
 
 }

@@ -7,18 +7,13 @@ import {HotelService} from "./hotel.service";
 
 @Component({
     selector: 'app-hotel',
-    template: '<ul>\n' +
-      '                <li *ngFor="let hotel of hotels">\n' +
-      '                <p>ID: {{hotel?.id}}</p>\n' +
-      '                <p>NAME: {{hotel?.hotelName}}</p>\n' +
-      '                <p>CITY: {{hotel?.city}}</p>\n' +
-      '                <p>RATING: {{hotel?.rating}}</p>\n' +
-      '                </li>\n' +
-      '            </ul>',
+    styleUrls: ['hotel.component.css'],
+    templateUrl: 'hotel.component.html',
     providers: [HotelService]
 })
 export class HotelComponent implements OnInit{
-  hotels: Hotel[]=[];
+   hotels: Hotel[]=[];
+
 
   constructor(private httpService: HotelService){}
 
@@ -27,6 +22,6 @@ export class HotelComponent implements OnInit{
     this.httpService.getAllHotelPage().subscribe((data: Hotel[]) => this.hotels=data);
   }
 
-
+  displayedColumns: string[] = ['id', 'hotelName', 'city', 'rating'];
 
 }
