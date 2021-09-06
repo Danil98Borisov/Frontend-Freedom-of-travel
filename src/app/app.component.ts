@@ -4,6 +4,7 @@ import {Hotel} from "../hotel/hotel";
 import {Apartment} from "../apartment/apartment";
 import {ApartmentService} from "../apartment/apartment.service";
 import { Router } from '@angular/router';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @Component({
@@ -11,7 +12,6 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
 
 })
-
 
 export class AppComponent implements OnInit {
 
