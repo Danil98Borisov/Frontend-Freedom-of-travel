@@ -12,25 +12,21 @@ import {HttpClient, HttpParams} from "@angular/common/http";
   providers: [HttpService]
 })
 export class HttpComponent {
-  hotels: Hotel[]=[];
+  hotels: Hotel[] = [];
   constructor(private http: HttpClient) {
   }
-/*
-  id: string ="1"
-  hotelName: string = "";
-  city: string = "";
-  rating: string = "";*/
 
   hotelUrlAdd = 'http://localhost:8050/hotel/add';
-  public addHotel(hotels: Hotel): Observable<Hotel> {
-    console.log("Отправил на сервер")
-    console.log(JSON.stringify(hotels));
-    console.log(JSON.stringify(this.hotelUrlAdd));
-    console.log(hotels);
+  public addHotel(hotel: Hotel) {
+    console.log(JSON.stringify(hotel));
+    console.log(this.hotelUrlAdd);
 
-    return this.http.put<Hotel>(this.hotelUrlAdd, JSON.stringify(hotels));
-    //return this.http.put(this.hotelUrlAdd, hotels);
-
+    return this.http.put<Hotel>(this.hotelUrlAdd, hotel)
+      .subscribe(hotel => {
+        console.log("Отель добалвен: ", hotel);
+      }, error => {
+        console.log('error: ', error);
+      });
  }
    onSubmit(form: NgForm){
       console.log(JSON.stringify(form.value));

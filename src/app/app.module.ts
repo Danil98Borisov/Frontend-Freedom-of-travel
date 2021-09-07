@@ -6,6 +6,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {HotelComponent} from "../hotel/hotel.component";
 import {ApartmentComponent} from "../apartment/apartment.component";
 import { HttpComponent } from 'src/http/http.component';
+import { DeleteHotelComponent } from 'src/delete/delete-hotel.component';
+
 
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,13 +17,15 @@ import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReservationComponent } from 'src/reservation/reservation.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HotelComponent,
     ApartmentComponent,
     HttpComponent,
-    ReservationComponent
+    ReservationComponent,
+    DeleteHotelComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,6 @@ import { ReservationComponent } from 'src/reservation/reservation.component';
     MatTabsModule
   ],
   providers: [],
-  bootstrap: [AppComponent, HotelComponent, ApartmentComponent, HttpComponent, ReservationComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

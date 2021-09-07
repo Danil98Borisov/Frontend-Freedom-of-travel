@@ -3,11 +3,7 @@
   <input class="form-control" type="number" name="id" [(ngModel)]="hotel.id" />
 </div>-->
 
-
-
-
-
-<form #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
+<form method="post" #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
   <div class="form-group">
     <label>id</label>
     <input class="form-control" name="id" ngModel required />
