@@ -17,11 +17,4 @@ export class HotelService {
     console.log("getAllHotelPage invoked");
     return this.http.get<Hotel[]>(this.hotelUrlAll);
   }
-/*
-  hotelUrlAdd = 'http://localhost:8050/hotel/add';
-  public addHotel(hotels: Hotel): Observable<Hotel[]> {
-    //return this.http.put<Hotel[]>(this.hotelUrlAdd, {id: hotels.id ,hotelsName: hotels.hotelName,city: hotels.city,rating: hotels.rating});
-    return this.http.put<Hotel[]>(this.hotelUrlAdd, JSON.stringify(hotels));
-  }*/
-
 }

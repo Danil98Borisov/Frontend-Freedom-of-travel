@@ -1,9 +1,4 @@
-<!--<div class="form-group">
-  <label>id</label>
-  <input class="form-control" type="number" name="id" [(ngModel)]="hotel.id" />
-</div>-->
-
-<form method="post" #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
+<form #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
   <div class="form-group">
     <label>id</label>
     <input class="form-control" name="id" ngModel required />
@@ -29,15 +24,3 @@
    <input type="submit" [disabled]="myForm.invalid" class="btn btn-default" value="Отправить" />
  </div>
 </form>
-
-
-
-
-<!--<div *ngIf="done">
-  <div>Получено от сервера:</div>
-  <div>id: {{receivedHotel.id}}</div>
-  <div>hotelName: {{receivedHotel.hotelName}}</div>
-  <div>city: {{receivedHotel.city}}</div>
-  <div>rating: {{receivedHotel.rating}}</div>
-
-</div>-->

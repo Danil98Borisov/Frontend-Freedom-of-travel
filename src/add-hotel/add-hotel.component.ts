@@ -1,16 +1,16 @@
 import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Hotel } from 'src/hotel/hotel';
-import { HttpService} from './http.service';
+import { AddHotelService} from './add-hotel.service';
 import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-http',
-  styleUrls: ['http.component.css'],
-  templateUrl: 'http.component.html',
-  providers: [HttpService]
+  selector: 'app-add-hotel',
+  styleUrls: ['add-hotel.component.css'],
+  templateUrl: 'add-hotel.component.html',
+  providers: [AddHotelService]
 })
-export class HttpComponent {
+export class AddHotelComponent {
   hotels: Hotel[] = [];
 
   constructor(private http: HttpClient) {
@@ -19,19 +19,16 @@ export class HttpComponent {
   hotelUrlAdd = 'http://localhost:8050/hotel/add';
 
   public addHotel(hotel: Hotel) {
-    console.log(JSON.stringify(hotel));
-    console.log(this.hotelUrlAdd);
 
     return this.http.put<Hotel>(this.hotelUrlAdd, hotel)
       .subscribe(hotel => {
-        console.log("Отель добалвен: ", hotel);
+        console.log("Отель добавлен: ", hotel);
       }, error => {
         console.log('error: ', error);
       });
   }
 
   onSubmit(form: NgForm) {
-    console.log(JSON.stringify(form.value));
     return this.addHotel(form.value)
   }
 
