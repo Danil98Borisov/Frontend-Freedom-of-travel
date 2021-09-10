@@ -1,9 +1,76 @@
+<!--<button>Submit</button>-->
+<!--<a href="http://localhost:4200/hotel" onclick="filterApartment()">Фильтрация</a>-->
+<!--<button href="#" onclick="filterApartment()">Фильтрация</button>-->
+
+
+<mat-form-field appearance="fill" [formGroup]="fil">
+  <mat-label>City</mat-label>
+  <input matInput formControlName="city">
+  <mat-error *ngIf="fil.controls.city.hasError('matStartDateInvalid')">Invalid city</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="fill" [formGroup]="fil">
+  <mat-label>Rating</mat-label>
+  <input matInput formControlName="rating">
+  <mat-error *ngIf="fil.controls.rating.hasError('matStartDateInvalid')">Invalid rating</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="fill" [formGroup]="fil">
+  <mat-label>Price</mat-label>
+  <input matInput formControlName="price">
+  <mat-error *ngIf="fil.controls.price.hasError('matStartDateInvalid')">Invalid price</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Type</mat-label>
+  <mat-select>
+    <mat-option value="one">SINGLE</mat-option>
+    <mat-option value="two">DOUBLE</mat-option>
+    <mat-option value="tres">TRIPLE</mat-option>
+  </mat-select>
+</mat-form-field>
+
 <mat-form-field appearance="fill">
   <mat-label>Enter a date range</mat-label>
-  <mat-date-range-input [rangePicker]="picker">
-    <input matStartDate placeholder="Start date">
-    <input matEndDate placeholder="End date">
+  <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
+    <input matStartDate formControlName="startDate" placeholder="Start date">
+    <input matEndDate formControlName="endDate" placeholder="End date">
   </mat-date-range-input>
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-date-range-picker #picker></mat-date-range-picker>
+
+  <mat-error *ngIf="fil.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+  <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
 </mat-form-field>
+
+<p>Selected fil: {{fil.value | json}}</p>
+
+<table mat-table [dataSource]="apartments" class="mat-elevation-z8">
+
+  <!-- id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- delete Column -->
+  <ng-container matColumnDef="hotel">
+    <th mat-header-cell *matHeaderCellDef> hotel </th>
+    <td mat-cell *matCellDef="let element"> {{element.hotel.hotelName}} </td>
+  </ng-container>
+
+  <!-- type Column -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> type </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+
+  <!-- price Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> price </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

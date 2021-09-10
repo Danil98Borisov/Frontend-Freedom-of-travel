@@ -1,46 +1,33 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-
-import {Observable, of, throwError} from 'rxjs';
-import {catchError, map, retry, tap} from 'rxjs/operators';
-import { DeleteHotelService } from './delete-hotel.service';
-import { ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Hotel} from "./hotel";
+import {DeleteHotelService} from "./delete-hotel.service";
 
 
 @Component({
-  selector: 'app-delete-hotel',
-  styleUrls: ['delete-hotel.component.css'],
-  templateUrl: 'delete-hotel.component.html',
-  providers: [DeleteHotelService]
-
+    selector: 'app-hotel',
+    styleUrls: ['delete-hotel.component.css'],
+    templateUrl: 'delete-hotel.component.html',
+    providers: [DeleteHotelService]
 })
-export class DeleteHotelComponent {
-  id: number;
 
-  constructor(private activateRoute: ActivatedRoute, private deleteHotelService: DeleteHotelService) {
+export class DeleteHotelComponent implements OnInit {
+   hotels: Hotel[]=[];
 
-    this.id = activateRoute.snapshot.params.id;
+  constructor(private httpService: DeleteHotelService, private hotelService: DeleteHotelService){}
+
+  delete(hotel: Hotel): void {
+    this.hotels = this.hotels.filter(h => h !== hotel);
+    this.hotelService.deleteHotel(hotel.id).subscribe();
   }
 
-  /*добавить слово api в URL*/
-  hotelUrlAll = 'http://localhost:8050/hotel';
 
-  delHotel() {
-    this.id = this.activateRoute.snapshot.params.id;
-    this.deleteHotelService.deleteHotel(this.id)
-      .subscribe((data) => {
-        console.log("success");
-    });
+  ngOnInit(){
 
-
-    /*
-      hotelUrlAdd = 'http://localhost:8050/hotel/add';
-      public addHotel(hotels: Hotel): Observable<Hotel[]> {
-        //return this.http.put<Hotel[]>(this.hotelUrlAdd, {id: hotels.id ,hotelsName: hotels.hotelName,city: hotels.city,rating: hotels.rating});
-        return this.http.put<Hotel[]>(this.hotelUrlAdd, JSON.stringify(hotels));
-      }*/
-
+    this.hotelService.getAllHotelPage().subscribe((data: Hotel[]) => this.hotels=data);
   }
+
+  displayedColumns: string[] = ['id', 'hotelName', 'city', 'rating'];
+
 }
+
+

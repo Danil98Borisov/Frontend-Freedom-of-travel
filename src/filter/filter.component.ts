@@ -1,41 +1,45 @@
-import {Component, Injectable} from '@angular/core';
-import {DateAdapter} from '@angular/material/core';
-import {
-  MatDateRangeSelectionStrategy,
-  DateRange,
-  MAT_DATE_RANGE_SELECTION_STRATEGY,
-} from '@angular/material/datepicker';
+import {Component, Input, OnInit} from '@angular/core';
+import {Apartment} from "../apartment/apartment";
+import { FilterService } from './filter.service';
+import {FormControl, FormGroup } from '@angular/forms';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {Hotel} from "../delete/hotel";
+import {DeleteHotelService} from "../delete/delete-hotel.service";
 
-@Injectable()
-export class FiveDayRangeSelectionStrategy<D> implements MatDateRangeSelectionStrategy<D> {
-  constructor(private _dateAdapter: DateAdapter<D>) {}
+/** @title Datepicker action buttons */
+@Component({
+  selector: 'app-filter',
+  templateUrl: 'filter.component.html',
+  styleUrls: ['filter.component.css'],
+  providers: [FilterService]
+})
+export class FilterComponent implements OnInit{
 
-  selectionFinished(date: D | null): DateRange<D> {
-    return this._createFiveDayRange(date);
+  fil = new FormGroup({
+    startDate: new FormControl(),
+    endDate: new FormControl(),
+    price: new FormControl(),
+    city: new FormControl(),
+    rating: new FormControl(),
+    type: new FormControl()
+  });
+
+  apartments: Apartment[]=[];
+
+  constructor(private filterService: FilterService){}
+
+
+  ngOnInit(){
+
+    this.filterService.getFilterApartment().subscribe((data: Apartment[]) => this.apartments=data);
   }
 
-  createPreview(activeDate: D | null): DateRange<D> {
-    return this._createFiveDayRange(activeDate);
-  }
+  displayedColumns: string[] = ['id', 'hotel', 'type', 'price'];
 
-  private _createFiveDayRange(date: D | null): DateRange<D> {
-    if (date) {
-      const start = this._dateAdapter.addCalendarDays(date, -2);
-      const end = this._dateAdapter.addCalendarDays(date, 2);
-      return new DateRange<D>(start, end);
-    }
-
-    return new DateRange<D>(null, null);
-  }
 }
 
-/** @title Date range picker with custom a selection strategy */
-@Component({
-  selector: 'date-range-picker-selection-strategy-example',
-  templateUrl: 'date-range-picker-selection-strategy-example.html',
-  providers: [{
-    provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
-    useClass: FiveDayRangeSelectionStrategy
-  }]
-})
-export class FilterComponent {}
+
+
+

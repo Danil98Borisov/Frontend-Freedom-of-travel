@@ -3,31 +3,37 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
-import {HotelComponent} from "../hotel/hotel.component";
+import {DeleteHotelComponent} from "../delete/delete-hotel.component";
 import {ApartmentComponent} from "../apartment/apartment.component";
 import { AddHotelComponent } from 'src/add-hotel/add-hotel.component';
-import { DeleteHotelComponent } from 'src/delete/delete-hotel.component';
+import { HotelComponent } from 'src/hotel/hotel.component';
 import {EditHotelComponent} from "../edit-hotel/edit-hotel.component";
+import {FilterComponent} from "../filter/filter.component";
 
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReservationComponent } from 'src/reservation/reservation.component';
-
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HotelComponent,
+    DeleteHotelComponent,
     ApartmentComponent,
     AddHotelComponent,
     ReservationComponent,
-    DeleteHotelComponent,
-    EditHotelComponent
+    HotelComponent,
+    EditHotelComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,13 @@ import { ReservationComponent } from 'src/reservation/reservation.component';
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

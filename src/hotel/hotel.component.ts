@@ -1,38 +1,81 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Observable, of} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
+import { DeleteHotelService } from 'src/delete/delete-hotel.service';
 import {Hotel} from "./hotel";
-import {map} from "rxjs/operators";
-import {HotelService} from "./hotel.service";
-import { MatTable } from '@angular/material/table';
+
 
 
 @Component({
-    selector: 'app-hotel',
-    styleUrls: ['hotel.component.css'],
-    templateUrl: 'hotel.component.html',
-    providers: [HotelService]
+  selector: 'app-delete-hotel',
+  styleUrls: ['hotel.component.css'],
+  templateUrl: 'hotel.component.html',
+  providers: [DeleteHotelService]
 })
 
 export class HotelComponent implements OnInit {
-   hotels: Hotel[]=[];
+  hotels: Hotel[]=[];
 
-  constructor(private httpService: HotelService){}
+  constructor(private httpService: DeleteHotelService, private hotelService: DeleteHotelService){}
+
+  delete(hotel: Hotel): void {
+    this.hotels = this.hotels.filter(h => h !== hotel);
+    this.hotelService.deleteHotel(hotel.id).subscribe();
+  }
 
 
   ngOnInit(){
 
-    this.httpService.getAllHotelPage().subscribe((data: Hotel[]) => this.hotels=data);
+    this.hotelService.getAllHotelPage().subscribe((data: Hotel[]) => this.hotels=data);
   }
 
   displayedColumns: string[] = ['id', 'hotelName', 'city', 'rating'];
 
-/*
-  dataSource = [...this.hotels];
-
-  @ViewChild(MatTable) table!: MatTable<Hotel>;
-
-  addData() {
-    this.httpService.addHotel()
-  }*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  id: number;
+
+  constructor(private activateRoute: ActivatedRoute, private deleteHotelService: HotelService) {
+
+    this.id = activateRoute.snapshot.params.id;
+  }*/
+
+/*  constructor(private http: HttpClient) {
+  }
+  deleteHotelUrlAll = 'http://localhost:8050/hotel/delete/{id}';
+
+  deleteHotel(id: number): Observable<any>{
+    //console.log(this.deleteHotelUrlAll + id);
+    console.log(id)
+    console.log(this.deleteHotelUrlAll + id)
+    return this.http.hotel(this.deleteHotelUrlAll + id)
+  }
+
+  delHotel(form: NgForm) {
+    return this.deleteHotel(form.value).subscribe(id => {
+      console.log("Удалили отель с ID: ", JSON.stringify(id));
+    }, error => {
+      console.log('error: ', error);
+    });
+  }*/
+
+

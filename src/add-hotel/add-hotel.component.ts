@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Hotel } from 'src/hotel/hotel';
+import { Hotel } from 'src/delete/hotel';
 import { AddHotelService} from './add-hotel.service';
 import {HttpClient} from "@angular/common/http";
 
