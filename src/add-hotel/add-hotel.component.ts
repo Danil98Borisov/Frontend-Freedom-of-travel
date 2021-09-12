@@ -16,7 +16,7 @@ export class AddHotelComponent {
   constructor(private http: HttpClient) {
   }
 
-  hotelUrlAdd = 'http://localhost:8050/hotel/add';
+  hotelUrlAdd = 'http://localhost:8050/api/hotel/add';
 
   public addHotel(hotel: Hotel) {
 

@@ -16,7 +16,7 @@ export class EditHotelComponent {
   constructor(private http: HttpClient) {
   }
 
-  hotelUrlEdit = 'http://localhost:8050/hotel/edit';
+  hotelUrlEdit = 'http://localhost:8050/api/hotel/edit';
 
   public editHotel(hotel: Hotel) {
 

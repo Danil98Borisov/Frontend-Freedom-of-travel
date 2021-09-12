@@ -16,8 +16,8 @@ export class HotelService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  hotelUrlAll = 'http://localhost:8050/hotel';
-  deleteHotelUrlAll = 'http://localhost:8050/hotel/delete';
+  hotelUrlAll = 'http://localhost:8050/api/hotel/all';
+  deleteHotelUrlAll = 'http://localhost:8050/api/hotel/delete';
 
   public getAllHotelPage(): Observable<Hotel[]> {
     console.log("getAllHotelPage invoked");

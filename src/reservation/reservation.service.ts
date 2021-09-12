@@ -11,7 +11,7 @@ export class ReservationService {
   constructor(private http: HttpClient) {
   }
   /*добавить слово api в URL*/
-  reservationUrlAll = 'http://localhost:8050/reservation';
+  reservationUrlAll = 'http://localhost:8050/api/reservation/all';
 
   public getAllReservationPage(): Observable<Reservation[]> {
     console.log("getAllReservationPage invoked");

@@ -6,7 +6,7 @@ import {Apartment} from "./apartment";
 @Injectable()
 export class ApartmentService {
 
-  apartmentUrlAll = 'http://localhost:8050/apartment/all';
+  apartmentUrlAll = 'http://localhost:8050/api/apartment/all';
 
   constructor(private http: HttpClient) {
   }

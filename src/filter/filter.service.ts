@@ -16,8 +16,8 @@ export class FilterService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  apartmentUrlAll = 'http://localhost:8050/apartment/all';
-  filterApartmentUrlAll = 'http://localhost:8050/apartment/find';
+  apartmentUrlAll = 'http://localhost:8050/api/apartment/all';
+  filterApartmentUrlAll = 'http://localhost:8050/api/apartment/find';
 
 
 

@@ -26,8 +26,6 @@ export class DeleteHotelComponent implements OnInit {
     this.hotelService.getAllHotelPage().subscribe((data: Hotel[]) => this.hotels=data);
   }
 
-  displayedColumns: string[] = ['id', 'hotelName', 'city', 'rating'];
-
 }
 
 

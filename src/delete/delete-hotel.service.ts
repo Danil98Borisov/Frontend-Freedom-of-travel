@@ -16,14 +16,14 @@ export class DeleteHotelService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  hotelUrlAll = 'http://localhost:8050/hotel';
-  deleteHotelUrlAll = 'http://localhost:8050/hotel/delete';
+  hotelUrlAll = 'http://localhost:8050/api/hotel/all';
+  deleteHotelUrlAll = 'http://localhost:8050/api/hotel/delete';
 
   public getAllHotelPage(): Observable<Hotel[]> {
     console.log("getAllHotelPage invoked");
     return this.http.get<Hotel[]>(this.hotelUrlAll);
   }
-  /** DELETE: hotel the hero from the server */
+
   deleteHotel(id: number): Observable<Hotel> {
     const url = `${this.deleteHotelUrlAll}/${id}`;
 
