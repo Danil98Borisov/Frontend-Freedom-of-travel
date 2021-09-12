@@ -8,7 +8,7 @@ import {Hotel} from "./hotel";
 
 
 @Injectable()
-export class HotelService {
+export class DeleteHotelService {
   constructor(private http: HttpClient) {
   }
 
@@ -37,4 +37,3 @@ export class HotelService {
   }
 
 }
-

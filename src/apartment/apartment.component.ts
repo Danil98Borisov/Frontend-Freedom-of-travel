@@ -22,7 +22,4 @@ export class ApartmentComponent implements OnInit{
   }
 
   displayedColumns: string[] = ['id', 'hotel', 'type', 'price'];
-
-
-
 }

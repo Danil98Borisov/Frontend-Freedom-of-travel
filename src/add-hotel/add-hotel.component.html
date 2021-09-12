@@ -1,0 +1,22 @@
+<form #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
+  <div class="form-group">
+    <label>hotelName</label>
+    <input class="form-control" name="hotelName" ngModel
+           required hotelName />
+  </div>
+  <div class="form-group">
+    <label>city</label>
+    <input class="form-control" name="city" ngModel
+           required />
+  </div>
+
+  <div class="form-group">
+    <label>rating</label>
+    <input class="form-control" name="rating" ngModel
+           required />
+  </div>
+
+ <div class="form-group">
+   <input type="submit" [disabled]="myForm.invalid" class="btn btn-default" value="Добавить" />
+ </div>
+</form>
