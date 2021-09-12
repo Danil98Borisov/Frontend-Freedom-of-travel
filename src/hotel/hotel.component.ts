@@ -1,24 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {DeleteHotelService} from 'src/delete/delete-hotel.service';
 import {Hotel} from "./hotel";
+import {HotelService} from './hotel.service';
 
 
 @Component({
   selector: 'app-delete-hotel',
   styleUrls: ['hotel.component.css'],
   templateUrl: 'hotel.component.html',
-  providers: [DeleteHotelService]
+  providers: [HotelService]
 })
 
 export class HotelComponent implements OnInit {
   hotels: Hotel[] = [];
 
-  constructor(private httpService: DeleteHotelService, private hotelService: DeleteHotelService) {
-  }
-
-  delete(hotel: Hotel): void {
-    this.hotels = this.hotels.filter(h => h !== hotel);
-    this.hotelService.deleteHotel(hotel.id).subscribe();
+  constructor(private hotelService: HotelService) {
   }
 
 

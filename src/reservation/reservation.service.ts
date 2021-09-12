@@ -1,16 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 
-import {Observable, of, throwError} from 'rxjs';
-import {catchError, map, retry} from 'rxjs/operators';
-import { Reservation } from './reservation';
+import {Observable} from 'rxjs';
+import {Reservation} from './reservation';
 import {AppConstComponent} from "../app/app-const.component";
 
 @Injectable()
 export class ReservationService {
   constructor(private http: HttpClient) {
   }
+
   reservationUrlAll = AppConstComponent.API_ENDPOINT + 'reservation/all';
 
   public getAllReservationPage(): Observable<Reservation[]> {

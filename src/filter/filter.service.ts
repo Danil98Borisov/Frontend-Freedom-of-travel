@@ -1,10 +1,10 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import { Apartment } from 'src/apartment/apartment';
+import {Apartment} from 'src/apartment/apartment';
 import {AppConstComponent} from "../app/app-const.component";
 
 
@@ -14,12 +14,11 @@ export class FilterService {
   }
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   apartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/all';
   filterApartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/find';
-
 
 
   public getAllApartmentPage(): Observable<Apartment[]> {
@@ -28,9 +27,7 @@ export class FilterService {
   }
 
 
-
-
-  public getFilterApartmentPage(url:string): Observable<Apartment[]> {
+  public getFilterApartmentPage(url: string): Observable<Apartment[]> {
     console.log("getFilterApartmentPage invoked");
     return this.http.get<Apartment[]>(url);
   }
