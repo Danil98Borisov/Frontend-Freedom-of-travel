@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Hotel} from "./hotel";
+import {AppConstComponent} from "../app/app-const.component";
 
 
 @Injectable()
@@ -16,8 +17,8 @@ export class DeleteHotelService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  hotelUrlAll = 'http://localhost:8050/api/hotel/all';
-  deleteHotelUrlAll = 'http://localhost:8050/api/hotel/delete';
+  hotelUrlAll = AppConstComponent.API_ENDPOINT + 'hotel/all';
+  deleteHotelUrlAll = AppConstComponent.API_ENDPOINT + 'hotel/delete';
 
   public getAllHotelPage(): Observable<Hotel[]> {
     console.log("getAllHotelPage invoked");

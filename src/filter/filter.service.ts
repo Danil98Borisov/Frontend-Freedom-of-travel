@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import { Apartment } from 'src/apartment/apartment';
+import {AppConstComponent} from "../app/app-const.component";
 
 
 @Injectable()
@@ -16,8 +17,8 @@ export class FilterService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  apartmentUrlAll = 'http://localhost:8050/api/apartment/all';
-  filterApartmentUrlAll = 'http://localhost:8050/api/apartment/find';
+  apartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/all';
+  filterApartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/find';
 
 
 

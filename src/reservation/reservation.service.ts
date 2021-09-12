@@ -5,13 +5,13 @@ import { Injectable } from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, map, retry} from 'rxjs/operators';
 import { Reservation } from './reservation';
+import {AppConstComponent} from "../app/app-const.component";
 
 @Injectable()
 export class ReservationService {
   constructor(private http: HttpClient) {
   }
-  /*добавить слово api в URL*/
-  reservationUrlAll = 'http://localhost:8050/api/reservation/all';
+  reservationUrlAll = AppConstComponent.API_ENDPOINT + 'reservation/all';
 
   public getAllReservationPage(): Observable<Reservation[]> {
     console.log("getAllReservationPage invoked");
