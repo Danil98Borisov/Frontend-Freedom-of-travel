@@ -1,34 +1,3 @@
-<!--<table mat-table [dataSource]="hotels" class="mat-elevation-z8">
-
-
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="hotelName">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> hotelName </th>
-    <td mat-cell *matCellDef="let element"> {{element.hotelName}} </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="city">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> city </th>
-    <td mat-cell *matCellDef="let element"> {{element.city}} </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="rating">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> rating </th>
-    <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-</table> -->
-
 <ul class="hotels">
   <li *ngFor="let hotel of hotels">
     <a routerLink="hotel/delete/{{hotel.id}}">
@@ -41,8 +10,3 @@
             (click)="delete(hotel)">Удалить</button>
   </li>
 </ul>
-
-
-
-
-

@@ -1,14 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Apartment} from "../apartment/apartment";
 import { FilterService } from './filter.service';
-import {FormControl, FormGroup } from '@angular/forms';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import {Hotel} from "../delete/hotel";
-import {DeleteHotelService} from "../delete/delete-hotel.service";
+import {FormControl, FormGroup, Validators } from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
-/** @title Datepicker action buttons */
 @Component({
   selector: 'app-filter',
   templateUrl: 'filter.component.html',
@@ -26,17 +21,41 @@ export class FilterComponent implements OnInit{
     type: new FormControl()
   });
 
+  columns = [
+    {
+      columnDef: 'hotel',
+      header: 'Hotel',
+      cell: (element: any) => `${element.hotel.hotelName}`
+    },
+    {
+      columnDef: 'type',
+      header: 'Type',
+      cell: (element: Apartment) => `${element.type}`
+    },
+    {
+      columnDef: 'price',
+      header: 'Price',
+      cell: (element: Apartment) => `${element.price}`
+    },
+  ];
   apartments: Apartment[]=[];
+  displayedColumns = this.columns.map(c => c.columnDef);
 
-  constructor(private filterService: FilterService){}
+  constructor(private filterService: FilterService,
+              private datePipe: DatePipe){}
 
+  public filter(fil: FormGroup): void {
+     console.log('fil.value.startDate = ', fil.value['startDate'])
+    console.log('fil.value.startDate = ',  )
+    let ap:Apartment = fil.value
 
-  ngOnInit(){
-
-    this.filterService.getFilterApartment().subscribe((data: Apartment[]) => this.apartments=data);
+    let startDate = this.datePipe.transform(fil.value['startDate'], 'yyyy-MM-dd');
+    let endDate = this.datePipe.transform(fil.value['endDate'], 'yyyy-MM-dd');
+    this.filterService.filterApartment(ap.price, ap.type, startDate, endDate, fil.value['city'], fil.value['rating'])
+      .subscribe((data: Apartment[]) => this.apartments=data);
   }
 
-  displayedColumns: string[] = ['id', 'hotel', 'type', 'price'];
+  ngOnInit(){}
 
 }
 

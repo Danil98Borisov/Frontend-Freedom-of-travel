@@ -13,7 +13,7 @@ import {DeleteHotelService} from "./delete-hotel.service";
 export class DeleteHotelComponent implements OnInit {
    hotels: Hotel[]=[];
 
-  constructor(private httpService: DeleteHotelService, private hotelService: DeleteHotelService){}
+  constructor(private hotelService: DeleteHotelService){}
 
   delete(hotel: Hotel): void {
     this.hotels = this.hotels.filter(h => h !== hotel);

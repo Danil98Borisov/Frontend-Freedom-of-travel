@@ -18,10 +18,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReservationComponent } from 'src/reservation/reservation.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import { MatNativeDateModule } from '@angular/material/core';
+import {ErrorStateMatcher, MatNativeDateModule, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from "@angular/material/select";
+import {DatePipe} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from '@angular/material/button';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -49,9 +53,12 @@ import {MatSelectModule} from "@angular/material/select";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatExpansionModule
   ],
-  providers: [],
+  providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
