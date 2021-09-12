@@ -4,5 +4,6 @@ export class Apartment {
     public hotel: string,
     public type: string,
     public price: number
-  ) {}
+  ) {
+  }
 }

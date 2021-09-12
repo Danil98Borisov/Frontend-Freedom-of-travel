@@ -1,8 +1,9 @@
-import { Component} from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Hotel } from 'src/delete/hotel';
-import { AddHotelService} from './add-hotel.service';
+import {Component} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Hotel} from 'src/hotel/hotel';
+import {AddHotelService} from './add-hotel.service';
 import {HttpClient} from "@angular/common/http";
+import {AppConstComponent} from "../app/app-const.component";
 
 @Component({
   selector: 'app-add-hotel',
@@ -16,7 +17,7 @@ export class AddHotelComponent {
   constructor(private http: HttpClient) {
   }
 
-  hotelUrlAdd = 'http://localhost:8050/hotel/add';
+  hotelUrlAdd = AppConstComponent.API_ENDPOINT + 'hotel/add';
 
   public addHotel(hotel: Hotel) {
 

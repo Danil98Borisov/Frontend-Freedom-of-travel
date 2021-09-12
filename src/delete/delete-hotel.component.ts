@@ -4,30 +4,26 @@ import {DeleteHotelService} from "./delete-hotel.service";
 
 
 @Component({
-    selector: 'app-hotel',
-    styleUrls: ['delete-hotel.component.css'],
-    templateUrl: 'delete-hotel.component.html',
-    providers: [DeleteHotelService]
+  selector: 'app-hotel',
+  styleUrls: ['delete-hotel.component.css'],
+  templateUrl: 'delete-hotel.component.html',
+  providers: [DeleteHotelService]
 })
 
 export class DeleteHotelComponent implements OnInit {
-   hotels: Hotel[]=[];
+  hotels: Hotel[] = [];
 
-  constructor(private hotelService: DeleteHotelService){}
+  constructor(private hotelService: DeleteHotelService) {
+  }
 
   delete(hotel: Hotel): void {
     this.hotels = this.hotels.filter(h => h !== hotel);
     this.hotelService.deleteHotel(hotel.id).subscribe();
   }
 
+  ngOnInit() {
 
-  ngOnInit(){
-
-    this.hotelService.getAllHotelPage().subscribe((data: Hotel[]) => this.hotels=data);
+    this.hotelService.getAllHotelPage().subscribe((data: Hotel[]) => this.hotels = data);
   }
 
-  displayedColumns: string[] = ['id', 'hotelName', 'city', 'rating'];
-
 }
-
-

@@ -1,10 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DeleteHotelService} from "../delete/delete-hotel.service";
-import {Hotel} from "../delete/hotel";
-import {Apartment} from "../apartment/apartment";
-import {ApartmentService} from "../apartment/apartment.service";
 import { Router } from '@angular/router';
-import {MatTabsModule} from '@angular/material/tabs';
 
 
 @Component({

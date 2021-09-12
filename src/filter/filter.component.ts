@@ -23,19 +23,29 @@ export class FilterComponent implements OnInit {
 
   columns = [
     {
+      columnDef: 'city',
+      header: 'City',
+      cell: (element: any) => `${element.hotel.city}`
+    },
+    {
       columnDef: 'hotel',
-      header: 'Hotel',
+      header: 'Name Hotel',
       cell: (element: any) => `${element.hotel.hotelName}`
     },
     {
+      columnDef: 'rating',
+      header: 'Rating hotel',
+      cell: (element: any) => `${element.hotel.rating}`
+    },
+    {
       columnDef: 'type',
-      header: 'Type',
+      header: 'Type apartment',
       cell: (element: Apartment) => `${element.type}`
     },
     {
       columnDef: 'price',
       header: 'Price',
-      cell: (element: Apartment) => `${element.price}`
+      cell: (element: Apartment) => `${element.price} $`
     },
   ];
   apartments: Apartment[] = [];
