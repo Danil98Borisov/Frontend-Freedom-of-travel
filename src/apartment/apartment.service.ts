@@ -1,17 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-
-
-import {Observable, of, throwError} from 'rxjs';
-import {catchError, map, retry} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 import {Apartment} from "./apartment";
 
 @Injectable()
 export class ApartmentService {
+
+  apartmentUrlAll = 'http://localhost:8050/apartment/all';
+
   constructor(private http: HttpClient) {
   }
-  /*добавить слово api в URL*/
-  apartmentUrlAll = 'http://localhost:8050/apartment/all';
 
   public getAllApartmentPage(): Observable<Apartment[]> {
     console.log("getAllApartmentPage invoked");
