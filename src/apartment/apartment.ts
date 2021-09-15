@@ -3,7 +3,8 @@ export class Apartment {
     public id: number,
     public hotel: string,
     public type: string,
-    public price: number
+    public price: number,
+    public image: string
   ) {
   }
 }

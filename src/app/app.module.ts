@@ -26,6 +26,8 @@ import {DatePipe} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {DetailsComponent} from "../details/details.component";
+
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ReservationComponent,
     HotelComponent,
     EditHotelComponent,
-    FilterComponent
+    FilterComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

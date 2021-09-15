@@ -9,10 +9,12 @@ import {ReservationComponent} from 'src/reservation/reservation.component';
 import {HotelComponent} from 'src/hotel/hotel.component';
 import {EditHotelComponent} from 'src/edit-hotel/edit-hotel.component';
 import {FilterComponent} from 'src/filter/filter.component';
+import { DetailsComponent } from 'src/details/details.component';
 
 
 const routes: Routes = [
   {path: 'delete', component: DeleteHotelComponent},
+  {path: 'apartment-details/:id', component: DetailsComponent},
   {path: 'apartment', component: ApartmentComponent},
   {path: 'hotel/add', component: AddHotelComponent},
   {path: 'reservation', component: ReservationComponent},

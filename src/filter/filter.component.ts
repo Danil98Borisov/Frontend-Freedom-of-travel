@@ -3,6 +3,7 @@ import {Apartment} from "../apartment/apartment";
 import {FilterService} from './filter.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-filter',
@@ -52,7 +53,8 @@ export class FilterComponent implements OnInit {
   displayedColumns = this.columns.map(c => c.columnDef);
 
   constructor(private filterService: FilterService,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private router: Router) {
   }
 
   public filter(fil: FormGroup): void {
@@ -64,6 +66,10 @@ export class FilterComponent implements OnInit {
     let endDate = this.datePipe.transform(fil.value['endDate'], 'yyyy-MM-dd');
     this.filterService.filterApartment(ap.price, ap.type, startDate, endDate, fil.value['city'], fil.value['rating'])
       .subscribe((data: Apartment[]) => this.apartments = data);
+  }
+  logFunc(row: any) {
+    console.log("Hi, I'm row" + row.id);
+    this.router.navigate(['/apartment-details', row.id])
   }
 
   ngOnInit() {
