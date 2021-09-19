@@ -1,47 +1,43 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Apartment} from "../models/apartment";
-import {DetailsService} from "./details.service";
+import {ApartmentPreviewService} from "./apartment-preview.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AppConstComponent} from "../app/app-const.component";
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {Details} from "../models/details";
+import {ApartmentPreview} from "../models/apartmentPreview";
 
 
 @Component({
-  selector: 'app-details',
-  styleUrls: ['details.component.css'],
-  templateUrl: 'details.component.html',
-  providers: [DetailsService]
+  selector: 'app-apartment-preview',
+  templateUrl: 'apartment-preview.component.html',
+  providers: [ApartmentPreviewService]
 })
-
-export class DetailsComponent implements OnInit {
+export class ApartmentPreviewComponent implements OnInit {
 
   isImage: boolean = true;
 
-  details: Details[]=[];
+  apartmentPreviews: ApartmentPreview[]=[];
 
 
   constructor(private activatedRoute: ActivatedRoute,
-              private detailsService: DetailsService,
-              private router:Router //instanciate a router
+              private apartmentPreviewService: ApartmentPreviewService,
+              private router:Router
   ) {
   }
-
-/*   detailsApartment(id: number): any {
-   console.log("A теперь здесь detailsApartment" +id)
-  }*/
 
   ngOnInit() {
     console.log("ApartmentPreviewComponent is opened, apart id = " + this.activatedRoute.snapshot.params.id);
 
-   this.detailsService.getDetailsApartmentPage(this.activatedRoute.snapshot.params.id)
-     .subscribe((data: Details[]) => this.details = data);
+    this.apartmentPreviewService.getApartmentPreviewPage()
+     .subscribe((data: ApartmentPreview[]) => this.apartmentPreviews = data);
   }
+
   getImageApartment(image: any): any{
     if (this.isImage) {
-      console.log("image = " + image);
+      console.log("image: ", image)
       return "data:image/png;base64," + image;
 
     } else {

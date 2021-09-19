@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs';
 import {publish, tap} from 'rxjs/operators';
-import {Apartment} from 'src/apartment/apartment';
+import {Apartment} from 'src/models/apartment';
 import {AppConstComponent} from "../app/app-const.component";
 import {toPublicName} from "@angular/compiler/src/i18n/serializers/xmb";
 
@@ -20,6 +20,7 @@ export class FilterService {
 
   apartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/all';
   filterApartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/find';
+  detailFlagUrl=AppConstComponent.API_ENDPOINT +"apartmentPreview/details/preview"
 
 
   public getAllApartmentPage(): Observable<Apartment[]> {
@@ -34,28 +35,8 @@ export class FilterService {
   }
 
   filterApartment(price: number, type: string, startDate: any, endDate: any, city: string, rating: number): Observable<Apartment[]> {
-/*    if (price == null) {
-      console.log("price=null")
-      price = 1000000000;
-    }
-    if (startDate == null) {
-      console.log("price=null")
-      startDate = endDate;
-    }
-    if (endDate == null) {
-      console.log("price=null")
-      endDate = startDate;
-    }
-    if (rating == null) {
-      console.log("price=null")
-      rating = 0;
-    }*/
-
-
-   //const url = `${this.filterApartmentUrlAll}?startDate=${startDate}&endDate=${endDate}&price=${price}&apartmentType=${type}&city=${city}&rating=${rating}`;
 
     let url = `${this.filterApartmentUrlAll}`;
-    // let url = this.filterApartmentUrlAll;
     if (price != null || type != null || city != null || rating != null || startDate != null || endDate != null) {
       url += '?';
       if (startDate != null) {
@@ -78,7 +59,7 @@ export class FilterService {
       }
     }
     else{
-      url =  this.apartmentUrlAll;
+      url = this.apartmentUrlAll;
     }
 
     return this.http.get<Apartment[]>(url, this.httpOptions).pipe(

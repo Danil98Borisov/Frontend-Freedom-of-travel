@@ -13,41 +13,44 @@
 
 
 </table>-->
-<table mat-table [dataSource]="apartmentsPreviews" class="mat-elevation-z8 demo-table">
+
+<!--
+
+<table mat-table [dataSource]="apartmentPreviews" class="mat-elevation-z8 demo-table">
 
   <ng-container matColumnDef="photo">
     <th mat-header-cell cdkDrag *matHeaderCellDef> Picture</th>
     <td mat-cell *matCellDef="let element">
       <ng-template [ngIf]="isImage">
         <div class="picture-box">
-          <img width="150" height="150" [src]="getImageApartment(element.imageApartment.image, element.apartment.id)">
+          <img width="200" height="150" [src]="getImageApartment(element.image)">
         </div>
       </ng-template>
-     <ng-template [ngIf]="!isImage">
+      <ng-template [ngIf]="!isImage">
         <p>No photo</p>
       </ng-template>
     </td>
   </ng-container>
 
-<!--id Column-->
+&lt;!&ndash;id Column &ndash;&gt;
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> id</th>
     <td mat-cell *matCellDef="let element"> {{element.apartment.id}} </td>
-  </ng-container>-->
+  </ng-container>
 
- <!--hotel Column -->
+ &lt;!&ndash;hotel Column&ndash;&gt;
   <ng-container matColumnDef="hotel">
     <th mat-header-cell *matHeaderCellDef> hotel</th>
     <td mat-cell *matCellDef="let element"> {{element.apartment.hotel.hotelName}} </td>
   </ng-container>
 
-<!--  type Column -->
+&lt;!&ndash;  type Column &ndash;&gt;
   <ng-container matColumnDef="type">
     <th mat-header-cell *matHeaderCellDef> type</th>
     <td mat-cell *matCellDef="let element"> {{element.apartment.type}} </td>
   </ng-container>
 
-<!--  price Column-->
+&lt;!&ndash;  price Column&ndash;&gt;
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef> price</th>
     <td mat-cell *matCellDef="let element"> {{element.apartment.price}} $ </td>
@@ -57,4 +60,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+-->
 

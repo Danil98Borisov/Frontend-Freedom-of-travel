@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 
 
 import {Observable} from 'rxjs';
-import {Reservation} from './reservation';
+import {Reservation} from '../models/reservation';
 import {AppConstComponent} from "../app/app-const.component";
 
 @Injectable()

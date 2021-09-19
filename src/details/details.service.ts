@@ -3,8 +3,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {AppConstComponent} from "../app/app-const.component";
 import {Router} from "@angular/router";
-import {Apartment} from "../apartment/apartment";
+import {Apartment} from "../models/apartment";
 import {tap} from "rxjs/operators";
+import {Details} from "../models/details";
 
 @Injectable()
 export class DetailsService {
@@ -21,28 +22,15 @@ export class DetailsService {
   detailUrl=AppConstComponent.API_ENDPOINT +"apartment/details"
 
 
-
-  getDetailsApartmentPage(id: number): Observable<Apartment[]> {
+   getDetailsApartmentPage(id: number): Observable<Details[]> {
     const url = `${this.detailUrl}/${id}`;
 
-    return this.http.get<Apartment[]>(url, this.httpOptions).pipe(
-      tap(apartment => {
-        console.log("Детально : ", apartment);
+    return this.http.get<Details[]>(url, this.httpOptions).pipe(
+      tap(details => {
+        /*console.log("Детально : ", details);*/
       }, error => {
         console.log('error: ', error);
       })
     );
   }
-
-
-
-
-  /*
-  public detailsApartment(): any {
-    console.log("getAllApartmentPage invoked");
-  }
-  public getDetailsApartmentPage(): Observable<Apartment[]> {
-    console.log("getAllApartmentPage invoked");
-    return this.http.get<Apartment[]>(this.detailUrl);
-  }*/
 }

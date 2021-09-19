@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 
 import {Observable} from 'rxjs';
-import {Hotel} from "./hotel";
+import {Hotel} from "../models/hotel";
 import {AppConstComponent} from "../app/app-const.component";
 
 

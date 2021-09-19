@@ -27,6 +27,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DetailsComponent} from "../details/details.component";
+import {ApartmentPreviewComponent} from "../apartment-preview/apartment-preview.component";
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {HomeComponent} from "../home/home.component";
 
 
 
@@ -40,7 +43,9 @@ import {DetailsComponent} from "../details/details.component";
     HotelComponent,
     EditHotelComponent,
     FilterComponent,
-    DetailsComponent
+    DetailsComponent,
+    ApartmentPreviewComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,10 @@ import {DetailsComponent} from "../details/details.component";
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MDBBootstrapModule.forRoot()
+
+
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],
   bootstrap: [AppComponent]

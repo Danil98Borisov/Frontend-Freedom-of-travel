@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Reservation} from './reservation';
+import {Reservation} from '../models/reservation';
 import {ReservationService} from './reservation.service';
 
 @Component({
