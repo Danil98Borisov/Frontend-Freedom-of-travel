@@ -3,9 +3,9 @@ import {Injectable} from '@angular/core';
 
 
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
-import {Apartment} from 'src/apartment/apartment';
+import {publish, tap} from 'rxjs/operators';
 import {AppConstComponent} from "../app/app-const.component";
+import {ApartmentPreview} from "../models/apartmentPreview";
 
 
 @Injectable()
@@ -19,27 +19,57 @@ export class FilterService {
 
   apartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/all';
   filterApartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/find';
+  detailFlagUrl=AppConstComponent.API_ENDPOINT +"apartmentPreview/details/preview"
+  filterApartmentPreviewUrlAll = AppConstComponent.API_ENDPOINT + 'apartmentPreview/find/preview';
 
 
-  public getAllApartmentPage(): Observable<Apartment[]> {
+  public getAllApartmentPreviewPage(): Observable<ApartmentPreview[]> {
     console.log("getAllApartmentPage invoked");
-    return this.http.get<Apartment[]>(this.apartmentUrlAll);
+    return this.http.get<ApartmentPreview[]>(this.detailFlagUrl);
   }
 
 
-  public getFilterApartmentPage(url: string): Observable<Apartment[]> {
+  public getFilterApartmentPreviewPage(url: string): Observable<ApartmentPreview[]> {
     console.log("getFilterApartmentPage invoked");
-    return this.http.get<Apartment[]>(url);
+    return this.http.get<ApartmentPreview[]>(url);
   }
 
-  filterApartment(price: number, type: string, startDate: any, endDate: any, city: string, rating: number): Observable<Apartment[]> {
-    const url = `${this.filterApartmentUrlAll}?startDate=${startDate}&endDate=${endDate}&price=${price}&apartmentType=${type}&city=${city}&rating=${rating}`;
+  filterApartment(price: number, type: string, startDate: any, endDate: any, city: string, rating: number): Observable<ApartmentPreview[]> {
 
-    return this.http.get<Apartment[]>(url, this.httpOptions).pipe(
-      tap(apartment => {
+    let url = `${this.filterApartmentPreviewUrlAll}`;
+    if (price != null || type != null || city != null || rating != null || startDate != null || endDate != null) {
+      url += '?';
+      if (startDate != null) {
+        url += `&startDate=${startDate}`;
+      }
+      if (endDate != null) {
+        url += `&endDate=${endDate}`;
+      }
+      if (price != null) {
+        url += `&price=${price}`;
+      }
+      if (type != null) {
+        url += `&type=${type}`;
+      }
+      if (city != null) {
+        url += `&city=${city}`;
+      }
+      if (rating != null) {
+        url += `&rating=${rating}`;
+      }
+    }
+    else{
+      url = this.detailFlagUrl;
+    }
+
+    return this.http.get<ApartmentPreview[]>(url, this.httpOptions).pipe(
+      tap(apartmentPreview => {
         console.log(url);
-        this.getFilterApartmentPage(url);
+        this.getFilterApartmentPreviewPage(url);
       }, error => {
+        if(price == null){
+          console.log("Введите price");
+        }
         console.log('error: ', error);
       })
     );
