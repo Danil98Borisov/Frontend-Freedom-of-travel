@@ -7,6 +7,7 @@ import {publish, tap} from 'rxjs/operators';
 import {Apartment} from 'src/models/apartment';
 import {AppConstComponent} from "../app/app-const.component";
 import {toPublicName} from "@angular/compiler/src/i18n/serializers/xmb";
+import {ApartmentPreview} from "../models/apartmentPreview";
 
 
 @Injectable()
@@ -21,22 +22,23 @@ export class FilterService {
   apartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/all';
   filterApartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/find';
   detailFlagUrl=AppConstComponent.API_ENDPOINT +"apartmentPreview/details/preview"
+  filterApartmentPreviewUrlAll = AppConstComponent.API_ENDPOINT + 'apartmentPreview/find/preview';
 
 
-  public getAllApartmentPage(): Observable<Apartment[]> {
+  public getAllApartmentPreviewPage(): Observable<ApartmentPreview[]> {
     console.log("getAllApartmentPage invoked");
-    return this.http.get<Apartment[]>(this.apartmentUrlAll);
+    return this.http.get<ApartmentPreview[]>(this.detailFlagUrl);
   }
 
 
-  public getFilterApartmentPage(url: string): Observable<Apartment[]> {
+  public getFilterApartmentPreviewPage(url: string): Observable<ApartmentPreview[]> {
     console.log("getFilterApartmentPage invoked");
-    return this.http.get<Apartment[]>(url);
+    return this.http.get<ApartmentPreview[]>(url);
   }
 
-  filterApartment(price: number, type: string, startDate: any, endDate: any, city: string, rating: number): Observable<Apartment[]> {
+  filterApartment(price: number, type: string, startDate: any, endDate: any, city: string, rating: number): Observable<ApartmentPreview[]> {
 
-    let url = `${this.filterApartmentUrlAll}`;
+    let url = `${this.filterApartmentPreviewUrlAll}`;
     if (price != null || type != null || city != null || rating != null || startDate != null || endDate != null) {
       url += '?';
       if (startDate != null) {
@@ -59,13 +61,13 @@ export class FilterService {
       }
     }
     else{
-      url = this.apartmentUrlAll;
+      url = this.detailFlagUrl;
     }
 
-    return this.http.get<Apartment[]>(url, this.httpOptions).pipe(
-      tap(apartment => {
+    return this.http.get<ApartmentPreview[]>(url, this.httpOptions).pipe(
+      tap(apartmentPreview => {
         console.log(url);
-        this.getFilterApartmentPage(url);
+        this.getFilterApartmentPreviewPage(url);
       }, error => {
         if(price == null){
           console.log("Введите price");

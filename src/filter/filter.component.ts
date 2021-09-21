@@ -27,39 +27,55 @@ export class FilterComponent implements OnInit {
     type: new FormControl()
   });
 
-  columns = [
+/*  columns = [    {
+    columnDef: 'image',
+    header: 'Image',*/
+    /*cell: (element: any) => `${this.getImageApartment(`${element.imageApartment.image}`,`${element.apartment.id}`)}`*/
+/*    cell: (element: any) => `<script type="text/html">
+                                    <ng-template [ngIf]="isImage">
+                                        <div class="picture-box">
+                                            <img width="150" height="150" [src]="getImageApartment(apartmentPreview.imageApartment.image, apartmentPreview.apartment.id)">
+                                        </div>
+                                    </ng-template>
+                           </script>
+                           `
+  },
     {
       columnDef: 'city',
       header: 'City',
-      cell: (element: any) => `${element.hotel.city}`
+      cell: (element: any) => `${element.apartment.hotel.city}`
     },
     {
       columnDef: 'hotel',
       header: 'Name Hotel',
-      cell: (element: any) => `${element.hotel.hotelName}`
+      cell: (element: any) => `${element.apartment.hotel.hotelName}`
     },
     {
       columnDef: 'rating',
       header: 'Rating hotel',
-      cell: (element: any) => `${element.hotel.rating}`
+      cell: (element: any) => `${element.apartment.hotel.rating}`
     },
     {
       columnDef: 'type',
       header: 'Type apartment',
-      cell: (element: Apartment) => `${element.type}`
+      cell: (element: any) => `${element.apartment.type}`
     },
     {
       columnDef: 'price',
       header: 'Price',
-      cell: (element: Apartment) => `${element.price} $`
+      cell: (element: any) => `${element.apartment.price} $`
     },
-  ];
+  ];*/
 
+/*
   apartments: Apartment[] = [];
+*/
 
   apartmentsPreviews: ApartmentPreview[]=[];
 
+/*
   displayedColumns = this.columns.map(c => c.columnDef);
+*/
 
   constructor(private filterService: FilterService,
               private datePipe: DatePipe,
@@ -78,13 +94,19 @@ export class FilterComponent implements OnInit {
 
     let startDate = this.datePipe.transform(fil.value['startDate'], 'yyyy-MM-dd');
     let endDate = this.datePipe.transform(fil.value['endDate'], 'yyyy-MM-dd');
+
     this.filterService.filterApartment(ap.price, ap.type, startDate, endDate, fil.value['city'], fil.value['rating'])
-      .subscribe((data: Apartment[]) => this.apartments = data);
+      .subscribe((data: ApartmentPreview[]) => this.apartmentsPreviews = data);
   }
 
-  logFunc(apartmentPreviews: any) {
+/*  logFunc(apartmentPreviews: any) {
     console.log("Hi, I'm apartmentPreviews" + apartmentPreviews.id);
     this.router.navigate(['/apartment-details', apartmentPreviews.id])
+  }*/
+
+  logFunc(id: any) {
+    console.log("Hi, I'm apartmentPreviews" + id);
+    this.router.navigate(['/apartment-details', id])
   }
 
   ngOnInit() {
@@ -107,7 +129,8 @@ export class FilterComponent implements OnInit {
     } else if(!image) {
       console.log("raster is null for apart : ", apartId)
     }
-    return "data:image/png;base64," + image;
+    return ("data:image/png;base64," + image);
   }
+  displayedColumns: string[] = ['photo', 'hotel', 'type', 'price'];
 
 }
