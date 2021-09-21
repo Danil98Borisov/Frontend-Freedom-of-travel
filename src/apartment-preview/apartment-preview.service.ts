@@ -18,19 +18,6 @@ export class ApartmentPreviewService {
 
   detailFlagUrl=AppConstComponent.API_ENDPOINT +"apartmentPreview/details/preview"
 
-
-/*  getApartmentPreviewPage(): Observable<ApartmentPreview[]> {
-    const url = `${this.detailFlagUrl}/${id}`;
-    console.log("ID: ", id)
-    return this.http.get<ApartmentPreview[]>(url, this.httpOptions).pipe(
-      tap(apartmentPreview => {
-        console.log("Детально : ", apartmentPreview);
-      }, error => {
-        console.log('error: ', error);
-      })
-    );
-  }*/
-
   public getApartmentPreviewPage(): Observable<ApartmentPreview[]> {
     console.log("getApartmentPreviewPage invoked");
     return this.http.get<ApartmentPreview[]>(this.detailFlagUrl);

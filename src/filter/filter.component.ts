@@ -27,64 +27,12 @@ export class FilterComponent implements OnInit {
     type: new FormControl()
   });
 
-/*  columns = [    {
-    columnDef: 'image',
-    header: 'Image',*/
-    /*cell: (element: any) => `${this.getImageApartment(`${element.imageApartment.image}`,`${element.apartment.id}`)}`*/
-/*    cell: (element: any) => `<script type="text/html">
-                                    <ng-template [ngIf]="isImage">
-                                        <div class="picture-box">
-                                            <img width="150" height="150" [src]="getImageApartment(apartmentPreview.imageApartment.image, apartmentPreview.apartment.id)">
-                                        </div>
-                                    </ng-template>
-                           </script>
-                           `
-  },
-    {
-      columnDef: 'city',
-      header: 'City',
-      cell: (element: any) => `${element.apartment.hotel.city}`
-    },
-    {
-      columnDef: 'hotel',
-      header: 'Name Hotel',
-      cell: (element: any) => `${element.apartment.hotel.hotelName}`
-    },
-    {
-      columnDef: 'rating',
-      header: 'Rating hotel',
-      cell: (element: any) => `${element.apartment.hotel.rating}`
-    },
-    {
-      columnDef: 'type',
-      header: 'Type apartment',
-      cell: (element: any) => `${element.apartment.type}`
-    },
-    {
-      columnDef: 'price',
-      header: 'Price',
-      cell: (element: any) => `${element.apartment.price} $`
-    },
-  ];*/
-
-/*
-  apartments: Apartment[] = [];
-*/
-
   apartmentsPreviews: ApartmentPreview[]=[];
 
-/*
-  displayedColumns = this.columns.map(c => c.columnDef);
-*/
 
   constructor(private filterService: FilterService,
               private datePipe: DatePipe,
-              private router: Router,
-              private apartmentService: ApartmentService,
-              private detailsComponent: DetailsComponent,
-              private detailsService: DetailsService,
-              private apartmentPreviewService: ApartmentPreviewService,
-              private activatedRoute: ActivatedRoute) {
+              private router: Router) {
   }
 
   public filter(fil: FormGroup): void {
@@ -99,27 +47,13 @@ export class FilterComponent implements OnInit {
       .subscribe((data: ApartmentPreview[]) => this.apartmentsPreviews = data);
   }
 
-/*  logFunc(apartmentPreviews: any) {
-    console.log("Hi, I'm apartmentPreviews" + apartmentPreviews.id);
-    this.router.navigate(['/apartment-details', apartmentPreviews.id])
-  }*/
-
   logFunc(id: any) {
     console.log("Hi, I'm apartmentPreviews" + id);
     this.router.navigate(['/apartment-details', id])
   }
 
   ngOnInit() {
-/*    this.apartmentService.getAllApartmentPage()
-      .subscribe((data: Apartment[]) => this.apartments = data);
-
-    console.log("activatedRoute params: ", JSON.stringify(this.activatedRoute.snapshot.params));
-
-    this.apartmentPreviewService.getApartmentPreviewPage()
-      .subscribe((data: ApartmentPreview[]) => this.apartmentsPreviews = data);*/
-
   }
-
 
   isImage: boolean = true;
   public getImageApartment(image: any, apartId: any): any{

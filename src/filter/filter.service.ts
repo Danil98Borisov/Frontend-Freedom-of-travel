@@ -4,9 +4,7 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs';
 import {publish, tap} from 'rxjs/operators';
-import {Apartment} from 'src/models/apartment';
 import {AppConstComponent} from "../app/app-const.component";
-import {toPublicName} from "@angular/compiler/src/i18n/serializers/xmb";
 import {ApartmentPreview} from "../models/apartmentPreview";
 
 

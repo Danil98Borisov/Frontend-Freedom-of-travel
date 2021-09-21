@@ -16,47 +16,10 @@ import {ApartmentPreviewService} from "../apartment-preview/apartment-preview.se
 })
 export class ApartmentComponent implements OnInit {
 
-/*  columns = [
-    {
-      columnDef: 'id',
-      header: 'id',
-      cell: (element: any) => `${element.id}`
-    },
-    {
-      columnDef: 'city',
-      header: 'City',
-      cell: (element: any) => `${element.hotel.city}`
-    },
-    {
-      columnDef: 'hotel',
-      header: 'Name Hotel',
-      cell: (element: any) => `${element.hotel.hotelName}`
-    },
-    {
-      columnDef: 'rating',
-      header: 'Rating hotel',
-      cell: (element: any) => `${element.hotel.rating}`
-    },
-    {
-      columnDef: 'type',
-      header: 'Type apartment',
-      cell: (element: Apartment) => `${element.type}`
-    },
-    {
-      columnDef: 'price',
-      header: 'Price',
-      cell: (element: Apartment) => `${element.price} $`
-    },
-    {
-      columnDef: 'raster',
-      header: 'raster',
-      cell: (element: Apartment) => `${element.raster} $`
-    }
-  ];*/
   apartments: Apartment[] = [];
   details: Details[] = [];
   apartmentsPreviews: ApartmentPreview[]=[];
- /* displayedColumns = this.columns.map(c => c.columnDef);*/
+
 
 
   constructor(private apartmentService: ApartmentService,

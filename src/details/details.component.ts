@@ -1,11 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Apartment} from "../models/apartment";
 import {DetailsService} from "./details.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AppConstComponent} from "../app/app-const.component";
-import {Observable} from "rxjs";
-import {tap} from "rxjs/operators";
 import {Details} from "../models/details";
 
 
@@ -29,9 +24,6 @@ export class DetailsComponent implements OnInit {
   ) {
   }
 
-/*   detailsApartment(id: number): any {
-   console.log("A теперь здесь detailsApartment" +id)
-  }*/
 
   ngOnInit() {
     console.log("ApartmentPreviewComponent is opened, apart id = " + this.activatedRoute.snapshot.params.id);
@@ -48,5 +40,4 @@ export class DetailsComponent implements OnInit {
       this.isImage = false;
     }
   }
-  displayedColumns: string[] = ['photo'];
 }

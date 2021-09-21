@@ -1,12 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Apartment} from "../models/apartment";
 import {ApartmentPreviewService} from "./apartment-preview.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AppConstComponent} from "../app/app-const.component";
-import {Observable} from "rxjs";
-import {tap} from "rxjs/operators";
-import {Details} from "../models/details";
 import {ApartmentPreview} from "../models/apartmentPreview";
 
 
@@ -44,5 +38,5 @@ export class ApartmentPreviewComponent implements OnInit {
       this.isImage = false;
     }
   }
-  displayedColumns: string[] = ['photo'];
+
 }

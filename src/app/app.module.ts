@@ -31,8 +31,6 @@ import {ApartmentPreviewComponent} from "../apartment-preview/apartment-preview.
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {HomeComponent} from "../home/home.component";
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +64,6 @@ import {HomeComponent} from "../home/home.component";
     MatButtonModule,
     MatExpansionModule,
     MDBBootstrapModule.forRoot()
-
 
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],

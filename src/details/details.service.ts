@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {AppConstComponent} from "../app/app-const.component";
 import {Router} from "@angular/router";
-import {Apartment} from "../models/apartment";
 import {tap} from "rxjs/operators";
 import {Details} from "../models/details";
 
@@ -11,7 +10,7 @@ import {Details} from "../models/details";
 export class DetailsService {
 
   constructor(
-    private router:Router, //instanciate a router
+    private router:Router,
     private http: HttpClient
   ){}
 
@@ -27,7 +26,7 @@ export class DetailsService {
 
     return this.http.get<Details[]>(url, this.httpOptions).pipe(
       tap(details => {
-        /*console.log("Детально : ", details);*/
+        console.log("Детально : ", details);
       }, error => {
         console.log('error: ', error);
       })
