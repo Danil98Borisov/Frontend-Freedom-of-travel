@@ -1,4 +1,5 @@
-<form>
+
+<form >
   <h1>Выберете ваш отпуск</h1>
   <mat-form-field appearance="fill" [formGroup]="fil">
     <mat-label>City</mat-label>
@@ -98,5 +99,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let apartmentsPreview; columns: displayedColumns;" (click)="logFunc(apartmentsPreview.apartment.id)"></tr>
 </table>
-
 

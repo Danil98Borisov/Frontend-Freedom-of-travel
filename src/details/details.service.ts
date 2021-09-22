@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {AppConstComponent} from "../app/app-const.component";
 import {Router} from "@angular/router";
 import {tap} from "rxjs/operators";
-import {Details} from "../models/details";
+import {ApartmentDetails} from "../models/apartmentDetails";
 
 @Injectable()
 export class DetailsService {
@@ -21,10 +21,10 @@ export class DetailsService {
   detailUrl=AppConstComponent.API_ENDPOINT +"apartment/details"
 
 
-   getDetailsApartmentPage(id: number): Observable<Details[]> {
+   getDetailsApartmentPage(id: number): Observable<ApartmentDetails> {
     const url = `${this.detailUrl}/${id}`;
 
-    return this.http.get<Details[]>(url, this.httpOptions).pipe(
+    return this.http.get<ApartmentDetails>(url, this.httpOptions).pipe(
       tap(details => {
         console.log("Детально : ", details);
       }, error => {
