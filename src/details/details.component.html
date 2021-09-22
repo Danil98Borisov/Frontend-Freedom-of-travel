@@ -1,35 +1,21 @@
-<!--1 вариант-->
-
-<body style="background-image: url(https://img2.akspic.ru/originals/1/9/1/2/92191-pribezhishhe-gorodok-berlin-zdanie-zhile-1920x1080.jpg)">
-
 <a href="filter"><button type="button" class="btn-close" aria-label="Close"></button></a>
 
-<div class="post">
-
-  <div class="post-container">
-    <h2>День в париже</h2>
-    <h3>Сентябрь 1, 2015 <span><a href="#">admin</a></span>
-    </h3>
-  </div>
+<div class="post-container">
+  <h2>{{details?.apartment?.hotel?.hotelName}}</h2>
+</div>
+<div class="image">
   <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
-    <mdb-carousel-item *ngFor="let detail of details">
-      <img class="d-block w-1" [src]="getImageApartment(detail.image)">
+    <mdb-carousel-item  *ngFor="let image of details.apartmentImages">
+      <img [src]="getImageApartment(image.image)" >
     </mdb-carousel-item>
   </mdb-carousel>
-  <div class="post-info">
-    <p>
-      <a class="post post--medium">
-        Отель «ДИВС» расположен в Екатеринбурге, в нескольких минутах ходьбы от городского пруда. Гости могут сыграть в бильярд и посетить фитнес-центр. В отеле работает бесплатный Wi-Fi.
-
-      Номера оснащены телевизором и кондиционером. В собственной ванной комнате с ванной предоставляются тапочки и бесплатные туалетно-косметические принадлежности. Из всех номеров открывается вид на пруд.
-
-      В 2 минутах ходьбы от отеля «ДИВС» расположена станция метро «Динамо». Расстояние до международного аэропорта Кольцово составляет 17 км.
-  </a>
-  </p>
   </div>
+<div class="block">
+    <p>
+      {{details.apartment?.description}}
+    </p>
+  <ul>
+  <a class="semi-transparent-button" href="apartment/edit">Изменить</a>
+  <a class="semi-transparent-button" href="#">Забронировать</a>
+  </ul>
 </div>
-</body>
-<body style="background-image: url(https://lh3.googleusercontent.com/proxy/duD5suCv0xi0sap2b0DG10hfGWimn0npOKfdCLWaKa_UxKVGbXLdQ9JRVIbqRrt8T8RHwu-SFVJCPtrThHPwaLQWTsgd1ko6wr1T5JZNmOqNzSniCexdq6wAvHDpXnGweRNWPNzrX_iSH9KoM3S86agr_7QkW8AN6UsdL_QeJFWJglJmCSjWY4iWmeQNA8huwysnzRNDxOrjE2r3BRGgWl8J)">
-
-<div id="liveAlertPlaceholder"></div>
-</body>

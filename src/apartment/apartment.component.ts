@@ -4,7 +4,7 @@ import {Apartment} from '../models/apartment';
 import {DetailsComponent} from "../details/details.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DetailsService} from "../details/details.service";
-import {Details} from "../models/details";
+import {ApartmentDetails} from "../models/apartmentDetails";
 import {ApartmentPreview} from "../models/apartmentPreview";
 import {ApartmentPreviewService} from "../apartment-preview/apartment-preview.service";
 
@@ -17,7 +17,7 @@ import {ApartmentPreviewService} from "../apartment-preview/apartment-preview.se
 export class ApartmentComponent implements OnInit {
 
   apartments: Apartment[] = [];
-  details: Details[] = [];
+  details: ApartmentDetails[] = [];
   apartmentsPreviews: ApartmentPreview[]=[];
 
 

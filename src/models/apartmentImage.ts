@@ -1,6 +1,6 @@
 export class ApartmentImage {
   constructor(
-    public raster: string,
+    public image: string,
     public flag: number
   ) {
   }
