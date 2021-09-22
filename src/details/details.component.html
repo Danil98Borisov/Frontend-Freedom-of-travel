@@ -1,21 +1,70 @@
-<a href="filter"><button type="button" class="btn-close" aria-label="Close"></button></a>
+<a href="filter">
+  <button type="button" class="btn-close" aria-label="Close"></button>
+</a>
 
 <div class="post-container">
   <h2>{{details?.apartment?.hotel?.hotelName}}</h2>
 </div>
 <div class="image">
   <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
-    <mdb-carousel-item  *ngFor="let image of details.apartmentImages">
-      <img [src]="getImageApartment(image.image)" >
+    <mdb-carousel-item *ngFor="let image of details.apartmentImages">
+      <img [src]="getImageApartment(image.image)">
     </mdb-carousel-item>
   </mdb-carousel>
-  </div>
+</div>
 <div class="block">
-    <p>
-      {{details.apartment?.description}}
-    </p>
   <ul>
-  <a class="semi-transparent-button" href="apartment/edit">Изменить</a>
-  <a class="semi-transparent-button" href="#">Забронировать</a>
+    <p>
+      Описание Отеля {{details.apartment?.description}}
+    </p>
+    <p>
+      Тип отеля: {{details.apartment?.type}}
+    </p>
+    <p>
+      Цена отеля: {{details.apartment?.price}} $
+    </p>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Изменить
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLiveLabel">Изменение описания апартементов</h2>
+          </div>
+          <form #myForm="ngForm" novalidate (ngSubmit)="onSubmitEditApartment(myForm)">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Описание:</label>
+                <div class="form-group">
+                  <input class="form-control" name="description" type="details.apartment?.description"
+                         [value]="details.apartment?.description" ngModel required/>
+                </div>
+                <label for="message-text" class="col-form-label">Тип:</label>
+                <div class="form-group">
+                  <input class="form-control" name="type" type="details.apartment?.type"
+                         [value]="details.apartment?.type" ngModel required/>
+                </div>
+                <label for="message-text" class="col-form-label">Цена:</label>
+                <div class="form-group">
+                  <input class="form-control" name="price" type="details.apartment?.price"
+                         [value]="details.apartment?.price" ngModel required/>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="myForm.invalid">
+                  Сохранить изменения
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </ul>
 </div>
