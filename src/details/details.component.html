@@ -24,6 +24,8 @@
       Цена отеля: {{details.apartment?.price}} $
     </p>
 
+    <!--ИЗМЕНЕНИЯ ПАРАМЕТРОВ АПАРТАМЕНТОВ-->
+
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Изменить
     </button>
@@ -66,5 +68,50 @@
         </div>
       </div>
     </div>
+
+
+    <!--Бронирование апартаментов-->
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
+      Забронировать
+    </button>
+
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="bookingModalLiveLabel">Забронировать отель</h2>
+          </div>
+          <form #myFormBooking="ngForm" novalidate (ngSubmit)="onSubmitBookingApartment(myFormBooking)">
+            <div class="modal-body">
+              <div class="mb-3">
+
+                <label for="message-text" class="col-form-label">Дата заселения:</label>
+                <div class="form-group">
+                  <input class="form-control" name="start_date" type="reservation?.start_date"
+                         [value]="reservation?.start_date" ngModel required/>
+                </div>
+
+                <label for="message-text" class="col-form-label">Дата выселения:</label>
+                <div class="form-group">
+                  <input class="form-control" name="end_date" type="reservation?.end_date"
+                         [value]="reservation?.end_date" ngModel required/>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="myFormBooking.invalid">
+                  Забронировать
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </ul>
 </div>
