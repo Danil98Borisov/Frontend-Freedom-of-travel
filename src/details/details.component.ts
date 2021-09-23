@@ -6,6 +6,7 @@ import {AppConstComponent} from "../app/app-const.component";
 import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
+import {Reservation} from "../models/reservation";
 
 @Component({
   selector: 'app-details',
@@ -19,16 +20,13 @@ export class DetailsComponent implements OnInit {
   isImage: boolean = true;
 
   details: ApartmentDetails = {};
-
-  apartments: Apartment[] = [];
+  reservation: Reservation = {};
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               private http: HttpClient
   ) {
   }
-  title: string ="qweasadsdqwd"
-
 
   ngOnInit() {
     console.log("ApartmentPreviewComponent is opened, apart id = " + this.activatedRoute.snapshot.params.id);
@@ -64,6 +62,29 @@ export class DetailsComponent implements OnInit {
   onSubmitEditApartment(form: NgForm) {
     return this.editApartment(form.value,)
   }
+  /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
+  apartmentUrlBooking = AppConstComponent.API_ENDPOINT + 'reservation/add';
 
+  public bookingApartment(reservation: Reservation) {
+    if (this.details.apartment) {
+      reservation.apartment = this.details.apartment;
+      reservation.hotel = this.details.apartment.hotel;
+      reservation.status = "BOOKED";
+    }
+    console.log("reservation "+ JSON.stringify(reservation))
+    return this.http.post<Reservation>(this.apartmentUrlBooking, reservation)
+      .subscribe(bookingApartment => {
+        console.log("Апартамент забронирован: ", bookingApartment);
+        this.reservation.apartment = bookingApartment.apartment;
+        this.reservation.hotel = bookingApartment.hotel;
+      }, error => {
+        console.log('error: ', error);
+      });
+  }
+
+  onSubmitBookingApartment(form: NgForm) {
+    console.log("Form: " + form.value)
+    return this.bookingApartment(form.value)
+  }
 
 }
