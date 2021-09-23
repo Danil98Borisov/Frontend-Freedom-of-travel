@@ -20,11 +20,15 @@ export class DetailsComponent implements OnInit {
 
   details: ApartmentDetails = {};
 
+  apartments: Apartment[] = [];
+
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               private http: HttpClient
   ) {
   }
+  title: string ="qweasadsdqwd"
+
 
   ngOnInit() {
     console.log("ApartmentPreviewComponent is opened, apart id = " + this.activatedRoute.snapshot.params.id);
