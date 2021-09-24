@@ -11,6 +11,7 @@ import {EditHotelComponent} from 'src/edit-hotel/edit-hotel.component';
 import {FilterComponent} from 'src/filter/filter.component';
 import { DetailsComponent } from 'src/details/details.component';
 import {HomeComponent} from "../home/home.component";
+import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'reservation', component: ReservationComponent},
   {path: 'hotel', component: HotelComponent},
   {path: 'hotel/edit', component: EditHotelComponent},
-  {path: 'filter', component: FilterComponent}
+  {path: 'filter', component: FilterComponent},
+  {path: 'filter-hotel', component: FilterHotelComponent}
 ];
 
 @NgModule({

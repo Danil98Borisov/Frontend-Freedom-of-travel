@@ -30,6 +30,8 @@ import {DetailsComponent} from "../details/details.component";
 import {ApartmentPreviewComponent} from "../apartment-preview/apartment-preview.component";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {HomeComponent} from "../home/home.component";
+import {HotelPreviewComponent} from "../hotel-preview/hotel-preview.component";
+import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import {HomeComponent} from "../home/home.component";
     FilterComponent,
     DetailsComponent,
     ApartmentPreviewComponent,
-    HomeComponent
+    HomeComponent,
+    HotelPreviewComponent,
+    FilterHotelComponent
   ],
   imports: [
     BrowserModule,

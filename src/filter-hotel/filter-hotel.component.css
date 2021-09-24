@@ -1,0 +1,74 @@
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+table {
+  width: 100%;
+}
+
+.demo-button-container {
+  padding-bottom: 16px;
+}
+
+.demo-button + .demo-button {
+  margin-left: 8px;
+}
+
+.demo-table {
+  width: 100%;
+}
+
+.mat-header-cell{
+  width: 200px;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+form {
+  margin: 100px;
+  height: 10px;
+  width: 10000px
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+h1 {
+
+  margin: 15px 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  align: center;
+  letter-spacing: 2px;
+  color: #c2a77a;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
