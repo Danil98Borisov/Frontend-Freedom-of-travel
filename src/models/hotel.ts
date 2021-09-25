@@ -3,7 +3,8 @@ export class Hotel {
     public id: number,
     public hotelName: string,
     public city: string,
-    public rating: number
+    public rating: number,
+    public description: string
   ) {
   }
 }

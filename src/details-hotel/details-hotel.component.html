@@ -1,0 +1,83 @@
+<a href="filter-hotel">
+  <button type="button" class="btn-close" aria-label="Close"></button>
+</a>
+
+<div class="post-container">
+  <h2>{{detailsHotel?.hotel?.hotelName}}</h2>
+</div>
+<div class="image">
+  <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+    <mdb-carousel-item *ngFor="let image of detailsHotel.hotelImages">
+      <img [src]="getImageHotel(image.image)">
+    </mdb-carousel-item>
+  </mdb-carousel>
+</div>
+<div class="block">
+  <ul>
+    <p>
+      Описание Отеля: {{detailsHotel.hotel?.description}}
+    </p>
+    <p>
+      Рейтинг отеля: {{detailsHotel.hotel?.rating}}
+    </p>
+    <p>
+      Город: {{detailsHotel.hotel?.city}}
+    </p>
+
+    <!--ИЗМЕНЕНИЯ ПАРАМЕТРОВ ОТЕЛЯ-->
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Изменить
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLiveLabel">Изменение описания отеля</h2>
+          </div>
+          <form #myFormHotel="ngForm" novalidate (ngSubmit)="onSubmitEditHotel(myFormHotel)">
+            <div class="modal-body">
+              <div class="mb-3">
+
+                <label for="message-text" class="col-form-label">Name:</label>
+                <div class="form-group">
+                  <input class="form-control" name="hotelName" type="detailsHotel.hotel?.hotelName"
+                         [value]="detailsHotel.hotel?.hotelName" ngModel required/>
+                </div>
+
+                <label for="message-text" class="col-form-label">Description:</label>
+                <div class="form-group">
+                  <input class="form-control" name="description" type="detailsHotel.hotel?.description"
+                         [value]="detailsHotel.hotel?.description" ngModel required/>
+                </div>
+
+                <label for="message-text" class="col-form-label">City:</label>
+                <div class="form-group">
+                  <input class="form-control" name="city" type="detailsHotel.hotel?.city"
+                         [value]="detailsHotel.hotel?.city" ngModel required/>
+                </div>
+
+                <label for="message-text" class="col-form-label">Rating:</label>
+                <div class="form-group">
+                  <input class="form-control" name="rating" type="detailsHotel.hotel?.rating"
+                         [value]="detailsHotel.hotel?.rating" ngModel required/>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="myFormHotel.invalid">
+                  Сохранить изменения
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </ul>
+</div>
