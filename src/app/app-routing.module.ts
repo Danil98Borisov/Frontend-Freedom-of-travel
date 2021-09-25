@@ -12,12 +12,14 @@ import {FilterComponent} from 'src/filter/filter.component';
 import { DetailsComponent } from 'src/details/details.component';
 import {HomeComponent} from "../home/home.component";
 import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
+import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'delete', component: DeleteHotelComponent},
   {path: 'apartment-details/:id', component: DetailsComponent},
+  {path: 'hotel-details/:id', component: DetailsHotelComponent},
   {path: 'apartment', component: ApartmentComponent},
   {path: 'hotel/add', component: AddHotelComponent},
   {path: 'reservation', component: ReservationComponent},

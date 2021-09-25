@@ -1,22 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {FilterHotelService} from './filter-hotel.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {DetailsComponent} from "../details/details.component";
-import {DetailsService} from "../details/details.service";
 import {HotelPreview} from "../models/hotelPreview";
 import {HotelService} from "../hotel/hotel.service";
 import {HotelPreviewService} from "../hotel-preview/hotel-preview.service";
 import {Hotel} from "../models/hotel";
+import {Router} from "@angular/router";
+import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
+import {DetailsHotelService} from "../details-hotel/details-hotel.service";
 
 @Component({
   selector: 'app-filter-hotel',
   templateUrl: 'filter-hotel.component.html',
   styleUrls: ['filter-hotel.component.css'],
-  providers: [FilterHotelService,HotelService, DetailsComponent, DetailsService, HotelPreviewService]
+  providers: [FilterHotelService,HotelService, DetailsHotelComponent, DetailsHotelService, HotelPreviewService]
 })
 export class FilterHotelComponent implements OnInit {
 
-  fill = new FormGroup({
+  fil = new FormGroup({
     city: new FormControl(),
     rating: new FormControl()
   });
@@ -24,14 +25,19 @@ export class FilterHotelComponent implements OnInit {
   hotelsPreviews: HotelPreview[]=[];
 
 
-  constructor(private filterHotelService: FilterHotelService) {
+  constructor(private filterHotelService: FilterHotelService,
+              private router: Router) {
   }
 
   public filter(fill: FormGroup): void {
-    let h: Hotel = fill.value
 
     this.filterHotelService.filterHotel(fill.value.city, fill.value.rating)
       .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
+  }
+
+  logFuncHotel(id: any) {
+    console.log("Hi, I'm hotelPreviews" + id);
+    this.router.navigate(['/hotel-details', id])
   }
 
   ngOnInit() {
@@ -47,5 +53,5 @@ export class FilterHotelComponent implements OnInit {
     }
     return ("data:image/png;base64," + image);
   }
-  displayedColumns: string[] = ['photo', 'Name', 'city', 'rating'];
+  displayedColumns: string[] = ['photo', 'Name', 'city', 'rating','description'];
 }
