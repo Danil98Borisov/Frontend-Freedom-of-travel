@@ -18,8 +18,6 @@ export class DetailsHotelService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-
-
    getDetailsHotelPage(id: number): Observable<HotelDetails> {
     const url = `${AppApiConst.HOTEL_DETAILS}/${id}`;
 
