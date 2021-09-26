@@ -1,9 +1,9 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AppConstComponent} from "../app/app-const.component";
 import {Router} from "@angular/router";
 import {HotelPreview} from "../models/hotelPreview";
+import {AppApiConst} from "../app/app.api.const";
 
 @Injectable()
 export class HotelPreviewService {
@@ -13,11 +13,8 @@ export class HotelPreviewService {
     private http: HttpClient
   ){}
 
-
-  detailFlagUrl=AppConstComponent.API_ENDPOINT +"hotelPreview/details/preview"
-
   public getHotelPreviewPage(): Observable<HotelPreview[]> {
     console.log("getHotelPreviewPage invoked");
-    return this.http.get<HotelPreview[]>(this.detailFlagUrl);
+    return this.http.get<HotelPreview[]>(AppApiConst.HOTEL_PREVIEW_DETAILS);
   }
 }

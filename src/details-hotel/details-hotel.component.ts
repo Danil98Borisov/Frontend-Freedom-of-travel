@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {DetailsHotelService} from "./details-hotel.service";
-import {AppConstComponent} from "../app/app-const.component";
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Reservation} from "../models/reservation";
 import {HotelDetails} from "../models/hotelDetails";
 import {Hotel} from "../models/hotel";
+import {AppApiConst} from "../app/app.api.const";
 
 @Component({
   selector: 'app-details-hotel',
@@ -38,17 +38,18 @@ export class DetailsHotelComponent implements OnInit {
   }
 
   getImageHotel(image: any): any{
+/*
     console.log("image = " + image);
+*/
     return "data:image/png;base64," + image;
   }
 
-  hotelUrlEdit = AppConstComponent.API_ENDPOINT + 'hotel/details/edit';
 
   public editHotel(hotel: Hotel) {
     if (this.detailsHotel.hotel) {
       hotel.id = this.detailsHotel.hotel.id;
     }
-    return this.http.post<HotelDetails>(this.hotelUrlEdit, {hotel: hotel, hotelImages: null})
+    return this.http.post<HotelDetails>(AppApiConst.HOTEL_DETAILS_EDIT, {hotel: hotel, hotelImages: null})
       .subscribe(editedHotel => {
         console.log("Отель изменён: ", editedHotel);
         this.detailsHotel.hotel = editedHotel.hotel;
