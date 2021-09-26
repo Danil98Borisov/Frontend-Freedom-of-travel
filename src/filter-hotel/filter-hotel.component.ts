@@ -8,6 +8,7 @@ import {Hotel} from "../models/hotel";
 import {Router} from "@angular/router";
 import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {DetailsHotelService} from "../details-hotel/details-hotel.service";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-filter-hotel',
@@ -16,6 +17,15 @@ import {DetailsHotelService} from "../details-hotel/details-hotel.service";
   providers: [FilterHotelService,HotelService, DetailsHotelComponent, DetailsHotelService, HotelPreviewService]
 })
 export class FilterHotelComponent implements OnInit {
+
+  // MatPaginator Inputs
+  length = 30;
+  pageSize = 5;
+
+  // MatPaginator Output
+  pageEvent: PageEvent[]=[];
+
+
 
   fil = new FormGroup({
     city: new FormControl(),
@@ -29,9 +39,9 @@ export class FilterHotelComponent implements OnInit {
               private router: Router) {
   }
 
-  public filter(fill: FormGroup): void {
+  public filter(fill: FormGroup, page: number): void {
 
-    this.filterHotelService.filterHotel(fill.value.city, fill.value.rating)
+    this.filterHotelService.filterHotel(fill.value.city, fill.value.rating, page)
       .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
   }
 

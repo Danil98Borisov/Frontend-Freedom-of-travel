@@ -34,10 +34,10 @@ export class FilterService {
     return this.http.get<ApartmentPreview[]>(url);
   }
 
-  filterApartment(price: number, type: string, startDate: any, endDate: any, city: string, rating: number): Observable<ApartmentPreview[]> {
+  filterApartment(price: number, type: string, startDate: any, endDate: any, city: string, rating: number, page: number): Observable<ApartmentPreview[]> {
 
     let url = `${this.filterApartmentPreviewUrlAll}`;
-    if (price != null || type != null || city != null || rating != null || startDate != null || endDate != null) {
+    if (price != null || type != null || city != null || rating != null || startDate != null || endDate != null ) {
       url += '?';
       if (startDate != null) {
         url += `&startDate=${startDate}`;
@@ -57,9 +57,12 @@ export class FilterService {
       if (rating != null) {
         url += `&rating=${rating}`;
       }
+      if (page != null) {
+        url += `&page=${page}`;
+      }
     }
     else{
-      url = this.detailFlagUrl;
+      url +='?'+`startDate=1970-01-01`+`&endDate=1970-02-01`+`&page=${page}`;
     }
 
     return this.http.get<ApartmentPreview[]>(url, this.httpOptions).pipe(

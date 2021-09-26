@@ -9,6 +9,7 @@ import {ApartmentService} from "../apartment/apartment.service";
 import {DetailsComponent} from "../details/details.component";
 import {DetailsService} from "../details/details.service";
 import {ApartmentPreviewService} from "../apartment-preview/apartment-preview.service";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-filter',
@@ -17,6 +18,14 @@ import {ApartmentPreviewService} from "../apartment-preview/apartment-preview.se
   providers: [FilterService,ApartmentService, DetailsComponent, DetailsService, ApartmentPreviewService]
 })
 export class FilterComponent implements OnInit {
+
+  // MatPaginator Inputs
+  length = 60;
+  pageSize = 5;
+
+  // MatPaginator Output
+  pageEvent: PageEvent[]=[];
+
 
   fil = new FormGroup({
     startDate: new FormControl(),
@@ -35,7 +44,7 @@ export class FilterComponent implements OnInit {
               private router: Router) {
   }
 
-  public filter(fil: FormGroup): void {
+  public filter(fil: FormGroup,page: number): void {
     console.log('fil.value.startDate = ', fil.value['startDate'])
     console.log('fil.value.startDate = ',)
     let ap: Apartment = fil.value
@@ -43,7 +52,7 @@ export class FilterComponent implements OnInit {
     let startDate = this.datePipe.transform(fil.value['startDate'], 'yyyy-MM-dd');
     let endDate = this.datePipe.transform(fil.value['endDate'], 'yyyy-MM-dd');
 
-    this.filterService.filterApartment(ap.price, ap.type, startDate, endDate, fil.value['city'], fil.value['rating'])
+    this.filterService.filterApartment(ap.price, ap.type, startDate, endDate, fil.value['city'], fil.value['rating'],page)
       .subscribe((data: ApartmentPreview[]) => this.apartmentsPreviews = data);
   }
 

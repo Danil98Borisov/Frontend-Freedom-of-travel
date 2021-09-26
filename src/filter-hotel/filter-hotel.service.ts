@@ -32,10 +32,10 @@ export class FilterHotelService {
     return this.http.get<HotelPreview[]>(url);
   }
 
-  filterHotel(city: string, rating: number): Observable<HotelPreview[]> {
+  filterHotel(city: string, rating: number, page: number): Observable<HotelPreview[]> {
 
     let url = `${this.filterHotelPreviewUrlAll}`;
-    if (city != null || rating != null ) {
+    if (city != null || rating != null || page!=null) {
       url += '?';
       if (city != null) {
         url += `&city=${city}`;
@@ -43,11 +43,10 @@ export class FilterHotelService {
       if (rating != null) {
         url += `&rating=${rating}`;
       }
+      if (page != null) {
+        url += `&page=${page}`;
+      }
     }
-    else{
-      url = this.detailHotelFlagUrl;
-    }
-
     return this.http.get<HotelPreview[]>(url, this.httpOptions).pipe(
       tap(hotelPreview => {
         console.log(url);

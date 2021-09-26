@@ -33,6 +33,7 @@ import {HomeComponent} from "../home/home.component";
 import {HotelPreviewComponent} from "../hotel-preview/hotel-preview.component";
 import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
 import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
     MatIconModule,
     MatButtonModule,
     MatExpansionModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    MatPaginatorModule
 
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],

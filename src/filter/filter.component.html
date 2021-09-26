@@ -51,7 +51,7 @@
     <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="filter(fil)">Поиск</button>
+  <button mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">Поиск</button>
 
 </form>
 
@@ -100,3 +100,11 @@
   <tr mat-row *matRowDef="let apartmentsPreview; columns: displayedColumns;" (click)="logFunc(apartmentsPreview.apartment.id)"></tr>
 </table>
 
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               (page)="pageEvent[0] = $event"
+               aria-label="Select page"
+               (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
+               showFirstLastButtons>
+
+</mat-paginator>
