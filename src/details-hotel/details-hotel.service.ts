@@ -1,10 +1,10 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AppConstComponent} from "../app/app-const.component";
 import {Router} from "@angular/router";
 import {tap} from "rxjs/operators";
 import {HotelDetails} from "../models/hotelDetails";
+import {AppApiConst} from "../app/app.api.const";
 
 @Injectable()
 export class DetailsHotelService {
@@ -18,11 +18,10 @@ export class DetailsHotelService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  detailHotelUrl=AppConstComponent.API_ENDPOINT +"hotel/details"
 
 
    getDetailsHotelPage(id: number): Observable<HotelDetails> {
-    const url = `${this.detailHotelUrl}/${id}`;
+    const url = `${AppApiConst.HOTEL_DETAILS}/${id}`;
 
     return this.http.get<HotelDetails>(url, this.httpOptions).pipe(
       tap(hotelDetails => {

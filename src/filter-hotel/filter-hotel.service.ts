@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {AppConstComponent} from "../app/app-const.component";
+import {AppApiConst} from "../app/app.api.const";
 import {HotelPreview} from "../models/hotelPreview";
 
 
@@ -17,13 +17,11 @@ export class FilterHotelService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  detailHotelFlagUrl=AppConstComponent.API_ENDPOINT +"hotelPreview/details/preview"
-  filterHotelPreviewUrlAll = AppConstComponent.API_ENDPOINT + 'hotelPreview/find/preview';
 
 
   public getAllHotelPreviewPage(): Observable<HotelPreview[]> {
     console.log("getAllHotelPage invoked");
-    return this.http.get<HotelPreview[]>(this.detailHotelFlagUrl);
+    return this.http.get<HotelPreview[]>(AppApiConst.APARTMENT_PREVIEW_FIND);
   }
 
 
@@ -34,8 +32,8 @@ export class FilterHotelService {
 
   filterHotel(city: string, rating: number, page: number): Observable<HotelPreview[]> {
 
-    let url = `${this.filterHotelPreviewUrlAll}`;
-    if (city != null || rating != null || page!=null) {
+    let url = `${AppApiConst.HOTEL_PREVIEW_FIND}`;
+    if (city != null || rating != null) {
       url += '?';
       if (city != null) {
         url += `&city=${city}`;
@@ -46,6 +44,9 @@ export class FilterHotelService {
       if (page != null) {
         url += `&page=${page}`;
       }
+    }
+    else {
+      url += '?'+ `page=${page}`;
     }
     return this.http.get<HotelPreview[]>(url, this.httpOptions).pipe(
       tap(hotelPreview => {
