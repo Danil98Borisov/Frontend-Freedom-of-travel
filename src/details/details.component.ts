@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {DetailsService} from "./details.service";
 import {ApartmentDetails} from "../models/apartmentDetails";
-import {AppConstComponent} from "../app/app-const.component";
 import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
 import {Reservation} from "../models/reservation";
+import {AppApiConst} from "../app/app.api.const";
 
 @Component({
   selector: 'app-details',
@@ -39,18 +39,18 @@ export class DetailsComponent implements OnInit {
   }
 
   getImageApartment(image: any): any{
+/*
     console.log("image = " + image);
+*/
     return "data:image/png;base64," + image;
   }
-
-  apartmentUrlEdit = AppConstComponent.API_ENDPOINT + 'apartment/details/edit';
 
   public editApartment(apartment: Apartment) {
     if (this.details.apartment) {
       apartment.id = this.details.apartment.id;
       apartment.hotel = this.details.apartment.hotel;
     }
-    return this.http.post<ApartmentDetails>(this.apartmentUrlEdit, {apartment: apartment, apartmentImages: null})
+    return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {apartment: apartment, apartmentImages: null})
       .subscribe(editedApartment => {
         console.log("Апартамент изменён: ", editedApartment);
         this.details.apartment = editedApartment.apartment;
@@ -62,9 +62,9 @@ export class DetailsComponent implements OnInit {
   onSubmitEditApartment(form: NgForm) {
     return this.editApartment(form.value,)
   }
-  /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
-  apartmentUrlBooking = AppConstComponent.API_ENDPOINT + 'reservation/add';
 
+
+  /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
   public bookingApartment(reservation: Reservation) {
     if (this.details.apartment) {
       reservation.apartment = this.details.apartment;
@@ -72,7 +72,7 @@ export class DetailsComponent implements OnInit {
       reservation.status = "BOOKED";
     }
     console.log("reservation "+ JSON.stringify(reservation))
-    return this.http.post<Reservation>(this.apartmentUrlBooking, reservation)
+    return this.http.post<Reservation>(AppApiConst.RESERVATION_ADD, reservation)
       .subscribe(bookingApartment => {
         console.log("Апартамент забронирован: ", bookingApartment);
         this.reservation.apartment = bookingApartment.apartment;

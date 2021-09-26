@@ -4,8 +4,8 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {AppApiConst} from "../app/app.api.const";
 import {HotelPreview} from "../models/hotelPreview";
+import {AppApiConst} from "../app/app.api.const";
 
 
 @Injectable()
@@ -17,11 +17,9 @@ export class FilterHotelService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-
-
   public getAllHotelPreviewPage(): Observable<HotelPreview[]> {
     console.log("getAllHotelPage invoked");
-    return this.http.get<HotelPreview[]>(AppApiConst.APARTMENT_PREVIEW_FIND);
+    return this.http.get<HotelPreview[]>(AppApiConst.HOTEL_PREVIEW_DETAILS);
   }
 
 
@@ -46,8 +44,9 @@ export class FilterHotelService {
       }
     }
     else {
-      url += '?'+ `page=${page}`;
+        url += '?'+`page=${page}`;
     }
+
     return this.http.get<HotelPreview[]>(url, this.httpOptions).pipe(
       tap(hotelPreview => {
         console.log(url);

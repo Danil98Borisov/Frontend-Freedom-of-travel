@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {DetailsHotelService} from "./details-hotel.service";
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {Reservation} from "../models/reservation";
 import {HotelDetails} from "../models/hotelDetails";
 import {Hotel} from "../models/hotel";
 import {AppApiConst} from "../app/app.api.const";
@@ -43,7 +42,6 @@ export class DetailsHotelComponent implements OnInit {
 */
     return "data:image/png;base64," + image;
   }
-
 
   public editHotel(hotel: Hotel) {
     if (this.detailsHotel.hotel) {

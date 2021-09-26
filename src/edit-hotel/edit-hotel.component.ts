@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Hotel} from 'src/delete/hotel';
 import {HttpClient} from "@angular/common/http";
 import {EditHotelService} from "./edit-hotel.service";
-import {AppConstComponent} from "../app/app-const.component";
+import {AppApiConst} from "../app/app.api.const";
 
 @Component({
   selector: 'app-edit-hotel',
@@ -17,11 +17,9 @@ export class EditHotelComponent {
   constructor(private http: HttpClient) {
   }
 
-  hotelUrlEdit = AppConstComponent.API_ENDPOINT + 'hotel/edit';
-
   public editHotel(hotel: Hotel) {
 
-    return this.http.post<Hotel>(this.hotelUrlEdit, hotel)
+    return this.http.post<Hotel>(AppApiConst.HOTEL_EDIT, hotel)
       .subscribe(hotel => {
         console.log("Отель изменён: ", hotel);
       }, error => {

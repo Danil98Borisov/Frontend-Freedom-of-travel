@@ -3,9 +3,9 @@ import {Injectable} from '@angular/core';
 
 
 import {Observable} from 'rxjs';
-import {publish, tap} from 'rxjs/operators';
-import {AppConstComponent} from "../app/app-const.component";
+import {tap} from 'rxjs/operators';
 import {ApartmentPreview} from "../models/apartmentPreview";
+import {AppApiConst} from "../app/app.api.const";
 
 
 @Injectable()
@@ -17,15 +17,9 @@ export class FilterService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  apartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/all';
-  filterApartmentUrlAll = AppConstComponent.API_ENDPOINT + 'apartment/find';
-  detailFlagUrl=AppConstComponent.API_ENDPOINT +"apartmentPreview/details/preview"
-  filterApartmentPreviewUrlAll = AppConstComponent.API_ENDPOINT + 'apartmentPreview/find/preview';
-
-
   public getAllApartmentPreviewPage(): Observable<ApartmentPreview[]> {
     console.log("getAllApartmentPage invoked");
-    return this.http.get<ApartmentPreview[]>(this.detailFlagUrl);
+    return this.http.get<ApartmentPreview[]>(AppApiConst.APARTMENT_PREVIEW_DETAILS);
   }
 
 
@@ -36,7 +30,7 @@ export class FilterService {
 
   filterApartment(price: number, type: string, startDate: any, endDate: any, city: string, rating: number, page: number): Observable<ApartmentPreview[]> {
 
-    let url = `${this.filterApartmentPreviewUrlAll}`;
+    let url = `${AppApiConst.APARTMENT_PREVIEW_FIND}`;
     if (price != null || type != null || city != null || rating != null || startDate != null || endDate != null ) {
       url += '?';
       if (startDate != null) {
