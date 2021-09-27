@@ -9,10 +9,7 @@ import {AppApiConst} from "../app/app.api.const";
 @Injectable()
 export class DetailsService {
 
-  constructor(
-    private router:Router,
-    private http: HttpClient
-  ){}
+  constructor(private http: HttpClient){}
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

@@ -34,6 +34,8 @@ import {HotelPreviewComponent} from "../hotel-preview/hotel-preview.component";
 import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
 import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {LoginComponent} from "../login/login.component";
+import {authInterceptorProviders} from "../helpers/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     HomeComponent,
     HotelPreviewComponent,
     FilterHotelComponent,
-    DetailsHotelComponent
+    DetailsHotelComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatPaginatorModule
 
   ],
-  providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],
+  providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

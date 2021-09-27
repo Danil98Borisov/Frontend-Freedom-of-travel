@@ -12,7 +12,6 @@ import {AppApiConst} from "../app/app.api.const";
   providers: [AddHotelService]
 })
 export class AddHotelComponent {
-  hotels: Hotel[] = [];
 
   constructor(private http: HttpClient) {
   }

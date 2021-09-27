@@ -37,9 +37,7 @@ export class DetailsHotelComponent implements OnInit {
   }
 
   getImageHotel(image: any): any{
-/*
-    console.log("image = " + image);
-*/
+    //console.log("image = " + image);
     return "data:image/png;base64," + image;
   }
 
