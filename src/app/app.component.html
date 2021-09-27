@@ -1,12 +1,11 @@
 <div class="app">
   <div class="topnav">
-    <a class="active" href="home">Home</a>
+    <a class="active" routerLink="filter">Home</a>
     <a class="nav-item" routerLink="hotel">Hotel</a>
     <a class="nav-item" routerLink="apartment">Apartment</a>
     <a class="nav-item" routerLink="reservation">Reservation</a>
     <a class="nav-item" routerLink="hotel/add">Add Hotel</a>
     <a class="nav-item" routerLink="hotel/edit">Edit Hotel</a>
-    <a class="nav-item" routerLink="filter">Filter</a>
     <a class="nav-item" routerLink="delete">Delete</a>
     <a class="nav-item" routerLink="filter-hotel">Filter Hotel</a>
     <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="login">Login</a>
