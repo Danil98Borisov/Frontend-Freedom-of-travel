@@ -13,10 +13,11 @@ import { DetailsComponent } from 'src/details/details.component';
 import {HomeComponent} from "../home/home.component";
 import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
 import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
-
+import {LoginComponent} from "../login/login.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'delete', component: DeleteHotelComponent},
   {path: 'apartment-details/:id', component: DetailsComponent},
   {path: 'hotel-details/:id', component: DetailsHotelComponent},

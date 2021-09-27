@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {AuthService} from "../services/auth.service";
 
 
 @Component({
@@ -8,5 +9,22 @@ import {Component, OnInit} from "@angular/core";
   providers: []
 })
 export class HomeComponent implements OnInit {
-  ngOnInit(){}
+
+  isLogin : boolean = false;
+
+
+  constructor(private authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.authService.currentIsLogIn.subscribe(isLogin => this.isLogin = isLogin);
+    if(this.isLogin){
+      this.reloadPage();
+    }
+  }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+
 }

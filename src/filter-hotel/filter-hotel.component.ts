@@ -4,7 +4,6 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {HotelPreview} from "../models/hotelPreview";
 import {HotelService} from "../hotel/hotel.service";
 import {HotelPreviewService} from "../hotel-preview/hotel-preview.service";
-import {Hotel} from "../models/hotel";
 import {Router} from "@angular/router";
 import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {DetailsHotelService} from "../details-hotel/details-hotel.service";

@@ -3,7 +3,7 @@ import {Apartment} from "../models/apartment";
 import {FilterService} from './filter.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {ApartmentPreview} from "../models/apartmentPreview";
 import {ApartmentService} from "../apartment/apartment.service";
 import {DetailsComponent} from "../details/details.component";

@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {DetailsService} from "./details.service";
 import {ApartmentDetails} from "../models/apartmentDetails";
+import {AppApiConst} from "../app/app.api.const";
 import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
 import {Reservation} from "../models/reservation";
-import {AppApiConst} from "../app/app.api.const";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-details',
@@ -24,8 +25,8 @@ export class DetailsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
-              private http: HttpClient
-  ) {
+              public userService: UserService,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -39,9 +40,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getImageApartment(image: any): any{
-/*
-    console.log("image = " + image);
-*/
+    // console.log("image = " + image);
     return "data:image/png;base64," + image;
   }
 
