@@ -15,9 +15,8 @@ export class ReservationComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.httpService.getAllReservationPage().subscribe((data: Reservation[]) => this.reservation = data);
+    this.httpService.getAllReservationPage().subscribe((data: Reservation[]) => {console.log("data"+JSON.stringify(data)); this.reservation = data});
   }
 
-  displayedColumns: string[] = ['id', 'hotel_id', 'apartment_id', 'status', 'start_date', 'end_date'];
+  displayedColumns: string[] = ['id', 'hotel_id', 'apartment_id', 'status', 'start_date', 'end_date','user_id'];
 }
