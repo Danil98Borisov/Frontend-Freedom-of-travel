@@ -8,6 +8,9 @@ import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
 import {Reservation} from "../models/reservation";
 import {UserService} from "../services/user.service";
+import {TokenStorageService} from "../services/token-storage.service";
+import {User} from "../models/user";
+import {Role} from "../models/role";
 
 @Component({
   selector: 'app-details',
@@ -19,14 +22,21 @@ import {UserService} from "../services/user.service";
 export class DetailsComponent implements OnInit {
 
   isImage: boolean = true;
+  isLogin: boolean = true;
+  roles: string[] = [];
+  email: string = '';
+  isLoggedIn = false;
 
   details: ApartmentDetails = {};
   reservation: Reservation = {};
+  users: User={}
+  role: Role = {}
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               public userService: UserService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit() {
@@ -65,9 +75,24 @@ export class DetailsComponent implements OnInit {
 
   /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
   public bookingApartment(reservation: Reservation) {
-    if (this.details.apartment) {
+    if (this.details.apartment && this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+      const user = this.tokenStorage.getUser();
+
+      this.role.id = 1;
+      this.role.name = this.roles.toString();
+
+      this.users.id=user.id;
+      this.users.username=user.username;
+      this.users.email=user.email;
+      this.users.password="";
+
       reservation.apartment = this.details.apartment;
       reservation.hotel = this.details.apartment.hotel;
+      reservation.user = this.users;
+
+      console.log("reservation.users: " + JSON.stringify(user.password))
       reservation.status = "BOOKED";
     }
     console.log("reservation "+ JSON.stringify(reservation))
