@@ -10,14 +10,14 @@ import {HotelComponent} from 'src/hotel/hotel.component';
 import {EditHotelComponent} from 'src/edit-hotel/edit-hotel.component';
 import {FilterComponent} from 'src/filter/filter.component';
 import { DetailsComponent } from 'src/details/details.component';
-import {HomeComponent} from "../home/home.component";
 import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
 import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {LoginComponent} from "../login/login.component";
 import {RegisterComponent} from "../register/register.component";
+import {NotFoundComponent} from "../errors/not-found.component";
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
+  {path: '', component: FilterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'delete', component: DeleteHotelComponent},
   {path: 'apartment-details/:id', component: DetailsComponent},
@@ -29,7 +29,9 @@ const routes: Routes = [
   {path: 'hotel/edit', component: EditHotelComponent},
   {path: 'filter', component: FilterComponent},
   {path: 'filter-hotel', component: FilterHotelComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: '404', component: NotFoundComponent},
+  { path: '**',component: NotFoundComponent}
 ];
 
 @NgModule({

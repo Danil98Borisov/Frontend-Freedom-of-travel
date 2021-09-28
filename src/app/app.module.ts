@@ -9,6 +9,15 @@ import {AddHotelComponent} from 'src/add-hotel/add-hotel.component';
 import {HotelComponent} from 'src/hotel/hotel.component';
 import {EditHotelComponent} from "../edit-hotel/edit-hotel.component";
 import {FilterComponent} from "../filter/filter.component";
+import {RegisterComponent} from "../register/register.component";
+import {LoginComponent} from "../login/login.component";
+import {HotelPreviewComponent} from "../hotel-preview/hotel-preview.component";
+import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
+import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
+import {DetailsComponent} from "../details/details.component";
+import {ReservationComponent} from 'src/reservation/reservation.component';
+import {NotFoundComponent} from "../errors/not-found.component";
+
 
 import {MatTableModule} from '@angular/material/table';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -16,7 +25,6 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
-import {ReservationComponent} from 'src/reservation/reservation.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {ErrorStateMatcher, MatNativeDateModule, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -26,17 +34,14 @@ import {DatePipe} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {DetailsComponent} from "../details/details.component";
+
 import {ApartmentPreviewComponent} from "../apartment-preview/apartment-preview.component";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import {HomeComponent} from "../home/home.component";
-import {HotelPreviewComponent} from "../hotel-preview/hotel-preview.component";
-import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
-import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
+
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {LoginComponent} from "../login/login.component";
+
 import {authInterceptorProviders} from "../helpers/auth.interceptor";
-import {RegisterComponent} from "../register/register.component";
+
 
 @NgModule({
   declarations: [
@@ -50,12 +55,12 @@ import {RegisterComponent} from "../register/register.component";
     FilterComponent,
     DetailsComponent,
     ApartmentPreviewComponent,
-    HomeComponent,
     HotelPreviewComponent,
     FilterHotelComponent,
     DetailsHotelComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
