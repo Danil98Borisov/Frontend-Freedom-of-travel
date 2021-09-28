@@ -10,6 +10,7 @@ import {DetailsComponent} from "../details/details.component";
 import {DetailsService} from "../details/details.service";
 import {ApartmentPreviewService} from "../apartment-preview/apartment-preview.service";
 import {PageEvent} from "@angular/material/paginator";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-filter',
@@ -26,6 +27,7 @@ export class FilterComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent[]=[];
 
+  isLogin : boolean = false;
 
   fil = new FormGroup({
     startDate: new FormControl(),
@@ -41,7 +43,8 @@ export class FilterComponent implements OnInit {
 
   constructor(private filterService: FilterService,
               private datePipe: DatePipe,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
   }
 
   public filter(fil: FormGroup,page: number): void {
@@ -61,7 +64,15 @@ export class FilterComponent implements OnInit {
     this.router.navigate(['/apartment-details', id])
   }
 
+
   ngOnInit() {
+    this.authService.currentIsLogIn.subscribe(isLogin => this.isLogin = isLogin);
+    if(this.isLogin){
+      this.reloadPage();
+    }
+  }
+  reloadPage(): void {
+    window.location.reload();
   }
 
   isImage: boolean = true;
