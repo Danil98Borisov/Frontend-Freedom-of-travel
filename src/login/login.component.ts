@@ -75,6 +75,6 @@ export class LoginComponent implements OnInit {
   }
 
   goToHome(): void {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/filter']);
   }
 }
