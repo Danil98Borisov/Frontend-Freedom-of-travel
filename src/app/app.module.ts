@@ -36,6 +36,7 @@ import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {LoginComponent} from "../login/login.component";
 import {authInterceptorProviders} from "../helpers/auth.interceptor";
+import {RegisterComponent} from "../register/register.component";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {authInterceptorProviders} from "../helpers/auth.interceptor";
     HotelPreviewComponent,
     FilterHotelComponent,
     DetailsHotelComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
