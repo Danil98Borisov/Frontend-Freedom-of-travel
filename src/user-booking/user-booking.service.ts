@@ -17,11 +17,10 @@ export class UserBookingService {
   };
 
   getAllReservationUser(email: string): Observable<Reservation[]> {
-    const url = `${AppApiConst.USER_BOOKING}/${email}`;
 
-    return this.http.get<Reservation[]>(url, this.httpOptions).pipe(
-      tap(userBooking => {
-        console.log("Детально userBooking: ", userBooking);
+    return this.http.get<Reservation[]>(`${AppApiConst.BOOKING}/${email}`, this.httpOptions).pipe(
+      tap(Booking => {
+        console.log("Детально Booking: ", Booking);
       }, error => {
         console.log('error: ', error);
       })

@@ -26,5 +26,5 @@ export class AppApiConst {
   public static RESERVATION_ALL = AppApiConst.API_ENDPOINT + '/reservation/all';
   public static RESERVATION_ADD = AppApiConst.API_ENDPOINT + '/reservation/add';
 
-  public static USER_BOOKING = AppApiConst.API_ENDPOINT + '/reservation/user/booking';
+  public static BOOKING = AppApiConst.API_ENDPOINT + '/reservation/booking';
 }
