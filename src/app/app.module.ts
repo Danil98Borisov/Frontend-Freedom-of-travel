@@ -3,21 +3,21 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
-import {DeleteHotelComponent} from "../delete/delete-hotel.component";
-import {ApartmentComponent} from "../apartment/apartment.component";
-import {AddHotelComponent} from 'src/add-hotel/add-hotel.component';
-import {HotelComponent} from 'src/hotel/hotel.component';
-import {EditHotelComponent} from "../edit-hotel/edit-hotel.component";
-import {FilterComponent} from "../filter/filter.component";
-import {RegisterComponent} from "../register/register.component";
-import {LoginComponent} from "../login/login.component";
-import {HotelPreviewComponent} from "../hotel-preview/hotel-preview.component";
-import {FilterHotelComponent} from "../filter-hotel/filter-hotel.component";
-import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
-import {DetailsComponent} from "../details/details.component";
-import {ReservationComponent} from 'src/reservation/reservation.component';
-import {NotFoundComponent} from "../errors/not-found.component";
-import {UserBookingComponent} from "../user-booking/user-booking.component";
+import {DeleteHotelComponent} from "./components/delete/delete-hotel.component";
+import {ApartmentComponent} from "./components/apartment/apartment.component";
+import {AddHotelComponent} from 'src/app/components/add-hotel/add-hotel.component';
+import {HotelComponent} from 'src/app/components/hotel/hotel.component';
+import {EditHotelComponent} from "./components/edit-hotel/edit-hotel.component";
+import {FilterComponent} from "./components/filter/filter.component";
+import {RegisterComponent} from "./components/register/register.component";
+import {LoginComponent} from "./components/login/login.component";
+import {HotelPreviewComponent} from "./components/hotel-preview/hotel-preview.component";
+import {FilterHotelComponent} from "./components/filter-hotel/filter-hotel.component";
+import {DetailsHotelComponent} from "./components/details-hotel/details-hotel.component";
+import {DetailsComponent} from "./components/details/details.component";
+import {ReservationComponent} from 'src/app/components/reservation/reservation.component';
+import {NotFoundComponent} from "./components/errors/not-found.component";
+import {UserBookingComponent} from "./components/user-booking/user-booking.component";
 
 
 import {MatTableModule} from '@angular/material/table';
@@ -36,12 +36,12 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 
-import {ApartmentPreviewComponent} from "../apartment-preview/apartment-preview.component";
+import {ApartmentPreviewComponent} from "./components/apartment-preview/apartment-preview.component";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import {MatPaginatorModule} from "@angular/material/paginator";
 
-import {authInterceptorProviders} from "../helpers/auth.interceptor";
+import {authInterceptorProviders} from "./components/helpers/auth.interceptor";
 
 
 @NgModule({
