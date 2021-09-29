@@ -6,11 +6,11 @@ import {AppApiConst} from "../app/app.api.const";
 import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
-import {Reservation} from "../models/reservation";
 import {UserService} from "../services/user.service";
 import {TokenStorageService} from "../services/token-storage.service";
 import {User} from "../models/user";
 import {Role} from "../models/role";
+import {BookingBy} from "../models/bookingBy";
 
 @Component({
   selector: 'app-details',
@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit {
   isLoggedIn = false;
 
   details: ApartmentDetails = {};
-  reservation: Reservation = {};
+  bookingBy: BookingBy = {}
   users: User={}
   role: Role = {}
 
@@ -74,40 +74,25 @@ export class DetailsComponent implements OnInit {
 
 
   /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
-  public bookingApartment(reservation: Reservation) {
+  public bookingApartment(bookingBy: BookingBy) {
     if (this.details.apartment && this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-      const user = this.tokenStorage.getUser();
 
-      this.role.id = 1;
-      this.role.name = this.roles.toString();
-
-      this.users.id=user.id;
-      this.users.username=user.username;
-      this.users.email=user.email;
-      this.users.password="";
-
-      reservation.apartment = this.details.apartment;
-      reservation.hotel = this.details.apartment.hotel;
-      reservation.user = this.users;
-
-      console.log("reservation.users: " + JSON.stringify(user.password))
-      reservation.status = "BOOKED";
+      bookingBy.apartmentId = this.details.apartment.id;
+      bookingBy.userEmail = this.tokenStorage.getUser().email;
     }
-    console.log("reservation "+ JSON.stringify(reservation))
-    return this.http.post<Reservation>(AppApiConst.RESERVATION_ADD, reservation)
-      .subscribe(bookingApartment => {
-        console.log("Апартамент забронирован: ", bookingApartment);
-        this.reservation.apartment = bookingApartment.apartment;
-        this.reservation.hotel = bookingApartment.hotel;
+
+
+    return this.http.post<BookingBy>(AppApiConst.RESERVATION_ADD, bookingBy)
+      .subscribe(booking => {
+        console.log("Апартамент забронирован: ", booking);
       }, error => {
         console.log('error: ', error);
       });
   }
 
   onSubmitBookingApartment(form: NgForm) {
-    console.log("Form: " + form.value)
+    console.log("Form: " + JSON.stringify(form.value))
     return this.bookingApartment(form.value)
   }
 

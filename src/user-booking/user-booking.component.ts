@@ -31,11 +31,11 @@ export class UserBookingComponent implements OnInit {
       const user = this.tokenStorage.getUser();
       this.email = user.email;
     }
-    
+
     console.log("this.email: "+ this.email)
 
     this.httpService.getAllReservationUser(this.email).subscribe((data: Reservation[]) => {console.log("data"+JSON.stringify(data)); this.reservation = data});
   }
 
-  displayedColumns: string[] = ['id', 'hotel_id', 'apartment_id', 'status', 'start_date', 'end_date','email'];
+  displayedColumns: string[] = ['id', 'apartment_id', 'status', 'start_date', 'end_date','email'];
 }
