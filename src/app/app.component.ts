@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {TokenStorageService} from "../services/token-storage.service";
+import {AuthService} from "../services/auth.service";
+import {UserService} from "../services/user.service";
 
 
 @Component({
@@ -10,31 +11,26 @@ import {TokenStorageService} from "../services/token-storage.service";
 export class AppComponent implements OnInit {
 
   isLoggedIn: boolean = false;
-  isUser: boolean = false;
   isAdmin: boolean =  false;
   isAdvertiser: boolean = false;
 
   public username: string = '';
   public token: string = '';
-  private roles: string[] = [];
 
-  constructor(private tokenStorageService: TokenStorageService){}
+  constructor(private userService: UserService,
+              private authService: AuthService){}
 
   ngOnInit() {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-    this.token = this.tokenStorageService.getToken();
-
+    this.isLoggedIn = this.userService.isLoggedIn();
     if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-
-      this.isUser = this.roles.includes('ROLE_USER');
-      this.isAdmin = this.roles.includes('ROLE_ADMIN');
-      this.isAdvertiser = this.roles.includes('ROLE_ADVERTISER');
-
-      this.username = user.username;
-
+      this.isAdmin = this.userService.isAdmin();
+      this.isAdvertiser = this.userService.isAdmin();
+      this.username = this.userService.getUserName();
     }
   }
 
+  signOut(): void {
+    this.authService.signOut();
+    window.location.reload();
+  }
 }

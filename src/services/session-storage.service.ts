@@ -6,7 +6,7 @@ const USER_KEY = 'auth-user';
 @Injectable({
   providedIn: 'root'
 })
-export class TokenStorageService {
+export class SessionStorageService {
 
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);

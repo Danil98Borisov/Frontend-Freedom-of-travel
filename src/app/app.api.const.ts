@@ -2,6 +2,7 @@ export class AppApiConst {
   public static API_ENDPOINT = 'http://localhost:8050/api';
 
   public static SIGN_IN = AppApiConst.API_ENDPOINT + '/auth/signin';
+  public static SIGN_OUT = AppApiConst.API_ENDPOINT + '/auth/signout';
   public static SIGN_UP = AppApiConst.API_ENDPOINT + '/signup';
 
   public static HOTEL_ALL = AppApiConst.API_ENDPOINT + '/hotel/all';

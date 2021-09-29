@@ -7,10 +7,10 @@ import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../services/user.service";
-import {TokenStorageService} from "../services/token-storage.service";
 import {User} from "../models/user";
 import {Role} from "../models/role";
 import {ReservationRequest} from "../models/reservation.request";
+import {SessionStorageService} from "../services/session-storage.service";
 
 @Component({
   selector: 'app-details',
@@ -36,7 +36,7 @@ export class DetailsComponent implements OnInit {
               private detailsService: DetailsService,
               public userService: UserService,
               private http: HttpClient,
-              private tokenStorage: TokenStorageService) {
+              private sessionStorageService: SessionStorageService) {
   }
 
   ngOnInit() {
@@ -75,11 +75,11 @@ export class DetailsComponent implements OnInit {
 
   /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
   public bookingApartment(reservationRequest: ReservationRequest) {
-    if (this.details.apartment && this.tokenStorage.getToken()) {
+    if (this.details.apartment && this.sessionStorageService.getToken()) {
       this.isLoggedIn = true;
 
       reservationRequest.apartmentId = this.details.apartment.id;
-      reservationRequest.bookingBy = this.tokenStorage.getUser().email;
+      reservationRequest.bookingBy = this.sessionStorageService.getUser().email;
     }
 
 

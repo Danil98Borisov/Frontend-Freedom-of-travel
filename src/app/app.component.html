@@ -11,6 +11,7 @@
     <a class="nav-item" routerLink="filter-hotel">Filter Hotel</a>
     <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="login">Login</a>
     <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="register">Sign Up</a>
+    <a *ngIf="isLoggedIn" class="nav-item" style="display: flex; float: right" (click)="signOut()">Sign Out</a>
   </div>
   <router-outlet></router-outlet>
 </div>
