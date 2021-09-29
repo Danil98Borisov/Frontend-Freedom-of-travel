@@ -6,11 +6,11 @@ import {AppApiConst} from "../../app.api.const";
 import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
-import {UserService} from "../services/user.service";
+import {UserService} from "../../services/user.service";
 import {User} from "../models/user";
 import {Role} from "../models/role";
 import {ReservationRequest} from "../models/reservation.request";
-import {SessionStorageService} from "../services/session-storage.service";
+import {SessionStorageService} from "../../services/session-storage.service";
 
 @Component({
   selector: 'app-details',

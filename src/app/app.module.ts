@@ -41,7 +41,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import {MatPaginatorModule} from "@angular/material/paginator";
 
-import {authInterceptorProviders} from "./components/helpers/auth.interceptor";
+import {authInterceptorProviders} from "./helpers/auth.interceptor";
 
 
 @NgModule({

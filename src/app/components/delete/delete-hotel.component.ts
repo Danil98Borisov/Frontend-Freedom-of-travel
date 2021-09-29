@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Hotel} from "./hotel";
 import {DeleteHotelService} from "./delete-hotel.service";
-import {UserService} from "../services/user.service";
-import {AuthService} from "../services/auth.service";
+import {UserService} from "../../services/user.service";
+import {AuthService} from "../../services/auth.service";
 
 
 @Component({

@@ -10,7 +10,7 @@ import {DetailsComponent} from "../details/details.component";
 import {DetailsService} from "../details/details.service";
 import {ApartmentPreviewService} from "../apartment-preview/apartment-preview.service";
 import {PageEvent} from "@angular/material/paginator";
-import {AuthService} from "../services/auth.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-filter',
