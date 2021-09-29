@@ -17,11 +17,23 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { username: any; password: any; }): Observable<any> {
+  signIn(credentials: { username: any; password: any; }): Observable<any> {
     return this.http.post(AppApiConst.SIGN_IN, {
       username: credentials.username,
       password: credentials.password
     }, httpOptions);
+  }
+
+  signOut(): void {
+    console.log("Signing out");
+    this.http.post(AppApiConst.SIGN_OUT, {})
+      .subscribe((res)=>{
+          console.log("Successfully signed out");
+        },
+        error => {
+          console.log("Error occurred during signing out:", error);
+        });
+    window.sessionStorage.clear();
   }
 
   public sendMessage(isLogin: boolean) {

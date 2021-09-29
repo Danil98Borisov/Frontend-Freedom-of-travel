@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Reservation} from '../models/reservation';
 import {UserBookingService} from "./user-booking.service";
 import {ActivatedRoute} from "@angular/router";
-import {TokenStorageService} from "../services/token-storage.service";
 
 @Component({
   selector: 'app-user-booking',

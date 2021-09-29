@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
-import {TokenStorageService} from '../services/token-storage.service';
+import {SessionStorageService} from '../services/session-storage.service';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   isLogin: boolean = true;
 
   constructor(private authService: AuthService,
-              private tokenStorage: TokenStorageService,
+              private sessionStorageService: SessionStorageService,
               private router: Router,
               private route: ActivatedRoute) {
   }
@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
       this.form['username'] = this.username;
     }*/
 
-    if (this.tokenStorage.getToken()) {
+    if (this.sessionStorageService.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-      const user = this.tokenStorage.getUser();
+      this.roles = this.sessionStorageService.getUser().roles;
+      const user = this.sessionStorageService.getUser();
       this.email = user.email;
     }
   }
@@ -45,15 +45,15 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     console.log("onSubmit()");
 
-    this.authService.login(this.form).subscribe(
+    this.authService.signIn(this.form).subscribe(
       // @ts-ignore
       data => {
-        this.tokenStorage.saveToken(data.token);
-        this.tokenStorage.saveUser(data);
+        this.sessionStorageService.saveToken(data.token);
+        this.sessionStorageService.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
+        this.roles = this.sessionStorageService.getUser().roles;
 
         if(this.isLoggedIn){
           console.log("to /Home");

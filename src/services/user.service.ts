@@ -1,18 +1,24 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {TokenStorageService} from "./token-storage.service";
+import {SessionStorageService} from "./session-storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private user = this.tokenStorageService.getUser();
+  private user = this.sessionStorageService.getUser();
   private roles = this.user ? this.user.roles : [];
+  private _isLoggedIn = !!this.user;
 
-  private isLogin = new BehaviorSubject<boolean>(false);
+  constructor(private sessionStorageService: SessionStorageService) {
+  }
 
-  constructor(private tokenStorageService: TokenStorageService) {
+  public isLoggedIn(): boolean {
+    return this._isLoggedIn;
+  }
+
+  public getUserName(): string {
+    return this.user ? this.user.username : '';
   }
 
   public isAdmin(): boolean {
