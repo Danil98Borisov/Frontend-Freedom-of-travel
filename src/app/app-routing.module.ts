@@ -15,6 +15,7 @@ import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {LoginComponent} from "../login/login.component";
 import {RegisterComponent} from "../register/register.component";
 import {NotFoundComponent} from "../errors/not-found.component";
+import {UserBookingComponent} from "../user-booking/user-booking.component";
 
 const routes: Routes = [
   {path: '', component: FilterComponent},
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: 'filter-hotel', component: FilterHotelComponent},
   {path: 'register', component: RegisterComponent},
   {path: '404', component: NotFoundComponent},
-  { path: '**',component: NotFoundComponent}
+  {path: 'user/booking', component: UserBookingComponent},
+  {path: '**',component: NotFoundComponent}
 ];
 
 @NgModule({

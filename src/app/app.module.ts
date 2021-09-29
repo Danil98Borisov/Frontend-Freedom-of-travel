@@ -17,6 +17,7 @@ import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {DetailsComponent} from "../details/details.component";
 import {ReservationComponent} from 'src/reservation/reservation.component';
 import {NotFoundComponent} from "../errors/not-found.component";
+import {UserBookingComponent} from "../user-booking/user-booking.component";
 
 
 import {MatTableModule} from '@angular/material/table';
@@ -60,7 +61,8 @@ import {authInterceptorProviders} from "../helpers/auth.interceptor";
     DetailsHotelComponent,
     LoginComponent,
     RegisterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UserBookingComponent
   ],
   imports: [
     BrowserModule,
