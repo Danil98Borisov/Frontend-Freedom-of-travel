@@ -10,7 +10,7 @@ import {UserService} from "../services/user.service";
 import {TokenStorageService} from "../services/token-storage.service";
 import {User} from "../models/user";
 import {Role} from "../models/role";
-import {BookingBy} from "../models/bookingBy";
+import {ReservationRequest} from "../models/reservation.request";
 
 @Component({
   selector: 'app-details',
@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit {
   isLoggedIn = false;
 
   details: ApartmentDetails = {};
-  bookingBy: BookingBy = {}
+  reservationRequest: ReservationRequest = {}
   users: User={}
   role: Role = {}
 
@@ -74,16 +74,16 @@ export class DetailsComponent implements OnInit {
 
 
   /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
-  public bookingApartment(bookingBy: BookingBy) {
+  public bookingApartment(reservationRequest: ReservationRequest) {
     if (this.details.apartment && this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
 
-      bookingBy.apartmentId = this.details.apartment.id;
-      bookingBy.userEmail = this.tokenStorage.getUser().email;
+      reservationRequest.apartmentId = this.details.apartment.id;
+      reservationRequest.bookingBy = this.tokenStorage.getUser().email;
     }
 
 
-    return this.http.post<BookingBy>(AppApiConst.RESERVATION_ADD, bookingBy)
+    return this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
       .subscribe(booking => {
         console.log("Апартамент забронирован: ", booking);
       }, error => {

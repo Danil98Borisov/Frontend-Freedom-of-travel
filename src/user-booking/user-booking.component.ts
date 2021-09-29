@@ -20,22 +20,21 @@ export class UserBookingComponent implements OnInit {
 
   constructor(private httpService: UserBookingService,
               private activatedRoute: ActivatedRoute,
-              private tokenStorage: TokenStorageService) {
+              private userBookingService: UserBookingService) {
   }
 
   ngOnInit() {
 
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-      const user = this.tokenStorage.getUser();
-      this.email = user.email;
+    if (this.userBookingService.getUser()) {
+      this.email = this.userBookingService.getUser().email;
+
+      console.log("this.email: "+ this.email)
+
+      this.httpService.getAllReservationUser(this.email).subscribe((data: Reservation[]) =>
+      {console.log("data"+JSON.stringify(data)); this.reservation = data});
     }
 
-    console.log("this.email: "+ this.email)
-
-    this.httpService.getAllReservationUser(this.email).subscribe((data: Reservation[]) => {console.log("data"+JSON.stringify(data)); this.reservation = data});
-  }
+}
 
   displayedColumns: string[] = ['id', 'apartment_id', 'status', 'start_date', 'end_date','email'];
 }
