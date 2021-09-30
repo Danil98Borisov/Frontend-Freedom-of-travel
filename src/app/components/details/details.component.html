@@ -1,0 +1,118 @@
+<a href="../filterter">
+  <button type="button" class="btn-close" aria-label="Close"></button>
+</a>
+
+<div class="post-container">
+  <h2>{{details?.apartment?.hotel?.hotelName}}</h2>
+</div>
+<div class="image">
+  <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+    <mdb-carousel-item *ngFor="let image of details.apartmentImages">
+      <img [src]="getImageApartment(image.image)">
+    </mdb-carousel-item>
+  </mdb-carousel>
+</div>
+<div class="block">
+  <ul>
+    <p>
+      Описание Отеля {{details.apartment?.description}}
+    </p>
+    <p>
+      Тип отеля: {{details.apartment?.type}}
+    </p>
+    <p>
+      Цена отеля: {{details.apartment?.price}} $
+    </p>
+
+    <!--ИЗМЕНЕНИЯ ПАРАМЕТРОВ АПАРТАМЕНТОВ-->
+
+
+    <button *ngIf="this.userService.isAdmin()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Изменить
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLiveLabel">Изменение описания апартементов</h2>
+          </div>
+          <form #myForm="ngForm" novalidate (ngSubmit)="onSubmitEditApartment(myForm)">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Описание:</label>
+                <div class="form-group">
+                  <input class="form-control" name="description" type="details.apartment?.description"
+                         [value]="details.apartment?.description" ngModel required/>
+                </div>
+                <label for="message-text" class="col-form-label">Тип:</label>
+                <div class="form-group">
+                  <input class="form-control" name="type" type="details.apartment?.type"
+                         [value]="details.apartment?.type" ngModel required/>
+                </div>
+                <label for="message-text" class="col-form-label">Цена:</label>
+                <div class="form-group">
+                  <input class="form-control" name="price" type="details.apartment?.price"
+                         [value]="details.apartment?.price" ngModel required/>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="myForm.invalid">
+                  Сохранить изменения
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Бронирование апартаментов-->
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
+      Забронировать
+    </button>
+
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="bookingModalLiveLabel">Забронировать отель</h2>
+          </div>
+          <form #myFormBooking="ngForm" novalidate (ngSubmit)="onSubmitBookingApartment(myFormBooking)">
+            <div class="modal-body">
+              <div class="mb-3">
+
+                <label for="message-text" class="col-form-label">Дата заселения:</label>
+                <div class="form-group">
+                  <input class="form-control" name="start_date" type="reservationRequest?.start_date"
+                         [value]="reservationRequest?.start_date" ngModel required/>
+                </div>
+
+                <label for="message-text" class="col-form-label">Дата выселения:</label>
+                <div class="form-group">
+                  <input class="form-control" name="end_date" type="reservationRequest?.end_date"
+                         [value]="reservationRequest?.end_date" ngModel required/>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="myFormBooking.invalid">
+                  Забронировать
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </ul>
+</div>
