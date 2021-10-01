@@ -16,9 +16,7 @@ export class DetailsService {
   };
 
    getDetailsApartmentPage(id: number): Observable<ApartmentDetails> {
-    const url = `${AppApiConst.APARTMENT_DETAILS}/${id}`;
-
-    return this.http.get<ApartmentDetails>(url, this.httpOptions).pipe(
+    return this.http.get<ApartmentDetails>(`${AppApiConst.APARTMENT_DETAILS}/${id}`, this.httpOptions).pipe(
       tap(details => {
         console.log("Детально : ", details);
       }, error => {

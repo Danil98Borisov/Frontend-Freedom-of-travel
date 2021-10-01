@@ -6,7 +6,7 @@
     <a *ngIf="isAdmin" class="nav-item" routerLink="hotel/add">Add Hotel</a>
     <a *ngIf="isAdmin" class="nav-item" routerLink="hotel/edit">Edit Hotel</a>
     <a *ngIf="isAdmin" class="nav-item" routerLink="delete">Delete</a>
-    <a class="nav-item" routerLink="user/booking">My bookings</a>
+    <a *ngIf="isAdmin || isAdvertiser || username"class="nav-item" routerLink="user/booking">My bookings</a>
     <a class="nav-item" routerLink="filter-hotel">Search Hotel</a>
     <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="login">Login</a>
     <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="register">Sign Up</a>

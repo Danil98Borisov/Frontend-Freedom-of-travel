@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {HotelDetails} from "../models/hotelDetails";
 import {Hotel} from "../models/hotel";
 import {AppApiConst} from "../../app.api.const";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-details-hotel',
@@ -22,6 +23,7 @@ export class DetailsHotelComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsHotelService: DetailsHotelService,
+              public userService: UserService,
               private http: HttpClient
   ) {
   }

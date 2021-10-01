@@ -22,7 +22,6 @@ export class FilterHotelService {
     return this.http.get<HotelPreview[]>(AppApiConst.HOTEL_PREVIEW_DETAILS);
   }
 
-
   public getFilterHotelPreviewPage(url: string): Observable<HotelPreview[]> {
     console.log("getFilterHotelPage invoked");
     return this.http.get<HotelPreview[]>(url);

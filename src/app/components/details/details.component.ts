@@ -7,10 +7,7 @@ import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
-import {User} from "../models/user";
-import {Role} from "../models/role";
 import {ReservationRequest} from "../models/reservation.request";
-import {SessionStorageService} from "../../services/session-storage.service";
 
 @Component({
   selector: 'app-details',
@@ -21,22 +18,13 @@ import {SessionStorageService} from "../../services/session-storage.service";
 
 export class DetailsComponent implements OnInit {
 
-  isImage: boolean = true;
-  isLogin: boolean = true;
-  roles: string[] = [];
-  email: string = '';
-  isLoggedIn = false;
-
   details: ApartmentDetails = {};
   reservationRequest: ReservationRequest = {}
-  users: User={}
-  role: Role = {}
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               public userService: UserService,
-              private http: HttpClient,
-              private sessionStorageService: SessionStorageService) {
+              private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -54,41 +42,46 @@ export class DetailsComponent implements OnInit {
     return "data:image/png;base64," + image;
   }
 
+  /*ИЗМЕНЕНИЯ ПАРАМЕТРОВ АПАРТАМЕНТОВ*/
   public editApartment(apartment: Apartment) {
-    if (this.details.apartment) {
-      apartment.id = this.details.apartment.id;
-      apartment.hotel = this.details.apartment.hotel;
+    let apartmentDetails = this.details.apartment;
+    if (apartmentDetails) {
+      apartment.id = apartmentDetails.id;
+      apartment.hotel = apartmentDetails.hotel;
+      return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {
+        apartment: apartment,
+        apartmentImages: null
+      })
+        .subscribe(editedApartment => {
+          console.log("Апартамент изменён: ", editedApartment);
+          this.details.apartment = editedApartment.apartment;
+        }, error => {
+          console.log('error: ', error);
+        });
     }
-    return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {apartment: apartment, apartmentImages: null})
-      .subscribe(editedApartment => {
-        console.log("Апартамент изменён: ", editedApartment);
-        this.details.apartment = editedApartment.apartment;
-      }, error => {
-        console.log('error: ', error);
-      });
+    return;
   }
+
 
   onSubmitEditApartment(form: NgForm) {
     return this.editApartment(form.value,)
   }
 
-
   /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
   public bookingApartment(reservationRequest: ReservationRequest) {
-    if (this.details.apartment && this.sessionStorageService.getToken()) {
-      this.isLoggedIn = true;
+    if (this.userService.isLoggedIn() && this.details.apartment) {
 
       reservationRequest.apartmentId = this.details.apartment.id;
-      reservationRequest.bookingBy = this.sessionStorageService.getUser().email;
+      reservationRequest.bookingBy = this.userService.getEmail();
+
+      return this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
+        .subscribe(booking => {
+          console.log("Апартамент забронирован: ", booking);
+        }, error => {
+          console.log('error: ', error);
+        });
     }
-
-
-    return this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
-      .subscribe(booking => {
-        console.log("Апартамент забронирован: ", booking);
-      }, error => {
-        console.log('error: ', error);
-      });
+    return;
   }
 
   onSubmitBookingApartment(form: NgForm) {

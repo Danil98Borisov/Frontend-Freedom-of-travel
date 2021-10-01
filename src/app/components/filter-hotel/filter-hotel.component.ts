@@ -18,7 +18,7 @@ import {PageEvent} from "@angular/material/paginator";
 export class FilterHotelComponent implements OnInit {
 
   // MatPaginator Inputs
-  length = 30;
+  length = 40;
   pageSize = 5;
 
   // MatPaginator Output
@@ -55,11 +55,11 @@ export class FilterHotelComponent implements OnInit {
   isImage: boolean = true;
   public getImageHotel(image: any, hotelId: any): any{
 
-    if (image) {
+/*    if (image) {
       console.log("raster is OK for hotel : ", hotelId)
     } else if(!image) {
       console.log("raster is null for hotel : ", hotelId)
-    }
+    }*/
     return ("data:image/png;base64," + image);
   }
   displayedColumns: string[] = ['photo', 'Name', 'city', 'rating','description'];
