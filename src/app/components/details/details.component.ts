@@ -5,10 +5,12 @@ import {ApartmentDetails} from "../models/apartmentDetails";
 import {AppApiConst} from "../../app.api.const";
 import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
+import {User} from "../models/user";
+import {Role} from "../models/role";
 import {ReservationRequest} from "../models/reservation.request";
-import {ReservationResponse} from "../models/reservation.response";
+import {SessionStorageService} from "../../services/session-storage.service";
 
 @Component({
   selector: 'app-details',
@@ -19,18 +21,23 @@ import {ReservationResponse} from "../models/reservation.response";
 
 export class DetailsComponent implements OnInit {
 
+  isImage: boolean = true;
+  isLogin: boolean = true;
+  roles: string[] = [];
+  email: string = '';
+  isLoggedIn = false;
+
   details: ApartmentDetails = {};
   reservationRequest: ReservationRequest = {}
-  reservationResponses: ReservationResponse[]=[];
+  users: User={}
+  role: Role = {}
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               public userService: UserService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private sessionStorageService: SessionStorageService) {
   }
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
 
   ngOnInit() {
     console.log("ApartmentPreviewComponent is opened, apart id = " + this.activatedRoute.snapshot.params.id);
@@ -47,57 +54,40 @@ export class DetailsComponent implements OnInit {
     return "data:image/png;base64," + image;
   }
 
-  /*ИЗМЕНЕНИЯ ПАРАМЕТРОВ АПАРТАМЕНТОВ*/
   public editApartment(apartment: Apartment) {
-    let apartmentDetails = this.details.apartment;
-    if (apartmentDetails) {
-      apartment.id = apartmentDetails.id;
-      apartment.hotel = apartmentDetails.hotel;
-      return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {
-        apartment: apartment,
-        apartmentImages: null
-      })
-        .subscribe(editedApartment => {
-          console.log("Апартамент изменён: ", editedApartment);
-          this.details.apartment = editedApartment.apartment;
-        }, error => {
-          console.log('error: ', error);
-        });
+    if (this.details.apartment) {
+      apartment.id = this.details.apartment.id;
+      apartment.hotel = this.details.apartment.hotel;
     }
-    return;
+    return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {apartment: apartment, apartmentImages: null})
+      .subscribe(editedApartment => {
+        console.log("Апартамент изменён: ", editedApartment);
+        this.details.apartment = editedApartment.apartment;
+      }, error => {
+        console.log('error: ', error);
+      });
   }
-
 
   onSubmitEditApartment(form: NgForm) {
     return this.editApartment(form.value,)
   }
 
+
   /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
   public bookingApartment(reservationRequest: ReservationRequest) {
-    if (this.userService.isLoggedIn() && this.details.apartment) {
+    if (this.details.apartment && this.sessionStorageService.getToken()) {
+      this.isLoggedIn = true;
 
       reservationRequest.apartmentId = this.details.apartment.id;
-      reservationRequest.bookingBy = this.userService.getEmail();
-
-      this.detailsService.getOccupiedApartment(reservationRequest.start_date, reservationRequest.end_date, reservationRequest.apartmentId)
-        .subscribe((data: ReservationResponse[]) => {this.reservationResponses = data,
-          console.log("data.length: "+ data.length)
-
-        if(data.length==0){
-
-          this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
-            .subscribe(booking => {
-              console.log("Апартамент забронирован: ", booking);
-            }, error => {
-              console.log('error: ', error);
-            });
-
-        }
-        else{
-          console.log("Апартамент уже забронирован на эти даты")
-        }});
+      reservationRequest.bookingBy = this.sessionStorageService.getUser().email;
     }
-    return;
+
+    return this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
+      .subscribe(booking => {
+        console.log("Апартамент забронирован: ", booking);
+      }, error => {
+        console.log('error: ', error);
+      });
   }
 
   onSubmitBookingApartment(form: NgForm) {
