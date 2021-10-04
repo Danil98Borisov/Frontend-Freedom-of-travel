@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {tap} from "rxjs/operators";
 import {ApartmentDetails} from "../models/apartmentDetails";
 import {AppApiConst} from "../../app.api.const";
+import {ReservationResponse} from "../models/reservation.response";
 
 @Injectable()
 export class DetailsService {
@@ -14,11 +15,21 @@ export class DetailsService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
+  getOccupiedApartment(startDate: any, endDate: any,apartmentId: number): Observable<ReservationResponse[]> {
 
-   getDetailsApartmentPage(id: number): Observable<ApartmentDetails> {
-    const url = `${AppApiConst.APARTMENT_DETAILS}/${id}`;
+    let url = `${AppApiConst.OCCUPIED_APARTMENT}`;
+    url +='?'+`startDate=${startDate}`+`&endDate=${endDate}`+`&apartmentId=${apartmentId}`;
+    return this.http.get<ReservationResponse[]>(url, this.httpOptions).pipe(
+      tap(occupiedApartment => {
+        console.log(url);
+      }, error => {
+        console.log('error: ', error);
+      })
+    );
+  }
 
-    return this.http.get<ApartmentDetails>(url, this.httpOptions).pipe(
+  getDetailsApartmentPage(id: number): Observable<ApartmentDetails> {
+    return this.http.get<ApartmentDetails>(`${AppApiConst.APARTMENT_DETAILS}/${id}`, this.httpOptions).pipe(
       tap(details => {
         console.log("Детально : ", details);
       }, error => {

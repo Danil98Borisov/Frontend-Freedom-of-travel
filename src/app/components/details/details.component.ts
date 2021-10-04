@@ -5,12 +5,10 @@ import {ApartmentDetails} from "../models/apartmentDetails";
 import {AppApiConst} from "../../app.api.const";
 import {NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
-import {User} from "../models/user";
-import {Role} from "../models/role";
 import {ReservationRequest} from "../models/reservation.request";
-import {SessionStorageService} from "../../services/session-storage.service";
+import {ReservationResponse} from "../models/reservation.response";
 
 @Component({
   selector: 'app-details',
@@ -29,14 +27,12 @@ export class DetailsComponent implements OnInit {
 
   details: ApartmentDetails = {};
   reservationRequest: ReservationRequest = {}
-  users: User={}
-  role: Role = {}
+  reservationResponses: ReservationResponse[]=[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               public userService: UserService,
-              private http: HttpClient,
-              private sessionStorageService: SessionStorageService) {
+              private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -75,20 +71,32 @@ export class DetailsComponent implements OnInit {
 
   /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
   public bookingApartment(reservationRequest: ReservationRequest) {
-    if (this.details.apartment && this.sessionStorageService.getToken()) {
-      this.isLoggedIn = true;
+    if (this.userService.isLoggedIn() && this.details.apartment) {
 
       reservationRequest.apartmentId = this.details.apartment.id;
-      reservationRequest.bookingBy = this.sessionStorageService.getUser().email;
-    }
+      reservationRequest.bookingBy = this.userService.getEmail();
 
-    return this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
-      .subscribe(booking => {
-        console.log("Апартамент забронирован: ", booking);
-      }, error => {
-        console.log('error: ', error);
-      });
+      this.detailsService.getOccupiedApartment(reservationRequest.start_date, reservationRequest.end_date, reservationRequest.apartmentId)
+        .subscribe((data: ReservationResponse[]) => {this.reservationResponses = data,
+          console.log("data.length: "+ data.length)
+
+          if(data.length==0){
+
+            this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
+              .subscribe(booking => {
+                console.log("Апартамент забронирован: ", booking);
+              }, error => {
+                console.log('error: ', error);
+              });
+
+          }
+          else{
+            console.log("Апартамент уже забронирован на эти даты")
+          }});
+    }
+    return;
   }
+
 
   onSubmitBookingApartment(form: NgForm) {
     console.log("Form: " + JSON.stringify(form.value))
