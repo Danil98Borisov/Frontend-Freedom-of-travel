@@ -35,7 +35,7 @@ import {DatePipe} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {ApartmentPreviewComponent} from "./components/apartment-preview/apartment-preview.component";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
@@ -83,7 +83,8 @@ import {authInterceptorProviders} from "./helpers/auth.interceptor";
     MatButtonModule,
     MatExpansionModule,
     MDBBootstrapModule.forRoot(),
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule
 
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, authInterceptorProviders],

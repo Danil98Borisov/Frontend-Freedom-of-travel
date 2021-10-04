@@ -10,6 +10,7 @@ import {UserService} from "../../services/user.service";
 import {ReservationRequest} from "../models/reservation.request";
 import {ReservationResponse} from "../models/reservation.response";
 import {DatePipe} from "@angular/common";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-details',
@@ -41,7 +42,8 @@ export class DetailsComponent implements OnInit {
               private detailsService: DetailsService,
               public userService: UserService,
               private http: HttpClient,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -100,9 +102,12 @@ export class DetailsComponent implements OnInit {
           console.log("data: "+ data)
 
           if(data){
-            console.log("Апартамент уже забронирован на эти даты")
+            this._snackBar.open('Апартамент уже занят. Выберете другие даты','Close');
+            console.log("Апартамент уже забронирован на эти даты.")
           }
           else{
+            this._snackBar.open('Апартамент успешно забронирова!!!','Close');
+
             this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, fil.value)
               .subscribe(booking => {
                 console.log("fil.value: "+ JSON.stringify(fil.value))
