@@ -72,47 +72,33 @@
 
 
     <!--Booking of apartments-->
+    <mat-expansion-panel *ngIf="this.userService.isLoggedIn()">
 
-    <button *ngIf="this.userService.isLoggedIn()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
-      To book
-    </button>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Enter dates
+        </mat-panel-title>
+        <mat-panel-description>
+          Dates of your vacation
+        </mat-panel-description>
+        <mat-icon>date_range</mat-icon>
+      </mat-expansion-panel-header>
 
-    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title" id="bookingModalLiveLabel">Book an apartment</h2>
-          </div>
-          <form #myFormBooking="ngForm" novalidate (ngSubmit)="onSubmitBookingApartment(myFormBooking)">
-            <div class="modal-body">
-              <div class="mb-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
+          <input matStartDate formControlName="start_date" placeholder="Start date">
+          <input matEndDate formControlName="end_date" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
 
-                <label for="message-text" class="col-form-label">Check-in date:</label>
-                <div class="form-group">
-                  <input class="form-control" name="start_date" type="reservationRequest?.start_date"
-                         [value]="reservationRequest?.start_date" ngModel required/>
-                </div>
+      </mat-form-field>
 
-                <label for="message-text" class="col-form-label">Eviction date:</label>
-                <div class="form-group">
-                  <input class="form-control" name="end_date" type="reservationRequest?.end_date"
-                         [value]="reservationRequest?.end_date" ngModel required/>
-                </div>
+      <button mat-raised-button color="primary" (click)="bookingApartment(fil)">Search
+      </button>
 
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="myFormBooking.invalid">
-                  To book
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    </mat-expansion-panel>
 
   </ul>
 </div>

@@ -3,12 +3,13 @@ import {ActivatedRoute} from "@angular/router";
 import {DetailsService} from "./details.service";
 import {ApartmentDetails} from "../models/apartmentDetails";
 import {AppApiConst} from "../../app.api.const";
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
 import {ReservationRequest} from "../models/reservation.request";
 import {ReservationResponse} from "../models/reservation.response";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-details',
@@ -25,6 +26,13 @@ export class DetailsComponent implements OnInit {
   email: string = '';
   isLoggedIn = false;
 
+  fil = new FormGroup({
+    start_date: new FormControl(),
+    end_date: new FormControl(),
+    apartmentId: new FormControl(),
+    bookingBy: new FormControl()
+  });
+
   details: ApartmentDetails = {};
   reservationRequest: ReservationRequest = {}
   reservationResponses: ReservationResponse[]=[];
@@ -32,7 +40,8 @@ export class DetailsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               public userService: UserService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private datePipe: DatePipe) {
   }
 
   ngOnInit() {
@@ -70,37 +79,39 @@ export class DetailsComponent implements OnInit {
 
 
   /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
-  public bookingApartment(reservationRequest: ReservationRequest) {
+  public bookingApartment(fil: FormGroup) {
     if (this.userService.isLoggedIn() && this.details.apartment) {
 
-      reservationRequest.apartmentId = this.details.apartment.id;
-      reservationRequest.bookingBy = this.userService.getEmail();
+      let startDate = this.datePipe.transform(fil.value.start_date, 'yyyy-MM-dd');
+      let endDate = this.datePipe.transform(fil.value.end_date, 'yyyy-MM-dd');
 
-      this.detailsService.getOccupiedApartment(reservationRequest.start_date, reservationRequest.end_date, reservationRequest.apartmentId)
+      fil.value.apartmentId = this.details.apartment.id;
+      fil.value.bookingBy = this.userService.getEmail();
+      fil.value.start_date = startDate;
+      fil.value.end_date = endDate;
+
+      console.log("Форма: " + JSON.stringify(fil.value))
+      console.log("start_date: "+ fil.value.start_date)
+      console.log("end_date: "+ fil.value.end_date)
+      console.log("apartmentId: "+ fil.value.apartmentId)
+
+      this.detailsService.getOccupiedApartment(startDate, endDate, fil.value.apartmentId)
         .subscribe((data: ReservationResponse[]) => {this.reservationResponses = data,
-          console.log("data.length: "+ data.length)
+          console.log("data: "+ data)
 
-          if(data.length==0){
-
-            this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
+          if(data){
+            console.log("Апартамент уже забронирован на эти даты")
+          }
+          else{
+            this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, fil.value)
               .subscribe(booking => {
+                console.log("fil.value: "+ JSON.stringify(fil.value))
                 console.log("Апартамент забронирован: ", booking);
               }, error => {
                 console.log('error: ', error);
               });
-
-          }
-          else{
-            console.log("Апартамент уже забронирован на эти даты")
           }});
     }
     return;
   }
-
-
-  onSubmitBookingApartment(form: NgForm) {
-    console.log("Form: " + JSON.stringify(form.value))
-    return this.bookingApartment(form.value)
-  }
-
 }
