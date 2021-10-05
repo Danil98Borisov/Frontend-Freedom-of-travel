@@ -42,7 +42,6 @@ export class DetailsComponent implements OnInit {
     return "data:image/png;base64," + image;
   }
 
-  /*ИЗМЕНЕНИЯ ПАРАМЕТРОВ АПАРТАМЕНТОВ*/
   public editApartment(apartment: Apartment) {
     let apartmentDetails = this.details.apartment;
     if (apartmentDetails) {
@@ -62,12 +61,10 @@ export class DetailsComponent implements OnInit {
     return;
   }
 
-
   onSubmitEditApartment(form: NgForm) {
     return this.editApartment(form.value,)
   }
 
-  /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
   public bookingApartment(reservationRequest: ReservationRequest) {
     if (this.userService.isLoggedIn() && this.details.apartment) {
 
