@@ -21,11 +21,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 export class DetailsComponent implements OnInit {
 
-  isImage: boolean = true;
-  isLogin: boolean = true;
-  roles: string[] = [];
-  email: string = '';
-  isLoggedIn = false;
+  details: ApartmentDetails = {};
+  reservationRequest: ReservationRequest = {}
+  reservationResponses: ReservationResponse[]=[];
 
   fil = new FormGroup({
     start_date: new FormControl(),
@@ -33,10 +31,6 @@ export class DetailsComponent implements OnInit {
     apartmentId: new FormControl(),
     bookingBy: new FormControl()
   });
-
-  details: ApartmentDetails = {};
-  reservationRequest: ReservationRequest = {}
-  reservationResponses: ReservationResponse[]=[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
@@ -62,25 +56,28 @@ export class DetailsComponent implements OnInit {
   }
 
   public editApartment(apartment: Apartment) {
-    if (this.details.apartment) {
-      apartment.id = this.details.apartment.id;
-      apartment.hotel = this.details.apartment.hotel;
+    let apartmentDetails = this.details.apartment;
+    if (apartmentDetails) {
+      apartment.id = apartmentDetails.id;
+      apartment.hotel = apartmentDetails.hotel;
+      return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {
+        apartment: apartment,
+        apartmentImages: null
+      })
+        .subscribe(editedApartment => {
+          console.log("Апартамент изменён: ", editedApartment);
+          this.details.apartment = editedApartment.apartment;
+        }, error => {
+          console.log('error: ', error);
+        });
     }
-    return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {apartment: apartment, apartmentImages: null})
-      .subscribe(editedApartment => {
-        console.log("Апартамент изменён: ", editedApartment);
-        this.details.apartment = editedApartment.apartment;
-      }, error => {
-        console.log('error: ', error);
-      });
+    return;
   }
 
   onSubmitEditApartment(form: NgForm) {
     return this.editApartment(form.value,)
   }
 
-
-  /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
   public bookingApartment(fil: FormGroup) {
     if (this.userService.isLoggedIn() && this.details.apartment) {
 
@@ -119,4 +116,5 @@ export class DetailsComponent implements OnInit {
     }
     return;
   }
+
 }
