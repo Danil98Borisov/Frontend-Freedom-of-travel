@@ -12,20 +12,12 @@ export class DetailsService {
 
   constructor(private http: HttpClient){}
 
-  httpOptions = {
+   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  getOccupiedApartment(startDate: any, endDate: any,apartmentId: number): Observable<ReservationResponse[]> {
 
-    let url = `${AppApiConst.OCCUPIED_APARTMENT}`;
-    url +='?'+`startDate=${startDate}`+`&endDate=${endDate}`+`&apartmentId=${apartmentId}`;
-    return this.http.get<ReservationResponse[]>(url, this.httpOptions).pipe(
-      tap(occupiedApartment => {
-        console.log(url);
-      }, error => {
-        console.log('error: ', error);
-      })
-    );
+  getOccupiedApartment(reservationResponse: ReservationResponse): Observable<any> {
+    return this.http.post(AppApiConst.RESERVATION_ADD, reservationResponse,this.httpOptions);
   }
 
   getDetailsApartmentPage(id: number): Observable<ApartmentDetails> {

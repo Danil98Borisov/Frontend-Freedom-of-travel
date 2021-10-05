@@ -14,6 +14,10 @@
 </div>
 <div class="block">
   <ul>
+    <button *ngIf="this.userService.isAdmin() || this.userService.isAdvertiser()" type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#exampleModal" mat-raised-button color="primary" >
+      <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
+    </button>
+
     <p>
       Description of the apartments: {{details.apartment?.description}}
     </p>
@@ -27,9 +31,7 @@
     <!--CHANGES TO APARTMENT PARAMETERS-->
 
 
-    <button *ngIf="this.userService.isAdmin() || this.userService.isAdvertiser()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      To change
-    </button>
+
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -73,22 +75,19 @@
 
     <!--Booking of apartments-->
     <mat-expansion-panel *ngIf="this.userService.isLoggedIn()">
-
       <mat-expansion-panel-header>
+        <mat-icon>date_range</mat-icon>
         <mat-panel-title>
           Enter dates
         </mat-panel-title>
-        <mat-panel-description>
-          Dates of your vacation
-        </mat-panel-description>
-        <mat-icon>date_range</mat-icon>
       </mat-expansion-panel-header>
+
 
       <mat-form-field appearance="fill">
         <mat-label>Enter a date range</mat-label>
         <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
-          <input matStartDate formControlName="start_date" placeholder="Start date">
-          <input matEndDate formControlName="end_date" placeholder="End date">
+          <input matStartDate formControlName="startDate" placeholder="Start date">
+          <input matEndDate formControlName="endDate" placeholder="End date">
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -98,6 +97,17 @@
       <button mat-raised-button color="primary" (click)="bookingApartment(fil)">To Book
       </button>
 
+      <div class="alert alert-warning" *ngIf="statusFailed">
+        {{ Message }}
+      </div>
+
+      <div class="alert alert-danger" *ngIf="statusError">
+        {{ Message }}
+      </div>
+
+      <div class="alert alert-success" *ngIf="statusSuccessfully">
+        {{ Message }}
+      </div>
     </mat-expansion-panel>
 
   </ul>

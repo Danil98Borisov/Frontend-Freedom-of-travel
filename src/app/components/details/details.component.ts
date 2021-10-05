@@ -23,14 +23,19 @@ export class DetailsComponent implements OnInit {
 
   details: ApartmentDetails = {};
   reservationRequest: ReservationRequest = {}
-  reservationResponses: ReservationResponse[]=[];
+  reservationResponses: ReservationResponse={};
 
   fil = new FormGroup({
-    start_date: new FormControl(),
-    end_date: new FormControl(),
+    startDate: new FormControl(),
+    endDate: new FormControl(),
     apartmentId: new FormControl(),
     bookingBy: new FormControl()
   });
+
+  statusFailed = false;
+  statusSuccessfully = false;
+  statusError = false;
+  Message = '';
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
@@ -81,38 +86,42 @@ export class DetailsComponent implements OnInit {
   public bookingApartment(fil: FormGroup) {
     if (this.userService.isLoggedIn() && this.details.apartment) {
 
-      let startDate = this.datePipe.transform(fil.value.start_date, 'yyyy-MM-dd');
-      let endDate = this.datePipe.transform(fil.value.end_date, 'yyyy-MM-dd');
+      let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
+      let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
 
       fil.value.apartmentId = this.details.apartment.id;
       fil.value.bookingBy = this.userService.getEmail();
-      fil.value.start_date = startDate;
-      fil.value.end_date = endDate;
+      fil.value.startDate = startDate;
+      fil.value.endDate = endDate;
 
       console.log("Форма: " + JSON.stringify(fil.value))
-      console.log("start_date: "+ fil.value.start_date)
-      console.log("end_date: "+ fil.value.end_date)
+      console.log("startDate: "+ fil.value.startDate)
+      console.log("endDate: "+ fil.value.endDate)
       console.log("apartmentId: "+ fil.value.apartmentId)
 
-      this.detailsService.getOccupiedApartment(startDate, endDate, fil.value.apartmentId)
-        .subscribe((data: ReservationResponse[]) => {this.reservationResponses = data,
-          console.log("data: "+ data)
 
-          if(data){
-            this._snackBar.open('Апартамент уже занят. Выберете другие даты','Close');
-            console.log("Апартамент уже забронирован на эти даты.")
+      this.detailsService.getOccupiedApartment(fil.value)
+        .subscribe((data: ReservationResponse) => {this.reservationResponses = data,
+          console.log("data: "+ JSON.stringify(data));
+            console.log("data: "+ data.message);
+          if(data.status){
+            this.statusSuccessfully = true;
+            this.statusFailed = false;
+          console.log("Apartment booking: " + JSON.stringify(fil.value))
+            // @ts-ignore
+            this.Message = data.message;
           }
           else{
-            this._snackBar.open('Апартамент успешно забронирова!!!','Close');
-
-            this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, fil.value)
-              .subscribe(booking => {
-                console.log("fil.value: "+ JSON.stringify(fil.value))
-                console.log("Апартамент забронирован: ", booking);
-              }, error => {
-                console.log('error: ', error);
-              });
-          }});
+            this.statusFailed = true;
+            this.statusSuccessfully = false;
+            // @ts-ignore
+            this.Message = data.message;
+          }
+          },
+          err => {
+            this.Message = err.error.message;
+            this.statusError = true;
+          });
     }
     return;
   }

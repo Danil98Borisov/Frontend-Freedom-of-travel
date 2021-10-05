@@ -135,3 +135,11 @@ p {
   color: #c2a77a;
 }
 
+.mat-expansion-panel{
+  width: 400px;
+}
+
+.mat-expansion-panel-header{
+  width: 400px;
+  background: #8a2db8;
+}
