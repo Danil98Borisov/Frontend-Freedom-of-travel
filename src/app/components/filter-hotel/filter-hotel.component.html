@@ -1,6 +1,6 @@
 
 <form >
-  <h1>Выберете ваш отпуск </h1>
+  <h1>Choose your vacation</h1>
   <mat-form-field appearance="fill" [formGroup]="fil">
     <mat-label>City</mat-label>
     <input matInput formControlName="city">
@@ -23,7 +23,7 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">Поиск</button>
+  <button mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">Search</button>
 
 </form>
 

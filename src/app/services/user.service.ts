@@ -21,6 +21,10 @@ export class UserService {
     return this.user ? this.user.username : '';
   }
 
+  public getEmail(): string {
+    return this.user ? this.user.email : '';
+  }
+
   public isAdmin(): boolean {
     return this.hasRole('ROLE_ADMIN');
   }

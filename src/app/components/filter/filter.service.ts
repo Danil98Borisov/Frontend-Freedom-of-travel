@@ -64,9 +64,6 @@ export class FilterService {
         console.log(url);
         this.getFilterApartmentPreviewPage(url);
       }, error => {
-        if(price == null){
-          console.log("Введите price");
-        }
         console.log('error: ', error);
       })
     );

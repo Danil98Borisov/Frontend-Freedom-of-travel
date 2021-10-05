@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Reservation} from '../models/reservation';
 import {UserBookingService} from "./user-booking.service";
 import {ActivatedRoute} from "@angular/router";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-user-booking',
@@ -10,27 +11,24 @@ import {ActivatedRoute} from "@angular/router";
   providers: [UserBookingService]
 })
 export class UserBookingComponent implements OnInit {
-  reservation: Reservation[] = [];
 
-  isLogin: boolean = true;
-  roles: string[] = [];
-  email: string = '';
-  isLoggedIn = false;
+  reservation: Reservation[] = [];
 
   constructor(private httpService: UserBookingService,
               private activatedRoute: ActivatedRoute,
-              private userBookingService: UserBookingService) {
+              private userService: UserService) {
   }
 
   ngOnInit() {
+    if (this.userService.isLoggedIn()) {
+      const email = this.userService.getEmail();
+      console.log("this.email: "+ email)
 
-    if (this.userBookingService.getUser()) {
-      this.email = this.userBookingService.getUser().email;
-
-      console.log("this.email: "+ this.email)
-
-      this.httpService.getAllReservationUser(this.email).subscribe((data: Reservation[]) =>
-      {console.log("data"+JSON.stringify(data)); this.reservation = data});
+      this.httpService.getAllReservationUser(email)
+        .subscribe((data: Reservation[]) => {
+          //console.log("data" + JSON.stringify(data));
+          this.reservation = data
+        });
     }
 
 }

@@ -25,7 +25,7 @@ h2 {
   font-size: 30px;
   text-align: center;
   letter-spacing: 2px;
-  color: #c2a77a;
+  color: #8a2db3;
 }
 
 h3 {
@@ -57,14 +57,14 @@ p {
   margin: 15px 0;
   font-family: 'Playfair Display', serif;
   font-size: 26px;
-  text-align: center;
+  /*text-align: center;*/
   letter-spacing: 2px;
-  color: #c2a77a;
+  color: #8a2db3;
 }
 
 /*Блок описания*/
 .block {
-  background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+  background: rgba(0, 0, 0, 0.1); /* Полупрозрачный фон */
   color: #fff; /* Цвет текста */
   padding: 20px; /* Поля вокруг текста */
   margin-left: 42%;
