@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Apartment} from "../models/apartment";
 import {FilterService} from './filter.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
@@ -50,12 +49,11 @@ export class FilterComponent implements OnInit {
   public filter(fil: FormGroup,page: number): void {
 /*    console.log('fil.value.startDate = ', fil.value.startDate)
     console.log('fil.value.startDate = ')*/
-    let ap: Apartment = fil.value
 
     let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
     let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
 
-    this.filterService.filterApartment(ap.price, ap.type.name, startDate, endDate, fil.value.city, fil.value.rating,page)
+    this.filterService.filterApartment(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating,page)
       .subscribe((data: ApartmentPreview[]) => this.apartmentsPreviews = data);
   }
 
