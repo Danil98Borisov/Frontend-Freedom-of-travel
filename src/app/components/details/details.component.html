@@ -14,6 +14,10 @@
 </div>
 <div class="block">
   <ul>
+    <button *ngIf="this.userService.isAdmin() || this.userService.isAdvertiser()" type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#exampleModal" mat-raised-button color="primary" >
+      <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
+    </button>
+
     <p>
       Description of the apartments: {{details.apartment?.description}}
     </p>
@@ -27,9 +31,7 @@
     <!--CHANGES TO APARTMENT PARAMETERS-->
 
 
-    <button *ngIf="this.userService.isAdmin() || this.userService.isAdvertiser()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      To change
-    </button>
+
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -72,47 +74,41 @@
 
 
     <!--Booking of apartments-->
+    <mat-expansion-panel *ngIf="this.userService.isLoggedIn()">
+      <mat-expansion-panel-header>
+        <mat-icon>date_range</mat-icon>
+        <mat-panel-title>
+          Enter dates
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-    <button *ngIf="this.userService.isLoggedIn()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
-      To book
-    </button>
 
-    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title" id="bookingModalLiveLabel">Book an apartment</h2>
-          </div>
-          <form #myFormBooking="ngForm" novalidate (ngSubmit)="onSubmitBookingApartment(myFormBooking)">
-            <div class="modal-body">
-              <div class="mb-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" placeholder="Start date">
+          <input matEndDate formControlName="endDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
 
-                <label for="message-text" class="col-form-label">Check-in date:</label>
-                <div class="form-group">
-                  <input class="form-control" name="start_date" type="reservationRequest?.start_date"
-                         [value]="reservationRequest?.start_date" ngModel required/>
-                </div>
+      </mat-form-field>
 
-                <label for="message-text" class="col-form-label">Eviction date:</label>
-                <div class="form-group">
-                  <input class="form-control" name="end_date" type="reservationRequest?.end_date"
-                         [value]="reservationRequest?.end_date" ngModel required/>
-                </div>
+      <button mat-raised-button color="primary" (click)="bookingApartment(fil)">To Book
+      </button>
 
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="myFormBooking.invalid">
-                  To book
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+      <div class="alert alert-warning" *ngIf="statusFailed">
+        {{ Message }}
       </div>
-    </div>
+
+      <div class="alert alert-danger" *ngIf="statusError">
+        {{ Message }}
+      </div>
+
+      <div class="alert alert-success" *ngIf="statusSuccessfully">
+        {{ Message }}
+      </div>
+    </mat-expansion-panel>
 
   </ul>
 </div>

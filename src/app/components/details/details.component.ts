@@ -3,11 +3,14 @@ import {ActivatedRoute} from "@angular/router";
 import {DetailsService} from "./details.service";
 import {ApartmentDetails} from "../models/apartmentDetails";
 import {AppApiConst} from "../../app.api.const";
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
 import {ReservationRequest} from "../models/reservation.request";
+import {ReservationResponse} from "../models/reservation.response";
+import {DatePipe} from "@angular/common";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-details',
@@ -20,11 +23,26 @@ export class DetailsComponent implements OnInit {
 
   details: ApartmentDetails = {};
   reservationRequest: ReservationRequest = {}
+  reservationResponses: ReservationResponse={};
+
+  fil = new FormGroup({
+    startDate: new FormControl(),
+    endDate: new FormControl(),
+    apartmentId: new FormControl(),
+    bookingBy: new FormControl()
+  });
+
+  statusFailed = false;
+  statusSuccessfully = false;
+  statusError = false;
+  Message = '';
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               public userService: UserService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private datePipe: DatePipe,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -65,25 +83,47 @@ export class DetailsComponent implements OnInit {
     return this.editApartment(form.value,)
   }
 
-  public bookingApartment(reservationRequest: ReservationRequest) {
+  public bookingApartment(fil: FormGroup) {
     if (this.userService.isLoggedIn() && this.details.apartment) {
 
-      reservationRequest.apartmentId = this.details.apartment.id;
-      reservationRequest.bookingBy = this.userService.getEmail();
+      let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
+      let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
 
-      return this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
-        .subscribe(booking => {
-          console.log("Апартамент забронирован: ", booking);
-        }, error => {
-          console.log('error: ', error);
-        });
+      fil.value.apartmentId = this.details.apartment.id;
+      fil.value.bookingBy = this.userService.getEmail();
+      fil.value.startDate = startDate;
+      fil.value.endDate = endDate;
+
+      console.log("Форма: " + JSON.stringify(fil.value))
+      console.log("startDate: "+ fil.value.startDate)
+      console.log("endDate: "+ fil.value.endDate)
+      console.log("apartmentId: "+ fil.value.apartmentId)
+
+
+      this.detailsService.getOccupiedApartment(fil.value)
+        .subscribe((data: ReservationResponse) => {this.reservationResponses = data,
+          console.log("data: "+ JSON.stringify(data));
+            console.log("data: "+ data.message);
+          if(data.status){
+            this.statusSuccessfully = true;
+            this.statusFailed = false;
+          console.log("Apartment booking: " + JSON.stringify(fil.value))
+            // @ts-ignore
+            this.Message = data.message;
+          }
+          else{
+            this.statusFailed = true;
+            this.statusSuccessfully = false;
+            // @ts-ignore
+            this.Message = data.message;
+          }
+          },
+          err => {
+            this.Message = err.error.message;
+            this.statusError = true;
+          });
     }
     return;
-  }
-
-  onSubmitBookingApartment(form: NgForm) {
-    console.log("Form: " + JSON.stringify(form.value))
-    return this.bookingApartment(form.value)
   }
 
 }
