@@ -55,7 +55,7 @@ export class FilterComponent implements OnInit {
     let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
     let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
 
-    this.filterService.filterApartment(ap.price, ap.type, startDate, endDate, fil.value.city, fil.value.rating,page)
+    this.filterService.filterApartment(ap.price, ap.type.name, startDate, endDate, fil.value.city, fil.value.rating,page)
       .subscribe((data: ApartmentPreview[]) => this.apartmentsPreviews = data);
   }
 
