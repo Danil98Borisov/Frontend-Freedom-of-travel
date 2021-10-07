@@ -42,6 +42,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatPaginatorModule} from "@angular/material/paginator";
 
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
+import {MatListModule} from "@angular/material/list";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -83,8 +85,9 @@ import {authInterceptorProviders} from "./helpers/auth.interceptor";
     MatButtonModule,
     MatExpansionModule,
     MDBBootstrapModule.forRoot(),
-    MatPaginatorModule
-
+    MatPaginatorModule,
+    MatListModule,
+    FlexLayoutModule
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, authInterceptorProviders],
   bootstrap: [AppComponent]

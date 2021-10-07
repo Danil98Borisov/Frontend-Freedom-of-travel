@@ -68,3 +68,9 @@ h1 {
   letter-spacing: 2px;
   color: #c2a77a;
 }
+
+.search-button {
+  background-color: #336cffdb;
+  color: white;
+  margin-left: 10px;
+}

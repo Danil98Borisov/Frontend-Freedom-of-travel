@@ -1,16 +1,21 @@
 <div class="app">
   <div class="topnav">
-    <a class="active" routerLink="filter">Home</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="hotel">Hotel</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="reservation">Reservation</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="hotel/add">Add Hotel</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="hotel/edit">Edit Hotel</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="delete">Delete</a>
-    <a class="nav-item" routerLink="user/booking">My bookings</a>
-    <a class="nav-item" routerLink="filter-hotel">Search Hotel</a>
-    <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="login">Login</a>
-    <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="register">Sign Up</a>
-    <a *ngIf="isLoggedIn" class="nav-item" style="display: flex; float: right" (click)="signOut()">Sign Out</a>
+    <a class="nav-item"
+       *ngFor="let link of navLinks"
+       [routerLink]=link.path
+       routerLinkActive #rla="routerLinkActive"
+       [class.active]="rla.isActive">
+      {{link.label}}
+    </a>
+
+    <ng-template [ngIf]="!isLoggedIn">
+      <a class="nav-item-right" routerLink="register">Sign Up</a>
+      <a class="nav-item-right" routerLink="login">Login</a>
+    </ng-template>
+
+    <a class="nav-item-right" *ngIf="isLoggedIn" (click)="signOut()">Sign Out</a>
+
   </div>
+
   <router-outlet></router-outlet>
 </div>

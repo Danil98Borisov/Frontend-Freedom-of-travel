@@ -20,6 +20,8 @@ import {AuthService} from "../../services/auth.service";
 })
 export class FilterComponent implements OnInit {
 
+  isDataLoaded: boolean =  false;
+
   // MatPaginator Inputs
   length = 60;
   pageSize = 5;
@@ -56,7 +58,10 @@ export class FilterComponent implements OnInit {
     let endDate = this.datePipe.transform(fil.value['endDate'], 'yyyy-MM-dd');
 
     this.filterService.filterApartment(ap.price, ap.type, startDate, endDate, fil.value['city'], fil.value['rating'],page)
-      .subscribe((data: ApartmentPreview[]) => this.apartmentsPreviews = data);
+      .subscribe((data: ApartmentPreview[]) => {
+        this.apartmentsPreviews = data;
+        this.isDataLoaded = true;
+      });
   }
 
   logFunc(id: any) {

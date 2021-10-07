@@ -10,13 +10,20 @@ import {UserService} from "./services/user.service";
 })
 export class AppComponent implements OnInit {
 
+  public navLinks: any = [
+    {label: "Apartments", path: "filter"},
+    {label: "Hotels", path: "hotel"},
+    {label: "Search Hotel", path: "filter-hotel"},
+    {label: "Reservations", path: "reservation"},
+    {label: "My bookings", path: "user/booking"}
+  ];
+
   isLoggedIn: boolean = false;
   isAdmin: boolean =  false;
   isAdvertiser: boolean = false;
 
   public username: string = '';
   public token: string = '';
-
   constructor(private userService: UserService,
               private authService: AuthService){}
 
@@ -33,4 +40,5 @@ export class AppComponent implements OnInit {
     this.authService.signOut();
     window.location.reload();
   }
+
 }

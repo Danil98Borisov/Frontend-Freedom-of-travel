@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {DetailsHotelService} from "../details-hotel/details-hotel.service";
 import {PageEvent} from "@angular/material/paginator";
+import {ApartmentPreview} from "../models/apartmentPreview";
 
 @Component({
   selector: 'app-filter-hotel',
@@ -23,7 +24,7 @@ export class FilterHotelComponent implements OnInit {
 
   // MatPaginator Output
   pageEvent: PageEvent[]=[];
-
+  public isDataLoaded: boolean = false;
 
 
   fil = new FormGroup({
@@ -41,7 +42,10 @@ export class FilterHotelComponent implements OnInit {
   public filter(fill: FormGroup, page: number): void {
 
     this.filterHotelService.filterHotel(fill.value.city, fill.value.rating, page)
-      .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
+      .subscribe((data: HotelPreview[]) => {
+        this.hotelsPreviews = data;
+        this.isDataLoaded = true;
+      });
   }
 
   logFuncHotel(id: any) {
@@ -54,7 +58,6 @@ export class FilterHotelComponent implements OnInit {
 
   isImage: boolean = true;
   public getImageHotel(image: any, hotelId: any): any{
-
     if (image) {
       console.log("raster is OK for hotel : ", hotelId)
     } else if(!image) {

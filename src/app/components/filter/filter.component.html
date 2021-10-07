@@ -1,110 +1,115 @@
+<div style="text-align: center; margin-top: 5%">
+  <p class="search-title">Find deals on hotels, homes and much more..</p>
+  <form style="width: 100%;">
+    <div>
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city">
+        <mat-error *ngIf="fil.controls.city.hasError('matStartDateInvalid')">Invalid city</mat-error>
+      </mat-form-field>
 
-<form >
-  <h1>Выберете ваш отпуск</h1>
-  <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>City</mat-label>
-    <input matInput formControlName="city">
-    <mat-error *ngIf="fil.controls.city.hasError('matStartDateInvalid')">Invalid city</mat-error>
-  </mat-form-field>
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>Rating</mat-label>
+        <mat-select formControlName="rating">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="5">5</mat-option>
+          <mat-option value="6">6</mat-option>
+          <mat-option value="7">7</mat-option>
+          <mat-option value="8">8</mat-option>
+          <mat-option value="9">9</mat-option>
+          <mat-option value="10">10</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>Rating</mat-label>
-    <mat-select formControlName="rating">
-      <mat-option value="1">1</mat-option>
-      <mat-option value="2">2</mat-option>
-      <mat-option value="3">3</mat-option>
-      <mat-option value="4">4</mat-option>
-      <mat-option value="5">5</mat-option>
-      <mat-option value="6">6</mat-option>
-      <mat-option value="7">7</mat-option>
-      <mat-option value="8">8</mat-option>
-      <mat-option value="9">9</mat-option>
-      <mat-option value="10">10</mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price">
+        <mat-error *ngIf="fil.controls.price.hasError('matStartDateInvalid')">Invalid price</mat-error>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>Price</mat-label>
-    <input matInput formControlName="price">
-    <mat-error *ngIf="fil.controls.price.hasError('matStartDateInvalid')">Invalid price</mat-error>
-  </mat-form-field>
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="SINGLE">Single</mat-option>
+          <mat-option value="DOUBLE">Double</mat-option>
+          <mat-option value="TRIPLE">Triple</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>Type</mat-label>
-    <mat-select formControlName="type">
-      <mat-option value="SINGLE">Single</mat-option>
-      <mat-option value="DOUBLE">Double</mat-option>
-      <mat-option value="TRIPLE">Triple</mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" placeholder="Start date">
+          <input matEndDate formControlName="endDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Enter a date range</mat-label>
-    <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
-      <input matStartDate formControlName="startDate" placeholder="Start date">
-      <input matEndDate formControlName="endDate" placeholder="End date">
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-error *ngIf="fil.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
 
-    <mat-error *ngIf="fil.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-    <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-  </mat-form-field>
+      <button mat-raised-button class="search-button" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">
+        Search
+      </button>
+    </div>
+  </form>
+</div>
 
-  <button mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">Поиск</button>
+<div *ngIf="isDataLoaded">
+  <table mat-table [dataSource]="apartmentsPreviews" class="mat-elevation-z8 demo-table">
+    <ng-container matColumnDef="photo">
+      <th mat-header-cell cdkDrag *matHeaderCellDef> Picture</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-template [ngIf]="isImage">
+          <div class="picture-box">
+            <img width="200" height="200" [src]="getImageApartment(element.imageApartment.image, element.apartment.id)">
+          </div>
+        </ng-template>
+        <ng-template [ngIf]="!isImage">
+          <p>No photo</p>
+        </ng-template>
+      </td>
+    </ng-container>
 
-</form>
+    <!--id Column-->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> id</th>
+      <td mat-cell *matCellDef="let element"> {{element.apartment.id}} </td>
+    </ng-container>
+    -->
 
-<table mat-table [dataSource]="apartmentsPreviews" class="mat-elevation-z8 demo-table">
+    <!--hotel Column -->
+    <ng-container matColumnDef="hotel">
+      <th mat-header-cell *matHeaderCellDef> hotel</th>
+      <td mat-cell *matCellDef="let element"> {{element.apartment.hotel.hotelName}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="photo">
-    <th mat-header-cell cdkDrag *matHeaderCellDef> Picture</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-template [ngIf]="isImage">
-        <div class="picture-box">
-          <img width="200" height="200" [src]="getImageApartment(element.imageApartment.image, element.apartment.id)">
-        </div>
-      </ng-template>
-      <ng-template [ngIf]="!isImage">
-        <p>No photo</p>
-      </ng-template>
-    </td>
-  </ng-container>
+    <!--  type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> type</th>
+      <td mat-cell *matCellDef="let element"> {{element.apartment.type}} </td>
+    </ng-container>
 
-  <!--id Column-->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> id</th>
-    <td mat-cell *matCellDef="let element"> {{element.apartment.id}} </td>
-  </ng-container>-->
-
-  <!--hotel Column -->
-  <ng-container matColumnDef="hotel">
-    <th mat-header-cell *matHeaderCellDef> hotel</th>
-    <td mat-cell *matCellDef="let element"> {{element.apartment.hotel.hotelName}} </td>
-  </ng-container>
-
-  <!--  type Column -->
-  <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef> type</th>
-    <td mat-cell *matCellDef="let element"> {{element.apartment.type}} </td>
-  </ng-container>
-
-  <!--  price Column-->
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> price</th>
-    <td mat-cell *matCellDef="let element"> {{element.apartment.price}} $ </td>
-  </ng-container>
+    <!--  price Column-->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> price</th>
+      <td mat-cell *matCellDef="let element"> {{element.apartment.price}} $</td>
+    </ng-container>
 
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let apartmentsPreview; columns: displayedColumns;" (click)="logFunc(apartmentsPreview.apartment.id)"></tr>
-</table>
-
-<mat-paginator [length]="length"
-               [pageSize]="pageSize"
-               (page)="pageEvent[0] = $event"
-               aria-label="Select page"
-               (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
-               showFirstLastButtons>
-
-</mat-paginator>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let apartmentsPreview; columns: displayedColumns;"
+        (click)="logFunc(apartmentsPreview.apartment.id)"></tr>
+  </table>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 (page)="pageEvent[0] = $event"
+                 aria-label="Select page"
+                 (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>
