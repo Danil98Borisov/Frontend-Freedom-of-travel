@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Apartment} from "../models/apartment";
-import {FilterService} from './filter.service';
+import {ApartmentSearchService} from './apartment-search.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Router} from "@angular/router";
@@ -14,11 +14,11 @@ import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-filter',
-  templateUrl: 'filter.component.html',
-  styleUrls: ['filter.component.css'],
-  providers: [FilterService,ApartmentService, DetailsComponent, DetailsService, ApartmentPreviewService]
+  templateUrl: 'apartment-search.component.html',
+  styleUrls: ['apartment-search.component.css'],
+  providers: [ApartmentSearchService,ApartmentService, DetailsComponent, DetailsService, ApartmentPreviewService]
 })
-export class FilterComponent implements OnInit {
+export class ApartmentSearchComponent implements OnInit {
 
   isDataLoaded: boolean =  false;
 
@@ -43,7 +43,7 @@ export class FilterComponent implements OnInit {
   apartmentsPreviews: ApartmentPreview[]=[];
 
 
-  constructor(private filterService: FilterService,
+  constructor(private filterService: ApartmentSearchService,
               private datePipe: DatePipe,
               private router: Router,
               private authService: AuthService) {

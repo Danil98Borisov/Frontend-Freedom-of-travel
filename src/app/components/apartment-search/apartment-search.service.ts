@@ -9,7 +9,7 @@ import {AppApiConst} from "../../app.api.const";
 
 
 @Injectable()
-export class FilterService {
+export class ApartmentSearchService {
   constructor(private http: HttpClient) {
   }
 

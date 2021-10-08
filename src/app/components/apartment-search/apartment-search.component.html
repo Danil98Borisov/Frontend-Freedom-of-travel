@@ -60,6 +60,36 @@
 </div>
 
 <div *ngIf="isDataLoaded">
+  <mat-card class="hotel-preview-card">
+    <mat-card-content style="display: flex">
+      <div style="width: 20%">
+        <img class="hotel-preview-img"
+             src="https://pix8.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?s=1024x768"
+             alt="Hotel preview photo">
+      </div>
+      <div>
+        <mat-card-header>
+          <div>
+            <mat-card-title>Apartment</mat-card-title>
+            <mat-card-subtitle>City</mat-card-subtitle>
+            <!--<div mat-card-avatar class="example-header-image"></div>-->
+          </div>
+        </mat-card-header>
+        <div class="hotel-preview-text">
+          Built in 2016, L Hotel is a distinct addition to Khon Kaen and a smart choice for travelers.
+          From here, guests can enjoy easy access to all that the lively city has to offer.
+          With its convenient location, the hotel offers easy access to the city's must-see destinations.
+        </div>
+      </div>
+      <div>
+        <div>Rating</div>
+        <mat-card-actions>
+          <button mat-button>Show details</button>
+        </mat-card-actions>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
   <table mat-table [dataSource]="apartmentsPreviews" class="mat-elevation-z8 demo-table">
     <ng-container matColumnDef="photo">
       <th mat-header-cell cdkDrag *matHeaderCellDef> Picture</th>

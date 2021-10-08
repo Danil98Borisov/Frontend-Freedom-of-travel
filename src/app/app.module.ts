@@ -8,7 +8,7 @@ import {ApartmentComponent} from "./components/apartment/apartment.component";
 import {AddHotelComponent} from 'src/app/components/add-hotel/add-hotel.component';
 import {HotelComponent} from 'src/app/components/hotel/hotel.component';
 import {EditHotelComponent} from "./components/edit-hotel/edit-hotel.component";
-import {FilterComponent} from "./components/filter/filter.component";
+import {ApartmentSearchComponent} from "./components/apartment-search/apartment-search.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {LoginComponent} from "./components/login/login.component";
 import {HotelPreviewComponent} from "./components/hotel-preview/hotel-preview.component";
@@ -44,6 +44,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
 import {MatListModule} from "@angular/material/list";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     ReservationComponent,
     HotelComponent,
     EditHotelComponent,
-    FilterComponent,
+    ApartmentSearchComponent,
     DetailsComponent,
     ApartmentPreviewComponent,
     HotelPreviewComponent,
@@ -87,7 +88,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MDBBootstrapModule.forRoot(),
     MatPaginatorModule,
     MatListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatCardModule
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, authInterceptorProviders],
   bootstrap: [AppComponent]
