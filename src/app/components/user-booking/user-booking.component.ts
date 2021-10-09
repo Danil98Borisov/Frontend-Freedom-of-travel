@@ -33,5 +33,5 @@ export class UserBookingComponent implements OnInit {
 
 }
 
-  displayedColumns: string[] = ['id', 'apartment_id', 'status', 'start_date', 'end_date','email'];
+  displayedColumns: string[] = ['id', 'hotelName', 'apartment_id', 'status', 'start_date', 'end_date','email'];
 }

@@ -63,8 +63,13 @@ export class DetailsComponent implements OnInit {
   public editApartment(apartment: Apartment) {
     let apartmentDetails = this.details.apartment;
     if (apartmentDetails) {
+      console.log("apartmentDetails: " + JSON.stringify(apartmentDetails))
       apartment.id = apartmentDetails.id;
       apartment.hotel = apartmentDetails.hotel;
+      apartment.type = apartmentDetails.type;
+      console.log("apartment: " + JSON.stringify(apartment))
+
+
       return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {
         apartment: apartment,
         apartmentImages: null

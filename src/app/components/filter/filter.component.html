@@ -51,11 +51,11 @@
     <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">Search</button>
+  <!--<button mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">Search</button>-->
 
 </form>
 
-<table mat-table [dataSource]="apartmentsPreviews" class="mat-elevation-z8 demo-table">
+<table mat-table [dataSource]="hotelsPreviews" class="mat-elevation-z8 demo-table">
 
   <ng-container matColumnDef="photo">
     <th mat-header-cell cdkDrag *matHeaderCellDef> Picture</th>

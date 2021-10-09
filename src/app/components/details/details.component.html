@@ -1,4 +1,4 @@
-<a href="../filter">
+<a href="../hotel-details/{{details.apartment?.hotel?.id}}">
   <button type="button" class="btn-close" aria-label="Close"></button>
 </a>
 
@@ -42,20 +42,20 @@
           <form #myForm="ngForm" novalidate (ngSubmit)="onSubmitEditApartment(myForm)">
             <div class="modal-body">
               <div class="mb-3">
-                <label for="message-text" class="col-form-label">Description:</label>
-                <div class="form-group">
-                  <input class="form-control" name="description" type="details.apartment?.description"
-                         [value]="details.apartment?.description" ngModel required/>
-                </div>
                 <label for="message-text" class="col-form-label">Type:</label>
                 <div class="form-group">
                   <input class="form-control" name="type" type="details.apartment?.type"
-                         [value]="details.apartment?.type" ngModel required/>
+                         [value]="details.apartment?.type?.name" ngModel required/>
                 </div>
                 <label for="message-text" class="col-form-label">Price:</label>
                 <div class="form-group">
                   <input class="form-control" name="price" type="details.apartment?.price"
                          [value]="details.apartment?.price" ngModel required/>
+                </div>
+                <label for="message-text" class="col-form-label">Description:</label>
+                <div class="form-group">
+                  <input class="form-control" name="description" type="details.apartment?.description"
+                         [value]="details.apartment?.description" ngModel required/>
                 </div>
               </div>
             </div>

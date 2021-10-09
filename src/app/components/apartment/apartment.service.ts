@@ -15,4 +15,10 @@ export class ApartmentService {
     return this.http.get<Apartment[]>(AppApiConst.APARTMENT_ALL);
   }
 
+  public getApartmentInHotel(id: number): Observable<Apartment[]> {
+    console.log("getAllApartmentPage invoked");
+    return this.http.get<Apartment[]>(`${AppApiConst.APARTMENT_IN_HOTEL}?id=`+`${id}`);
+  }
+
+
 }

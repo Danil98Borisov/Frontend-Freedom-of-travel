@@ -14,6 +14,7 @@ export class AppApiConst {
   public static APARTMENT_DETAILS = AppApiConst.API_ENDPOINT + '/apartment/details';
   public static APARTMENT_DETAILS_EDIT = AppApiConst.API_ENDPOINT + '/apartment/details/edit';
   public static APARTMENT_FIND = AppApiConst.API_ENDPOINT + '/apartment/find';
+  public static APARTMENT_IN_HOTEL = AppApiConst.API_ENDPOINT+'/apartment/apart-in-hotel'
 
   public static APARTMENT_PREVIEW_FIND = AppApiConst.API_ENDPOINT + '/apartmentPreview/find/preview';
   public static APARTMENT_PREVIEW_DETAILS = AppApiConst.API_ENDPOINT + '/apartmentPreview/details/preview';
