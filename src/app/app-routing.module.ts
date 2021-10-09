@@ -16,6 +16,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {NotFoundComponent} from "./components/errors/not-found.component";
 import {UserBookingComponent} from "./components/user-booking/user-booking.component";
+import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
 
 const routes: Routes = [
   {path: '', component: FilterComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: '404', component: NotFoundComponent},
   {path: 'user/booking', component: UserBookingComponent},
+  {path: 'hotel/manager-hotel', component: HotelManagementComponent},
   {path: '**',component: NotFoundComponent}
 ];
 
