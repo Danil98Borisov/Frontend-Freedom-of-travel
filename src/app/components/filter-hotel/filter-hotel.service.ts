@@ -58,7 +58,7 @@ export class FilterHotelService {
       }
     }
     else{
-      url +='?'+`startDate=2021-01-01`+`&endDate=2021-02-01`+`&sort=${sort}`+`&page=${page}`;
+      url +='?'+`startDate=1970-01-01`+`&endDate=1970-02-01`+`&sort=${sort}`+`&page=${page}`;
     }
 
     return this.http.get<HotelPreview[]>(url, this.httpOptions).pipe(
