@@ -52,8 +52,21 @@ export class FilterHotelComponent implements OnInit {
 
     let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
     let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
+    let sort ="DESC"
 
-    this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating,page)
+    this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating, sort, page)
+      .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
+  }
+
+  public filterAsc(fil: FormGroup,page: number): void {
+    /*    console.log('fil.value.startDate = ', fil.value.startDate)
+        console.log('fil.value.startDate = ')*/
+
+    let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
+    let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
+    let sort = "ASC";
+
+    this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating, sort, page)
       .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
   }
 
