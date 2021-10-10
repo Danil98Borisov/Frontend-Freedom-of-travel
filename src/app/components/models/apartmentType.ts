@@ -1,6 +1,5 @@
-export class Type {
+export class ApartmentType {
   constructor(
-    public id: number,
     public name: string,
   ) {
   }
