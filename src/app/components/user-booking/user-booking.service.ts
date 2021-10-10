@@ -27,4 +27,13 @@ export class UserBookingService {
     );
   }
 
+  deleteReservation(reservation: Reservation){
+    return this.http.post<Reservation>(AppApiConst.RESERVATION_EDIT, reservation)
+      .subscribe(reservation => {
+        console.log("Reservation delete: ", reservation);
+      }, error => {
+        console.log('error: ', error);
+      });
+  }
+
 }

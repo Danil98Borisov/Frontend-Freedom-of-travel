@@ -32,6 +32,11 @@ export class UserBookingComponent implements OnInit {
     }
 
 }
+  public delete(reservation: Reservation): void {
+    reservation.status ="CANCELLED";
+    this.httpService.deleteReservation(reservation)
+    window.location.reload();
+  }
 
   displayedColumns: string[] = ['id', 'hotelName', 'apartment_id', 'status', 'start_date', 'end_date','email'];
 }
