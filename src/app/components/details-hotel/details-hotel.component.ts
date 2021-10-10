@@ -9,12 +9,13 @@ import {AppApiConst} from "../../app.api.const";
 import {UserService} from "../../services/user.service";
 import {ApartmentService} from "../apartment/apartment.service";
 import {Apartment} from "../models/apartment";
+import {HotelManagementService} from "../hotel-management/hotel-management.service";
 
 @Component({
   selector: 'app-details-hotel',
   styleUrls: ['details-hotel.component.css'],
   templateUrl: 'details-hotel.component.html',
-  providers: [DetailsHotelService, ApartmentService]
+  providers: [DetailsHotelService, ApartmentService,HotelManagementService]
 })
 
 export class DetailsHotelComponent implements OnInit {
@@ -27,8 +28,11 @@ export class DetailsHotelComponent implements OnInit {
 
   detailsHotel: HotelDetails = {};
 
+  isFlag: boolean = this.userService.isAdmin() || this.userService.isAdvertiser();
+
   constructor(private activatedRoute: ActivatedRoute,
               private detailsHotelService: DetailsHotelService,
+              private hotelManagementService: HotelManagementService,
               public userService: UserService,
               private http: HttpClient,
               private apartmentService: ApartmentService,
@@ -37,10 +41,25 @@ export class DetailsHotelComponent implements OnInit {
   }
 
   ngOnInit() {
+
     console.log("HotelPreviewComponent is opened, hotel id = " + this.activatedRoute.snapshot.params.id);
+    console.log("this.userService.getEmail(): "+ this.userService.getEmail())
+    console.log("flag: " + this.isFlag)
+    console.log("this.userService.isAdmin(): " + this.userService.isAdmin())
+    console.log("this.userService.isAdvertiser(): " + this.userService.isAdvertiser())
 
    this.detailsHotelService.getDetailsHotelPage(this.activatedRoute.snapshot.params.id)
-     .subscribe((data: HotelDetails) => this.detailsHotel = data,
+     .subscribe((data: HotelDetails) => {
+       this.detailsHotel = data,
+         console.log("this.detailsHotel.flag: " + this.detailsHotel?.flag)
+         if(this.isFlag && this.detailsHotel?.flag) {
+           this.isFlag = true;
+         }
+         else {
+           this.isFlag = false;
+         }
+
+     },
        error => {
          console.log(error);
        });

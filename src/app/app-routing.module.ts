@@ -34,7 +34,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: '404', component: NotFoundComponent},
   {path: 'user/booking', component: UserBookingComponent},
-  {path: 'hotel/manager-hotel', component: HotelManagementComponent},
+  {path: 'hotel/manage-hotel', component: HotelManagementComponent},
   {path: '**',component: NotFoundComponent}
 ];
 

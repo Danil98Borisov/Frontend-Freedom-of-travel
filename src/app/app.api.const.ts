@@ -32,5 +32,6 @@ export class AppApiConst {
 
   public static BOOKING = AppApiConst.API_ENDPOINT + '/reservation/booking';
 
-  public static HOTEL_MANAGEMENT = AppApiConst.API_ENDPOINT + '/hotel/manager-hotel';
+  public static HOTEL_MANAGEMENT = AppApiConst.API_ENDPOINT + '/hotel/manage-hotel';
+  public static HOTEL_MANAGEMENT_ALL = AppApiConst.API_ENDPOINT + '/hotel/manage-hotel/all';
 }

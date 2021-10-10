@@ -21,11 +21,22 @@ export class HotelManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.userService.isLoggedIn()) {
+    if (this.userService.isLoggedIn() && this.userService.isAdvertiser()) {
       const email = this.userService.getEmail();
       console.log("this.email: "+ email)
 
-      this.httpService.getAllReservationUser(email)
+      this.httpService.getHotelUser(email)
+        .subscribe((data: Hotel[]) => {
+          //console.log("data" + JSON.stringify(data));
+          this.hotels = data
+        });
+    }
+
+    if (this.userService.isLoggedIn() && this.userService.isAdmin()) {
+      const email = this.userService.getEmail();
+      console.log("this.email: "+ email)
+
+      this.httpService.getAllHotelUser()
         .subscribe((data: Hotel[]) => {
           //console.log("data" + JSON.stringify(data));
           this.hotels = data
@@ -39,5 +50,5 @@ export class HotelManagementComponent implements OnInit {
     this.router.navigate(['/hotel-details', id])
   }
 
-  displayedColumns: string[] = ['id', 'hotelName', 'city', 'rating', 'description'];
+  displayedColumns: string[] = ['id', 'hotelName', 'city', 'rating'];
 }
