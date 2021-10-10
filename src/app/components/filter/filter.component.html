@@ -30,7 +30,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>Type</mat-label>
+    <mat-label>ApartmentType</mat-label>
     <mat-select formControlName="type">
       <mat-option value="SINGLE">Single</mat-option>
       <mat-option value="DOUBLE">Double</mat-option>
@@ -51,11 +51,11 @@
     <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">Search</button>
+  <!--<button mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">Search</button>-->
 
 </form>
 
-<table mat-table [dataSource]="apartmentsPreviews" class="mat-elevation-z8 demo-table">
+<table mat-table [dataSource]="hotelsPreviews" class="mat-elevation-z8 demo-table">
 
   <ng-container matColumnDef="photo">
     <th mat-header-cell cdkDrag *matHeaderCellDef> Picture</th>
@@ -86,7 +86,7 @@
   <!--  type Column -->
   <ng-container matColumnDef="type">
     <th mat-header-cell *matHeaderCellDef> type</th>
-    <td mat-cell *matCellDef="let element"> {{element.apartment.type}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.apartment.type.name}} </td>
   </ng-container>
 
   <!--  price Column-->

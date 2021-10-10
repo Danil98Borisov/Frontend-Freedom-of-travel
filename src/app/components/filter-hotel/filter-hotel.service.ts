@@ -27,11 +27,23 @@ export class FilterHotelService {
     return this.http.get<HotelPreview[]>(url);
   }
 
-  filterHotel(city: string, rating: number, page: number): Observable<HotelPreview[]> {
+  filterHotel(price: number, type: string, startDate: any, endDate: any, city: string, rating: number, page: number): Observable<HotelPreview[]> {
 
     let url = `${AppApiConst.HOTEL_PREVIEW_FIND}`;
-    if (city != null || rating != null) {
+    if (price != null || type != null || city != null || rating != null || startDate != null || endDate != null ) {
       url += '?';
+      if (startDate != null) {
+        url += `&startDate=${startDate}`;
+      }
+      if (endDate != null) {
+        url += `&endDate=${endDate}`;
+      }
+      if (price != null) {
+        url += `&price=${price}`;
+      }
+      if (type != null) {
+        url += `&type=${type}`;
+      }
       if (city != null) {
         url += `&city=${city}`;
       }
@@ -42,8 +54,8 @@ export class FilterHotelService {
         url += `&page=${page}`;
       }
     }
-    else {
-        url += '?'+`page=${page}`;
+    else{
+      url +='?'+`startDate=2021-01-01`+`&endDate=2021-02-01`+`&page=${page}`;
     }
 
     return this.http.get<HotelPreview[]>(url, this.httpOptions).pipe(
