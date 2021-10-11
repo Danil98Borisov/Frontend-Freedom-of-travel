@@ -5,7 +5,7 @@ export class HotelDetails {
   constructor(
     public hotel?: Hotel,
     public hotelImages?: HotelImage[],
-    public flag?: boolean
+    public editAllowed?: boolean
   ) {
   }
 }

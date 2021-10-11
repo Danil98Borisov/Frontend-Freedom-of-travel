@@ -44,15 +44,15 @@ export class DetailsHotelComponent implements OnInit {
 
     console.log("HotelPreviewComponent is opened, hotel id = " + this.activatedRoute.snapshot.params.id);
     console.log("this.userService.getEmail(): "+ this.userService.getEmail())
-    console.log("flag: " + this.isFlag)
+    console.log("editAllowed: " + this.isFlag)
     console.log("this.userService.isAdmin(): " + this.userService.isAdmin())
     console.log("this.userService.isAdvertiser(): " + this.userService.isAdvertiser())
 
    this.detailsHotelService.getDetailsHotelPage(this.activatedRoute.snapshot.params.id)
      .subscribe((data: HotelDetails) => {
        this.detailsHotel = data,
-         console.log("this.detailsHotel.flag: " + this.detailsHotel?.flag)
-         if(this.isFlag && this.detailsHotel?.flag) {
+         console.log("this.detailsHotel.editAllowed: " + this.detailsHotel?.editAllowed)
+         if(this.isFlag && this.detailsHotel?.editAllowed) {
            this.isFlag = true;
          }
          else {
