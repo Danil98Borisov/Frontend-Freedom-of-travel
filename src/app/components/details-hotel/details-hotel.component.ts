@@ -10,12 +10,14 @@ import {UserService} from "../../services/user.service";
 import {ApartmentService} from "../apartment/apartment.service";
 import {Apartment} from "../models/apartment";
 import {HotelManagementService} from "../hotel-management/hotel-management.service";
+import {NotificationService} from "../../services/notification.service";
+import {AppNotificationConst} from "../../app.notification.const";
 
 @Component({
   selector: 'app-details-hotel',
   styleUrls: ['details-hotel.component.css'],
   templateUrl: 'details-hotel.component.html',
-  providers: [DetailsHotelService, ApartmentService,HotelManagementService]
+  providers: [DetailsHotelService, ApartmentService,HotelManagementService,NotificationService]
 })
 
 export class DetailsHotelComponent implements OnInit {
@@ -37,6 +39,7 @@ export class DetailsHotelComponent implements OnInit {
               private http: HttpClient,
               private apartmentService: ApartmentService,
               private router: Router,
+              private notificationService: NotificationService
   ) {
   }
 
@@ -80,8 +83,10 @@ export class DetailsHotelComponent implements OnInit {
       .subscribe(editedHotel => {
         console.log("Отель изменён: ", editedHotel);
         this.detailsHotel.hotel = editedHotel.hotel;
+        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_EDITED)
       }, error => {
         console.log('error: ', error);
+        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_NOT_EDITED)
       });
   }
 
