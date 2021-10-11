@@ -27,13 +27,14 @@ export class UserBookingService {
     );
   }
 
-  deleteReservation(reservation: Reservation){
-    return this.http.post<Reservation>(AppApiConst.RESERVATION_EDIT, reservation)
-      .subscribe(reservation => {
+  cancelReservation(id: number){
+    return this.http.get<Reservation[]>(AppApiConst.RESERVATION_CANCEL+"/" + `${id}`).pipe(
+      tap(reservation => {
         console.log("Reservation delete: ", reservation);
       }, error => {
         console.log('error: ', error);
-      });
+      })
+    );
   }
 
 }

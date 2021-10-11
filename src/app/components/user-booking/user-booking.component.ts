@@ -32,9 +32,10 @@ export class UserBookingComponent implements OnInit {
     }
 
 }
-  public delete(reservation: Reservation): void {
-    reservation.status ="CANCELLED";
-    this.httpService.deleteReservation(reservation)
+  public cancel(id: number): void {
+    this.httpService.cancelReservation(id).subscribe((data: Reservation[]) => {
+      this.reservation = data
+    });
     window.location.reload();
   }
 
