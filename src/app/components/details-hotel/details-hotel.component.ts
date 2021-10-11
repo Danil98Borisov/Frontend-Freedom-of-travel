@@ -11,6 +11,7 @@ import {ApartmentService} from "../apartment/apartment.service";
 import {Apartment} from "../models/apartment";
 import {HotelManagementService} from "../hotel-management/hotel-management.service";
 import {NotificationService} from "../../services/notification.service";
+import {AppNotificationConst} from "../../app.notification.const";
 
 @Component({
   selector: 'app-details-hotel',
@@ -82,10 +83,10 @@ export class DetailsHotelComponent implements OnInit {
       .subscribe(editedHotel => {
         console.log("Отель изменён: ", editedHotel);
         this.detailsHotel.hotel = editedHotel.hotel;
-        this.notificationService.openSnackBar(3)
+        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_EDITED)
       }, error => {
         console.log('error: ', error);
-        this.notificationService.openSnackBar(4)
+        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_NOT_EDITED)
       });
   }
 

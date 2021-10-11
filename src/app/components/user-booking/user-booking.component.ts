@@ -5,6 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NotificationService} from "../../services/notification.service";
+import {AppNotificationConst} from "../../app.notification.const";
 
 @Component({
   selector: 'app-user-booking',
@@ -38,12 +39,11 @@ export class UserBookingComponent implements OnInit {
   public cancel(id: number): void {
     this.httpService.cancelReservation(id).subscribe((data: Reservation[]) => {
       this.reservation = data,
-        this.notificationService.openSnackBar(1)
+        this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_CANCELED)
     }, error => {
       console.log('error: ', error);
-      this.notificationService.openSnackBar(2)
+      this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_NOT_CANCELED)
     })
-    this.notificationService.reboot()
   }
 
 

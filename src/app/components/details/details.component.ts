@@ -12,6 +12,7 @@ import {ReservationResponse} from "../models/reservation.response";
 import {DatePipe} from "@angular/common";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NotificationService} from "../../services/notification.service";
+import {AppNotificationConst} from "../../app.notification.const";
 
 @Component({
   selector: 'app-details',
@@ -79,11 +80,11 @@ export class DetailsComponent implements OnInit {
         .subscribe(editedApartment => {
           console.log("Апартамент изменён: ", editedApartment);
           this.details.apartment = editedApartment.apartment;
-          this.notificationService.openSnackBar(3)
+          this.notificationService.openSnackBar(AppNotificationConst.APARTMENT_EDITED)
 
         }, error => {
           console.log('error: ', error);
-          this.notificationService.openSnackBar(3)
+          this.notificationService.openSnackBar(AppNotificationConst.APARTMENT_NOT_EDITED)
 
         });
     }

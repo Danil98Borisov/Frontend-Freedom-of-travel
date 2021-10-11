@@ -20,7 +20,6 @@ export class DeleteHotelComponent implements OnInit {
   }
 
   delete(hotel: Hotel): void {
-    this.hotels = this.hotels.filter(h => h !== hotel);
     this.hotelService.deleteHotel(hotel.id).subscribe();
   }
 
