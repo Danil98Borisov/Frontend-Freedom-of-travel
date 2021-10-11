@@ -32,6 +32,12 @@ export class UserBookingComponent implements OnInit {
     }
 
 }
+  public cancel(id: number): void {
+    this.httpService.cancelReservation(id).subscribe((data: Reservation[]) => {
+      this.reservation = data
+    });
+    window.location.reload();
+  }
 
   displayedColumns: string[] = ['id', 'hotelName', 'apartment_id', 'status', 'start_date', 'end_date','email'];
 }
