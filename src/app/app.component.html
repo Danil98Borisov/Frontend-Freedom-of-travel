@@ -1,12 +1,12 @@
 <div class="app">
   <div class="topnav">
     <a class="active" routerLink="filter-hotel">Home</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="hotel">Hotel</a>
     <a *ngIf="isAdmin" class="nav-item" routerLink="reservation">Reservation</a>
     <a *ngIf="isAdmin" class="nav-item" routerLink="hotel/add">Add Hotel</a>
     <a *ngIf="isAdmin" class="nav-item" routerLink="hotel/edit">Edit Hotel</a>
     <a *ngIf="isAdmin" class="nav-item" routerLink="delete">Delete</a>
-    <a *ngIf="isAdmin || isAdvertiser || username"class="nav-item" routerLink="user/booking">My bookings</a>
+    <a *ngIf="isAdmin || isAdvertiser || username" class="nav-item" routerLink="user/booking">My bookings</a>
+    <a *ngIf="isAdmin || isAdvertiser" class="nav-item" routerLink="hotel/manage-hotel">Manage Hotels</a>
     <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="login">Login</a>
     <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="register">Sign Up</a>
     <a *ngIf="isLoggedIn" class="nav-item" style="display: flex; float: right" (click)="signOut()">Sign Out</a>

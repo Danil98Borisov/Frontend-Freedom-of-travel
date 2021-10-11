@@ -42,6 +42,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatPaginatorModule} from "@angular/material/paginator";
 
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
+import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {authInterceptorProviders} from "./helpers/auth.interceptor";
     LoginComponent,
     RegisterComponent,
     NotFoundComponent,
-    UserBookingComponent
+    UserBookingComponent,
+    HotelManagementComponent
   ],
   imports: [
     BrowserModule,

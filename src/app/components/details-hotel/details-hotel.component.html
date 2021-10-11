@@ -14,22 +14,17 @@
 </div>
 <div class="block">
   <ul>
-    <button *ngIf="this.userService.isAdmin() || this.userService.isAdvertiser()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      To change
+
+    <p>Description of the Hotel: {{detailsHotel.hotel?.description}}</p>
+    <p>Hotel rating: {{detailsHotel.hotel?.rating}}</p>
+    <p>City: {{detailsHotel.hotel?.city}}</p>
+
+    <button *ngIf="isFlag || this.userService.isAdmin()" type="button"
+            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" mat-raised-button color="primary">
+      <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
     </button>
-    <p>
-      Description of the Hotel: {{detailsHotel.hotel?.description}}
-    </p>
-    <p>
-      Hotel rating: {{detailsHotel.hotel?.rating}}
-    </p>
-    <p>
-      City: {{detailsHotel.hotel?.city}}
-    </p>
 
     <!--CHANGES TO HOTEL PARAMETERS-->
-
-
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
