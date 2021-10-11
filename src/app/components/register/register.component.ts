@@ -10,9 +10,13 @@ import {Router} from "@angular/router";
 export class RegisterComponent implements OnInit {
 
   form: any = {};
-  isSuccessful = false;
+
+  isSignUpCompleted = false;
   isSignUpFailed = false;
+  isVerificationCompleted = false;
+
   errorMessage = '';
+  resendVerifyEmailMessage = '';
 
   constructor(private userRegistrationService: UserRegistrationService,
               private router: Router) {}
@@ -20,20 +24,42 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.userRegistrationService.register(this.form).subscribe(
+    console.log("RegisterComponent: onSubmit");
+    this.isSignUpCompleted = false;
+    this.isVerificationCompleted = false;
+
+    this.userRegistrationService.register(this.form, this.getRandomString(64)).subscribe(
       data => {
         console.log(data);
-        this.isSuccessful = true;
+        this.isSignUpCompleted = true;
         this.isSignUpFailed = false;
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 3000);
       },
       err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
     );
+  }
+
+  /*Send request verification email*/
+  sendVerifyUserEmail(): void {
+    this.isVerificationCompleted = false;
+    this.userRegistrationService.resendVerifyUserEmail(this.form['email'])
+      .subscribe((message: string) => {
+          this.resendVerifyEmailMessage = message;
+          console.log("resendVerifyEmailMessage: ", this.resendVerifyEmailMessage);
+        }
+      );
+  }
+
+  /*Generation string code for verification email*/
+  getRandomString(length: number): any {
+    const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += randomChars.charAt(Math.floor(Math.random() * length));
+    }
+    return result;
   }
 
 }

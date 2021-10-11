@@ -1,0 +1,21 @@
+.access-is-denied {
+  font-size: 45px;
+  align-items: center;
+  box-sizing: border-box;
+  width: 50%;
+  height: 40px;
+  text-align: center;
+  margin-top: 98px;
+  margin-left: 25%;
+  color: blue;
+}
+
+.resend-email-text {
+  font-size: 30px;
+  text-decoration: underline;
+}
+
+.resend-email-text:hover {
+  cursor: pointer;
+  color: #00a1ff;
+}

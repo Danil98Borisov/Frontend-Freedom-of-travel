@@ -4,6 +4,7 @@ export class AppApiConst {
   public static SIGN_IN = AppApiConst.API_ENDPOINT + '/auth/signin';
   public static SIGN_OUT = AppApiConst.API_ENDPOINT + '/auth/signout';
   public static SIGN_UP = AppApiConst.API_ENDPOINT + '/signup';
+  public static VERIFY_USER_EMAIL = AppApiConst.API_ENDPOINT + '/verify-user-email';
 
   public static HOTEL_ALL = AppApiConst.API_ENDPOINT + '/hotel/all';
   public static HOTEL_ADD = AppApiConst.API_ENDPOINT + '/hotel/add';

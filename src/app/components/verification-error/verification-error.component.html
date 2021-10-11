@@ -1,0 +1,12 @@
+<div class="access-is-denied">
+  <div  class="message">Oops! Something went wrong...</div>
+  <div  class="message" style="margin-top: 20px;">
+    <p class="resend-email-text" (click)=resendVerificationEmail()> Re-send verification email</p>
+  </div>
+  <div class="alert alert-success" *ngIf="isVerificationRequestSent && !isVerificationRequestFailed">
+    Verification email send to {{email}}.
+  </div>
+  <div class="alert alert-danger" *ngIf="isVerificationRequestSent && isVerificationRequestFailed">
+    No user with this email found: {{email}}.
+  </div>
+</div>
