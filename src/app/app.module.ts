@@ -43,6 +43,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
 import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
+import {VerificationErrorComponent} from "./components/verification-error/verification-error.component";
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import {HotelManagementComponent} from "./components/hotel-management/hotel-mana
     RegisterComponent,
     NotFoundComponent,
     UserBookingComponent,
-    HotelManagementComponent
+    HotelManagementComponent,
+    VerificationErrorComponent
   ],
   imports: [
     BrowserModule,
