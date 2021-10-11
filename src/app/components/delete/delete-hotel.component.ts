@@ -3,13 +3,14 @@ import {Hotel} from "./hotel";
 import {DeleteHotelService} from "./delete-hotel.service";
 import {UserService} from "../../services/user.service";
 import {AuthService} from "../../services/auth.service";
+import {NotificationService} from "../../services/notification.service";
 
 
 @Component({
   selector: 'app-hotel',
   styleUrls: ['delete-hotel.component.css'],
   templateUrl: 'delete-hotel.component.html',
-  providers: [DeleteHotelService]
+  providers: [DeleteHotelService,NotificationService]
 })
 
 export class DeleteHotelComponent implements OnInit {

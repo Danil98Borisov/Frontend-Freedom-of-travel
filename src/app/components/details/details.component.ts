@@ -11,12 +11,13 @@ import {ReservationRequest} from "../models/reservation.request";
 import {ReservationResponse} from "../models/reservation.response";
 import {DatePipe} from "@angular/common";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-details',
   styleUrls: ['details.component.css'],
   templateUrl: 'details.component.html',
-  providers: [DetailsService]
+  providers: [DetailsService,NotificationService]
 })
 
 export class DetailsComponent implements OnInit {
@@ -42,7 +43,8 @@ export class DetailsComponent implements OnInit {
               public userService: UserService,
               private http: HttpClient,
               private datePipe: DatePipe,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -77,8 +79,12 @@ export class DetailsComponent implements OnInit {
         .subscribe(editedApartment => {
           console.log("Апартамент изменён: ", editedApartment);
           this.details.apartment = editedApartment.apartment;
+          this.notificationService.openSnackBar(3)
+
         }, error => {
           console.log('error: ', error);
+          this.notificationService.openSnackBar(3)
+
         });
     }
     return;

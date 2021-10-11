@@ -3,12 +3,14 @@ import {Reservation} from '../models/reservation';
 import {UserBookingService} from "./user-booking.service";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-user-booking',
   styleUrls: ['user-booking.component.css'],
   templateUrl: 'user-booking.component.html',
-  providers: [UserBookingService]
+  providers: [UserBookingService,NotificationService]
 })
 export class UserBookingComponent implements OnInit {
 
@@ -16,7 +18,9 @@ export class UserBookingComponent implements OnInit {
 
   constructor(private httpService: UserBookingService,
               private activatedRoute: ActivatedRoute,
-              private userService: UserService) {
+              private userService: UserService,
+              private _snackBar: MatSnackBar,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -30,14 +34,18 @@ export class UserBookingComponent implements OnInit {
           this.reservation = data
         });
     }
-
 }
   public cancel(id: number): void {
     this.httpService.cancelReservation(id).subscribe((data: Reservation[]) => {
-      this.reservation = data
-    });
-    window.location.reload();
+      this.reservation = data,
+        this.notificationService.openSnackBar(1)
+    }, error => {
+      console.log('error: ', error);
+      this.notificationService.openSnackBar(2)
+    })
+    this.notificationService.reboot()
   }
+
 
   displayedColumns: string[] = ['id', 'hotelName', 'apartment_id', 'status', 'start_date', 'end_date','email'];
 }

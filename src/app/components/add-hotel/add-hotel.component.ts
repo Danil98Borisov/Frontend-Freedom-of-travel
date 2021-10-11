@@ -4,16 +4,18 @@ import {Hotel} from 'src/app/components/models/hotel';
 import {AddHotelService} from './add-hotel.service';
 import {HttpClient} from "@angular/common/http";
 import {AppApiConst} from "../../app.api.const";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-add-hotel',
   styleUrls: ['add-hotel.component.css'],
   templateUrl: 'add-hotel.component.html',
-  providers: [AddHotelService]
+  providers: [AddHotelService,NotificationService]
 })
 export class AddHotelComponent {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private notificationService: NotificationService) {
   }
 
   public addHotel(hotel: Hotel) {
@@ -21,9 +23,12 @@ export class AddHotelComponent {
     return this.http.put<Hotel>(AppApiConst.HOTEL_ADD, hotel)
       .subscribe(hotel => {
         console.log("Отель добавлен: ", hotel);
+        this.notificationService.openSnackBar(7)
       }, error => {
         console.log('error: ', error);
+        this.notificationService.openSnackBar(8)
       });
+    this.notificationService.reboot()
   }
 
   onSubmit(form: NgForm) {

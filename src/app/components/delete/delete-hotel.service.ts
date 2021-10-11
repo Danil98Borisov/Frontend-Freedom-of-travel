@@ -6,11 +6,13 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Hotel} from "./hotel";
 import {AppApiConst} from "../../app.api.const";
+import {NotificationService} from "../../services/notification.service";
 
 
 @Injectable()
 export class DeleteHotelService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private notificationService: NotificationService) {
   }
 
   httpOptions = {
@@ -28,10 +30,13 @@ export class DeleteHotelService {
     return this.http.delete<Hotel>(url, this.httpOptions).pipe(
       tap(hotel => {
         console.log("Отель удалён: ", hotel);
+        this.notificationService.openSnackBar(5)
       }, error => {
         console.log('error: ', error);
+        this.notificationService.openSnackBar(6)
       })
     );
+    this.notificationService.reboot()
   }
 
 }
