@@ -31,7 +31,7 @@ export class FilterHotelComponent implements OnInit {
   isDataLoaded = false;
 
   // MatPaginator Inputs
-  length = 40;
+  length = 30;
   pageSize = 5;
 
   // MatPaginator Output
@@ -97,7 +97,14 @@ export class FilterHotelComponent implements OnInit {
     let sort = "ASC";
 
     this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating, sort, page)
-      .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
+      .subscribe((data: HotelPreview[]) => {
+        this.hotelsPreviews = data;
+        this.isDataLoaded = true;
+        this.changeDetectorRef.detectChanges();
+        this.dataSource = new MatTableDataSource<HotelPreview>(this.hotelsPreviews);
+        this.dataSource.paginator = this.paginator;
+        this.hotelPreviews = this.dataSource.connect();
+      });
   }
 
   logFuncHotel(id: any) {
