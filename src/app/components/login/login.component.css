@@ -38,3 +38,7 @@ label {
   display: inline-block;
   cursor: pointer;
 }
+
+.login {
+  font-size: 18px;
+}

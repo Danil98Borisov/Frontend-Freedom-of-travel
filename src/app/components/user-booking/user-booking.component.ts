@@ -2,38 +2,50 @@ import {Component, OnInit} from '@angular/core';
 import {Reservation} from '../models/reservation';
 import {UserBookingService} from "./user-booking.service";
 import {ActivatedRoute} from "@angular/router";
+import {UserService} from "../../services/user.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {NotificationService} from "../../services/notification.service";
+import {AppNotificationConst} from "../../app.notification.const";
 
 @Component({
   selector: 'app-user-booking',
   styleUrls: ['user-booking.component.css'],
   templateUrl: 'user-booking.component.html',
-  providers: [UserBookingService]
+  providers: [UserBookingService,NotificationService]
 })
 export class UserBookingComponent implements OnInit {
-  reservation: Reservation[] = [];
 
-  isLogin: boolean = true;
-  roles: string[] = [];
-  email: string = '';
-  isLoggedIn = false;
+  reservation: Reservation[] = [];
 
   constructor(private httpService: UserBookingService,
               private activatedRoute: ActivatedRoute,
-              private userBookingService: UserBookingService) {
+              private userService: UserService,
+              private _snackBar: MatSnackBar,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
+    if (this.userService.isLoggedIn()) {
+      const email = this.userService.getEmail();
+      console.log("this.email: "+ email)
 
-    if (this.userBookingService.getUser()) {
-      this.email = this.userBookingService.getUser().email;
-
-      console.log("this.email: "+ this.email)
-
-      this.httpService.getAllReservationUser(this.email).subscribe((data: Reservation[]) =>
-      {console.log("data"+JSON.stringify(data)); this.reservation = data});
+      this.httpService.getAllReservationUser(email)
+        .subscribe((data: Reservation[]) => {
+          //console.log("data" + JSON.stringify(data));
+          this.reservation = data
+        });
     }
-
 }
+  public cancel(id: number): void {
+    this.httpService.cancelReservation(id).subscribe((data: Reservation[]) => {
+      this.reservation = data,
+        this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_CANCELED)
+    }, error => {
+      console.log('error: ', error);
+      this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_NOT_CANCELED)
+    })
+  }
 
-  displayedColumns: string[] = ['id', 'apartment_id', 'status', 'start_date', 'end_date','email'];
+
+  displayedColumns: string[] = ['id', 'hotelName', 'apartment_id', 'status', 'start_date', 'end_date','email'];
 }

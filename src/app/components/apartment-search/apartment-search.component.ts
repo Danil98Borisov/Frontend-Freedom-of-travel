@@ -11,6 +11,7 @@ import {DetailsService} from "../details/details.service";
 import {ApartmentPreviewService} from "../apartment-preview/apartment-preview.service";
 import {PageEvent} from "@angular/material/paginator";
 import {AuthService} from "../../services/auth.service";
+import {HotelPreview} from "../models/hotelPreview";
 
 @Component({
   selector: 'app-filter',
@@ -22,25 +23,26 @@ export class ApartmentSearchComponent implements OnInit {
 
   isDataLoaded: boolean =  false;
 
-  // MatPaginator Inputs
-  length = 60;
-  pageSize = 5;
 
-  // MatPaginator Output
-  pageEvent: PageEvent[]=[];
+    // MatPaginator Inputs
+    length = 70;
+    pageSize = 5;
 
-  isLogin : boolean = false;
+    // MatPaginator Output
+    pageEvent: PageEvent[]=[];
 
-  fil = new FormGroup({
-    startDate: new FormControl(),
-    endDate: new FormControl(),
-    price: new FormControl(),
-    city: new FormControl(),
-    rating: new FormControl(),
-    type: new FormControl()
-  });
+    isLogin : boolean = false;
 
-  apartmentsPreviews: ApartmentPreview[]=[];
+    fil = new FormGroup({
+      startDate: new FormControl(),
+      endDate: new FormControl(),
+      price: new FormControl(),
+      city: new FormControl(),
+      rating: new FormControl(),
+      type: new FormControl()
+    });
+
+    hotelsPreviews: HotelPreview[]=[];
 
 
   constructor(private filterService: ApartmentSearchService,
@@ -49,45 +51,43 @@ export class ApartmentSearchComponent implements OnInit {
               private authService: AuthService) {
   }
 
-  public filter(fil: FormGroup,page: number): void {
-    console.log('fil.value.startDate = ', fil.value['startDate'])
-    console.log('fil.value.startDate = ',)
-    let ap: Apartment = fil.value
 
-    let startDate = this.datePipe.transform(fil.value['startDate'], 'yyyy-MM-dd');
-    let endDate = this.datePipe.transform(fil.value['endDate'], 'yyyy-MM-dd');
+    public filter(fil: FormGroup,page: number): void {
+  /*    console.log('fil.value.startDate = ', fil.value.startDate)
+      console.log('fil.value.startDate = ')*/
 
-    this.filterService.filterApartment(ap.price, ap.type, startDate, endDate, fil.value['city'], fil.value['rating'],page)
-      .subscribe((data: ApartmentPreview[]) => {
-        this.apartmentsPreviews = data;
-        this.isDataLoaded = true;
-      });
-  }
+      let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
+      let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
 
-  logFunc(id: any) {
-    console.log("Hi, I'm apartmentPreviews" + id);
-    this.router.navigate(['/apartment-details', id])
-  }
-
-
-  ngOnInit() {
-    this.authService.currentIsLogIn.subscribe(isLogin => this.isLogin = isLogin);
-    if(this.isLogin){
-      this.reloadPage();
+      /*this.filterService.filterApartment(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating,page)
+        .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);*/
     }
-  }
-  reloadPage(): void {
-    window.location.reload();
-  }
 
-  isImage: boolean = true;
-  public getImageApartment(image: any, apartId: any): any{
 
-    if (image) {
-      console.log("raster is OK for apart : ", apartId)
-    } else if(!image) {
-      console.log("raster is null for apart : ", apartId)
+    logFunc(id: any) {
+      console.log("Hi, I'm apartmentPreviews " + id);
+      this.router.navigate(['/apartment-details', id])
     }
+
+
+    ngOnInit() {
+      this.authService.currentIsLogIn.subscribe(isLogin => this.isLogin = isLogin);
+      if(this.isLogin){
+        this.reloadPage();
+      }
+    }
+    reloadPage(): void {
+      window.location.reload();
+    }
+
+    isImage: boolean = true;
+    public getImageApartment(image: any, apartId: any): any{
+
+  /*    if (image) {
+        console.log("raster is OK for apart : ", apartId)
+      } else if(!image) {
+        console.log("raster is null for apart : ", apartId)
+      }*/
     return ("data:image/png;base64," + image);
   }
   displayedColumns: string[] = ['photo', 'hotel', 'type', 'price'];

@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     this.isLoggedIn = this.userService.isLoggedIn();
     if (this.isLoggedIn) {
       this.isAdmin = this.userService.isAdmin();
-      this.isAdvertiser = this.userService.isAdmin();
+      this.isAdvertiser = this.userService.isAdvertiser();
       this.username = this.userService.getUserName();
     }
   }

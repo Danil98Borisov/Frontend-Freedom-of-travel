@@ -19,9 +19,7 @@ export class DetailsHotelService {
   };
 
    getDetailsHotelPage(id: number): Observable<HotelDetails> {
-    const url = `${AppApiConst.HOTEL_DETAILS}/${id}`;
-
-    return this.http.get<HotelDetails>(url, this.httpOptions).pipe(
+    return this.http.get<HotelDetails>(`${AppApiConst.HOTEL_DETAILS}/${id}`, this.httpOptions).pipe(
       tap(hotelDetails => {
         console.log("Детально : ", hotelDetails);
       }, error => {

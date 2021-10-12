@@ -4,6 +4,7 @@ export class AppApiConst {
   public static SIGN_IN = AppApiConst.API_ENDPOINT + '/auth/signin';
   public static SIGN_OUT = AppApiConst.API_ENDPOINT + '/auth/signout';
   public static SIGN_UP = AppApiConst.API_ENDPOINT + '/signup';
+  public static VERIFY_USER_EMAIL = AppApiConst.API_ENDPOINT + '/verify-user-email';
 
   public static HOTEL_ALL = AppApiConst.API_ENDPOINT + '/hotel/all';
   public static HOTEL_ADD = AppApiConst.API_ENDPOINT + '/hotel/add';
@@ -14,6 +15,7 @@ export class AppApiConst {
   public static APARTMENT_DETAILS = AppApiConst.API_ENDPOINT + '/apartment/details';
   public static APARTMENT_DETAILS_EDIT = AppApiConst.API_ENDPOINT + '/apartment/details/edit';
   public static APARTMENT_FIND = AppApiConst.API_ENDPOINT + '/apartment/find';
+  public static APARTMENT_IN_HOTEL = AppApiConst.API_ENDPOINT+'/apartment/apart-in-hotel'
 
   public static APARTMENT_PREVIEW_FIND = AppApiConst.API_ENDPOINT + '/apartmentPreview/find/preview';
   public static APARTMENT_PREVIEW_DETAILS = AppApiConst.API_ENDPOINT + '/apartmentPreview/details/preview';
@@ -26,6 +28,12 @@ export class AppApiConst {
 
   public static RESERVATION_ALL = AppApiConst.API_ENDPOINT + '/reservation/all';
   public static RESERVATION_ADD = AppApiConst.API_ENDPOINT + '/reservation/add';
+  public static RESERVATION_CANCEL = AppApiConst.API_ENDPOINT + '/reservation/cancel';
+
+  public static OCCUPIED_APARTMENT = AppApiConst.API_ENDPOINT + '/reservation/find/reservation';
 
   public static BOOKING = AppApiConst.API_ENDPOINT + '/reservation/booking';
+
+  public static HOTEL_MANAGEMENT = AppApiConst.API_ENDPOINT + '/hotel/manage-hotel';
+  public static HOTEL_MANAGEMENT_ALL = AppApiConst.API_ENDPOINT + '/hotel/manage-hotel/all';
 }

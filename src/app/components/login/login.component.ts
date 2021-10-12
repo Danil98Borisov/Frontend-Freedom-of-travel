@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   email: string = '';
   message: string = '';
   isLogin: boolean = true;
+  isVerified = false;
 
   constructor(private authService: AuthService,
               private sessionStorageService: SessionStorageService,
@@ -28,10 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = String(this.route.snapshot.queryParams['username']);
-
-    /*if (this.username) {
-      this.form['username'] = this.username;
-    }*/
+    this.isVerified = String(this.route.snapshot.queryParams['verified']) == 'true';
 
     if (this.sessionStorageService.getToken()) {
       this.isLoggedIn = true;

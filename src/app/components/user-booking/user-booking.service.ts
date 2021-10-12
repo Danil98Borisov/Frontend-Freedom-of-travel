@@ -6,7 +6,6 @@ import {Observable} from 'rxjs';
 import {Reservation} from '../models/reservation';
 import {AppApiConst} from "../../app.api.const";
 import {tap} from "rxjs/operators";
-const USER_KEY = 'auth-user';
 
 @Injectable()
 export class UserBookingService {
@@ -19,7 +18,7 @@ export class UserBookingService {
 
   getAllReservationUser(email: string): Observable<Reservation[]> {
 
-    return this.http.get<Reservation[]>(`${AppApiConst.BOOKING}/${email}`, this.httpOptions).pipe(
+    return this.http.get<Reservation[]>(AppApiConst.BOOKING +"/" + `${email}`).pipe(
       tap(Booking => {
         console.log("Детально Booking: ", Booking);
       }, error => {
@@ -28,9 +27,14 @@ export class UserBookingService {
     );
   }
 
-  public getUser(): any {
-    // @ts-ignore
-    return JSON.parse(sessionStorage.getItem(USER_KEY));
+  cancelReservation(id: number){
+    return this.http.get<Reservation[]>(AppApiConst.RESERVATION_CANCEL+"/" + `${id}`).pipe(
+      tap(reservation => {
+        console.log("Reservation delete: ", reservation);
+      }, error => {
+        console.log('error: ', error);
+      })
+    );
   }
 
 }

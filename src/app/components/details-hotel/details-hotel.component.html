@@ -1,4 +1,4 @@
-<a href="../filter-hoteltel">
+<a href="../filter-hotel">
   <button type="button" class="btn-close" aria-label="Close"></button>
 </a>
 
@@ -14,27 +14,23 @@
 </div>
 <div class="block">
   <ul>
-    <p>
-      Описание Отеля: {{detailsHotel.hotel?.description}}
-    </p>
-    <p>
-      Рейтинг отеля: {{detailsHotel.hotel?.rating}}
-    </p>
-    <p>
-      Город: {{detailsHotel.hotel?.city}}
-    </p>
 
-    <!--ИЗМЕНЕНИЯ ПАРАМЕТРОВ ОТЕЛЯ-->
+    <p>Description of the Hotel: {{detailsHotel.hotel?.description}}</p>
+    <p>Hotel rating: {{detailsHotel.hotel?.rating}}</p>
+    <p>City: {{detailsHotel.hotel?.city}}</p>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Изменить
+    <button *ngIf="isFlag || this.userService.isAdmin()" type="button"
+            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" mat-raised-button color="primary">
+      <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
     </button>
+
+    <!--CHANGES TO HOTEL PARAMETERS-->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h2 class="modal-title" id="exampleModalLiveLabel">Изменение описания отеля</h2>
+            <h2 class="modal-title" id="exampleModalLiveLabel">Changing the hotel description</h2>
           </div>
           <form #myFormHotel="ngForm" novalidate (ngSubmit)="onSubmitEditHotel(myFormHotel)">
             <div class="modal-body">
@@ -67,10 +63,10 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="myFormHotel.invalid">
-                  Сохранить изменения
+                  Save Changes
                 </button>
               </div>
             </div>
@@ -79,5 +75,35 @@
       </div>
     </div>
 
+    <table mat-table [dataSource]="apartments" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="hotel">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> hotel</th>
+        <td mat-cell *matCellDef="let element"> {{element.hotel.hotelName}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> type</th>
+        <td mat-cell *matCellDef="let element"> {{element.type.name}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> price</th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> description</th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="logFunc(row.id)"></tr>
+    </table>
   </ul>
+
+</div>
+<div>
 </div>

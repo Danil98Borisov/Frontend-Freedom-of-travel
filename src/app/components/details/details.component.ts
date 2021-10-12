@@ -3,40 +3,49 @@ import {ActivatedRoute} from "@angular/router";
 import {DetailsService} from "./details.service";
 import {ApartmentDetails} from "../models/apartmentDetails";
 import {AppApiConst} from "../../app.api.const";
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {Apartment} from "../models/apartment";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
-import {User} from "../models/user";
-import {Role} from "../models/role";
 import {ReservationRequest} from "../models/reservation.request";
-import {SessionStorageService} from "../../services/session-storage.service";
+import {ReservationResponse} from "../models/reservation.response";
+import {DatePipe} from "@angular/common";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {NotificationService} from "../../services/notification.service";
+import {AppNotificationConst} from "../../app.notification.const";
 
 @Component({
   selector: 'app-details',
   styleUrls: ['details.component.css'],
   templateUrl: 'details.component.html',
-  providers: [DetailsService]
+  providers: [DetailsService,NotificationService]
 })
 
 export class DetailsComponent implements OnInit {
 
-  isImage: boolean = true;
-  isLogin: boolean = true;
-  roles: string[] = [];
-  email: string = '';
-  isLoggedIn = false;
-
   details: ApartmentDetails = {};
   reservationRequest: ReservationRequest = {}
-  users: User={}
-  role: Role = {}
+  reservationResponses: ReservationResponse={};
+
+  fil = new FormGroup({
+    startDate: new FormControl(),
+    endDate: new FormControl(),
+    apartmentId: new FormControl(),
+    bookingBy: new FormControl()
+  });
+
+  statusFailed = false;
+  statusSuccessfully = false;
+  statusError = false;
+  Message = '';
 
   constructor(private activatedRoute: ActivatedRoute,
               private detailsService: DetailsService,
               public userService: UserService,
               private http: HttpClient,
-              private sessionStorageService: SessionStorageService) {
+              private datePipe: DatePipe,
+              private _snackBar: MatSnackBar,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -55,45 +64,78 @@ export class DetailsComponent implements OnInit {
   }
 
   public editApartment(apartment: Apartment) {
-    if (this.details.apartment) {
-      apartment.id = this.details.apartment.id;
-      apartment.hotel = this.details.apartment.hotel;
+    let apartmentDetails = this.details.apartment;
+    if (apartmentDetails) {
+      console.log("apartmentDetails: " + JSON.stringify(apartmentDetails))
+      apartment.id = apartmentDetails.id;
+      apartment.hotel = apartmentDetails.hotel;
+      apartment.type = apartmentDetails.type;
+      console.log("apartment: " + JSON.stringify(apartment))
+
+
+      return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {
+        apartment: apartment,
+        apartmentImages: null
+      })
+        .subscribe(editedApartment => {
+          console.log("Апартамент изменён: ", editedApartment);
+          this.details.apartment = editedApartment.apartment;
+          this.notificationService.openSnackBar(AppNotificationConst.APARTMENT_EDITED)
+
+        }, error => {
+          console.log('error: ', error);
+          this.notificationService.openSnackBar(AppNotificationConst.APARTMENT_NOT_EDITED)
+
+        });
     }
-    return this.http.post<ApartmentDetails>(AppApiConst.APARTMENT_DETAILS_EDIT, {apartment: apartment, apartmentImages: null})
-      .subscribe(editedApartment => {
-        console.log("Апартамент изменён: ", editedApartment);
-        this.details.apartment = editedApartment.apartment;
-      }, error => {
-        console.log('error: ', error);
-      });
+    return;
   }
 
   onSubmitEditApartment(form: NgForm) {
     return this.editApartment(form.value,)
   }
 
+  public bookingApartment(fil: FormGroup) {
+    if (this.userService.isLoggedIn() && this.details.apartment) {
 
-  /*БРОНИРОВАНИЕ АПАРТАМЕНТОВ*/
-  public bookingApartment(reservationRequest: ReservationRequest) {
-    if (this.details.apartment && this.sessionStorageService.getToken()) {
-      this.isLoggedIn = true;
+      let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
+      let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
 
-      reservationRequest.apartmentId = this.details.apartment.id;
-      reservationRequest.bookingBy = this.sessionStorageService.getUser().email;
+      fil.value.apartmentId = this.details.apartment.id;
+      fil.value.bookingBy = this.userService.getEmail();
+      fil.value.startDate = startDate;
+      fil.value.endDate = endDate;
+
+      console.log("Форма: " + JSON.stringify(fil.value))
+      console.log("startDate: "+ fil.value.startDate)
+      console.log("endDate: "+ fil.value.endDate)
+      console.log("apartmentId: "+ fil.value.apartmentId)
+
+
+      this.detailsService.getOccupiedApartment(fil.value)
+        .subscribe((data: ReservationResponse) => {this.reservationResponses = data,
+          console.log("data: "+ JSON.stringify(data));
+            console.log("data: "+ data.message);
+          if(data.status){
+            this.statusSuccessfully = true;
+            this.statusFailed = false;
+          console.log("Apartment booking: " + JSON.stringify(fil.value))
+            // @ts-ignore
+            this.Message = data.message;
+          }
+          else{
+            this.statusFailed = true;
+            this.statusSuccessfully = false;
+            // @ts-ignore
+            this.Message = data.message;
+          }
+          },
+          err => {
+            this.Message = err.error.message;
+            this.statusError = true;
+          });
     }
-
-
-    return this.http.post<ReservationRequest>(AppApiConst.RESERVATION_ADD, reservationRequest)
-      .subscribe(booking => {
-        console.log("Апартамент забронирован: ", booking);
-      }, error => {
-        console.log('error: ', error);
-      });
-  }
-
-  onSubmitBookingApartment(form: NgForm) {
-    console.log("Form: " + JSON.stringify(form.value))
-    return this.bookingApartment(form.value)
+    return;
   }
 
 }

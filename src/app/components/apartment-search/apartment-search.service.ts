@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {ApartmentPreview} from "../models/apartmentPreview";
 import {AppApiConst} from "../../app.api.const";
+import {HotelPreview} from "../models/hotelPreview";
 
 
 @Injectable()
@@ -13,14 +14,14 @@ export class ApartmentSearchService {
   constructor(private http: HttpClient) {
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
+   httpOptions = {
+     headers: new HttpHeaders({'Content-Type': 'application/json'})
+   };
 
-  public getAllApartmentPreviewPage(): Observable<ApartmentPreview[]> {
-    console.log("getAllApartmentPage invoked");
-    return this.http.get<ApartmentPreview[]>(AppApiConst.APARTMENT_PREVIEW_DETAILS);
-  }
+   public getAllApartmentPreviewPage(): Observable<ApartmentPreview[]> {
+     console.log("getAllApartmentPage invoked");
+     return this.http.get<ApartmentPreview[]>(AppApiConst.APARTMENT_PREVIEW_DETAILS);
+   }
 
 
   public getFilterApartmentPreviewPage(url: string): Observable<ApartmentPreview[]> {
@@ -64,9 +65,6 @@ export class ApartmentSearchService {
         console.log(url);
         this.getFilterApartmentPreviewPage(url);
       }, error => {
-        if(price == null){
-          console.log("Введите price");
-        }
         console.log('error: ', error);
       })
     );

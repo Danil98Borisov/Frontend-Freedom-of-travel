@@ -35,13 +35,15 @@ import {DatePipe} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {ApartmentPreviewComponent} from "./components/apartment-preview/apartment-preview.component";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import {MatPaginatorModule} from "@angular/material/paginator";
 
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
+import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
+import {VerificationErrorComponent} from "./components/verification-error/verification-error.component";
 import {MatListModule} from "@angular/material/list";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatCardModule} from "@angular/material/card";
@@ -65,7 +67,9 @@ import {MatCardModule} from "@angular/material/card";
     LoginComponent,
     RegisterComponent,
     NotFoundComponent,
-    UserBookingComponent
+    UserBookingComponent,
+    HotelManagementComponent,
+    VerificationErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +91,7 @@ import {MatCardModule} from "@angular/material/card";
     MatExpansionModule,
     MDBBootstrapModule.forRoot(),
     MatPaginatorModule,
+    MatSnackBarModule
     MatListModule,
     FlexLayoutModule,
     MatCardModule

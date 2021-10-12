@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 import {DetailsHotelComponent} from "../details-hotel/details-hotel.component";
 import {DetailsHotelService} from "../details-hotel/details-hotel.service";
 import {PageEvent} from "@angular/material/paginator";
+import {DatePipe} from "@angular/common";
+import {AuthService} from "../../services/auth.service";
 import {ApartmentPreview} from "../models/apartmentPreview";
 
 @Component({
@@ -19,7 +21,7 @@ import {ApartmentPreview} from "../models/apartmentPreview";
 export class FilterHotelComponent implements OnInit {
 
   // MatPaginator Inputs
-  length = 30;
+  length = 40;
   pageSize = 5;
 
   // MatPaginator Output
@@ -28,24 +30,48 @@ export class FilterHotelComponent implements OnInit {
 
 
   fil = new FormGroup({
+    startDate: new FormControl(),
+    endDate: new FormControl(),
+    price: new FormControl(),
     city: new FormControl(),
-    rating: new FormControl()
+    rating: new FormControl(),
+    type: new FormControl()
   });
 
   hotelsPreviews: HotelPreview[]=[];
-
+  isLogin : boolean = false;
 
   constructor(private filterHotelService: FilterHotelService,
-              private router: Router) {
+              private router: Router,
+              private datePipe: DatePipe,
+              private authService: AuthService) {
   }
 
-  public filter(fill: FormGroup, page: number): void {
+  public filter(fil: FormGroup,page: number): void {
+    /*    console.log('fil.value.startDate = ', fil.value.startDate)
+        console.log('fil.value.startDate = ')*/
 
-    this.filterHotelService.filterHotel(fill.value.city, fill.value.rating, page)
+    let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
+    let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
+    let sort ="DESC"
+
+    this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating, sort, page)
       .subscribe((data: HotelPreview[]) => {
-        this.hotelsPreviews = data;
         this.isDataLoaded = true;
+        this.hotelsPreviews = data;
       });
+  }
+
+  public filterAsc(fil: FormGroup,page: number): void {
+    /*    console.log('fil.value.startDate = ', fil.value.startDate)
+        console.log('fil.value.startDate = ')*/
+
+    let startDate = this.datePipe.transform(fil.value.startDate, 'yyyy-MM-dd');
+    let endDate = this.datePipe.transform(fil.value.endDate, 'yyyy-MM-dd');
+    let sort = "ASC";
+
+    this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating, sort, page)
+      .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
   }
 
   logFuncHotel(id: any) {
@@ -54,16 +80,24 @@ export class FilterHotelComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.currentIsLogIn.subscribe(isLogin => this.isLogin = isLogin);
+    if(this.isLogin){
+      this.reloadPage();
+    }
+  }
+  reloadPage(): void {
+    window.location.reload();
   }
 
   isImage: boolean = true;
   public getImageHotel(image: any, hotelId: any): any{
-    if (image) {
+/*    if (image) {
       console.log("raster is OK for hotel : ", hotelId)
     } else if(!image) {
       console.log("raster is null for hotel : ", hotelId)
-    }
+    }*/
     return ("data:image/png;base64," + image);
   }
+
   displayedColumns: string[] = ['photo', 'Name', 'city', 'rating','description'];
 }
