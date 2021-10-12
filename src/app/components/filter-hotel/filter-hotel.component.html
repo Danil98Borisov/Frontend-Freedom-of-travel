@@ -111,10 +111,22 @@
   <tr mat-row *matRowDef="let hotelsPreview; columns: displayedColumns;" (click)="logFuncHotel(hotelsPreview.hotel.id)"></tr>
 </table>
 
-<mat-paginator [length]="length"
+<ng-template [ngIf]="isSortDESC">
+<mat-paginator  [length]="length"
                [pageSize]="pageSize"
                (page)="pageEvent[0] = $event"
                aria-label="Select page"
                (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
                showFirstLastButtons>
 </mat-paginator>
+</ng-template>
+
+<ng-template [ngIf]="!isSortDESC">
+  <mat-paginator  [length]="length"
+                  [pageSize]="pageSize"
+                  (page)="pageEvent[0] = $event"
+                  aria-label="Select page"
+                  (click)="filterAsc(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
+                  showFirstLastButtons>
+  </mat-paginator>
+</ng-template>

@@ -122,6 +122,7 @@ export class DetailsComponent implements OnInit {
           console.log("Apartment booking: " + JSON.stringify(fil.value))
             // @ts-ignore
             this.Message = data.message;
+            this.detailsService.sendEmailToReservation(fil.value.bookingBy).subscribe();
           }
           else{
             this.statusFailed = true;
