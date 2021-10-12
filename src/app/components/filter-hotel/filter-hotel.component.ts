@@ -39,6 +39,7 @@ export class FilterHotelComponent implements OnInit {
 
   hotelsPreviews: HotelPreview[]=[];
   isLogin : boolean = false;
+  isFlag: boolean = true;
 
   constructor(private filterHotelService: FilterHotelService,
               private router: Router,
@@ -55,7 +56,7 @@ export class FilterHotelComponent implements OnInit {
     let sort ="DESC"
 
     this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating, sort, page)
-      .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
+      .subscribe((data: HotelPreview[]) => {this.hotelsPreviews = data, this.isFlag = true});
   }
 
   public filterAsc(fil: FormGroup,page: number): void {
@@ -67,7 +68,7 @@ export class FilterHotelComponent implements OnInit {
     let sort = "ASC";
 
     this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating, sort, page)
-      .subscribe((data: HotelPreview[]) => this.hotelsPreviews = data);
+      .subscribe((data: HotelPreview[]) => {this.hotelsPreviews = data, this.isFlag = false});
   }
 
   logFuncHotel(id: any) {
