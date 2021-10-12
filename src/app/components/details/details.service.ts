@@ -6,6 +6,7 @@ import {tap} from "rxjs/operators";
 import {ApartmentDetails} from "../models/apartmentDetails";
 import {AppApiConst} from "../../app.api.const";
 import {ReservationResponse} from "../models/reservation.response";
+import {Reservation} from "../models/reservation";
 
 @Injectable()
 export class DetailsService {
@@ -18,6 +19,10 @@ export class DetailsService {
 
   getOccupiedApartment(reservationResponse: ReservationResponse): Observable<any> {
     return this.http.post(AppApiConst.RESERVATION_ADD, reservationResponse,this.httpOptions);
+  }
+  public sendEmailToReservation(email: string): Observable<Reservation[]> {
+    const url = `${AppApiConst.EMAIL_TO_RESERVATION}?email=${email}`
+    return this.http.get<Reservation[]>(url);
   }
 
   getDetailsApartmentPage(id: number): Observable<ApartmentDetails> {
