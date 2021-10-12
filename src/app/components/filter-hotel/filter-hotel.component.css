@@ -30,28 +30,11 @@ table {
 }
 
 .mat-row:hover .mat-cell {
-  border-color: currentColor;/
+  border-color: currentColor;
 }
 
 .demo-row-is-clicked {
-  font-weight: bold;/
-}
-
-.example-button-row button,
-.example-button-row a {
-  margin-right: 8px;
-}
-form {
-  margin: 100px;
-  height: 10px;
-  width: 1000px;
-  margin-left: 30%;
-}
-
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+  font-weight: bold;
 }
 
 .example-full-width {
@@ -59,7 +42,6 @@ form {
 }
 
 h1 {
-
   margin: 15px 0;
   font-family: 'Playfair Display', serif;
   font-size: 40px;
@@ -68,12 +50,48 @@ h1 {
   color: #c2a77a;
 }
 
-.sort{
-  margin: 0.2%;
+.hotel-search-title-with-form{
+  text-align: center;
+  margin-top: 3%;
 }
+
+
+.hotel-search-form {
+  width: 100%;
+  margin: 10px 0 10px 0;
+}
+
+.hotel-search-results {
+  margin: 10px 0 0 0;
+}
+
 
 .search-button {
   background-color: #336cffdb;
   color: white;
   margin-left: 10px;
+}
+
+.sort-button {
+  background-color: #336cffdb;
+  color: white;
+  margin-left: 10px;
+}
+
+.hotel-preview-card {
+  width: 70%;
+  margin: 0 0 1% 15%;
+  border: 1px solid #4489ff4f;
+}
+
+.hotel-preview-img {
+  /* fit image to 'div' container */
+  max-width:100%;
+  max-height:100%;
+  border-radius: 10%;
+}
+
+.hotel-preview-text {
+  margin-left: 3%;
+  width: 90%;
 }

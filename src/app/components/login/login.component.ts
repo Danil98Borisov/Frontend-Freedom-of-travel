@@ -73,6 +73,6 @@ export class LoginComponent implements OnInit {
   }
 
   goToHome(): void {
-    this.router.navigate(['/apartment-search']);
+    this.router.navigate(['/filter-hotel']);
   }
 }

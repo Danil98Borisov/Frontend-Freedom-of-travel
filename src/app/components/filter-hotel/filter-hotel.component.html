@@ -1,128 +1,110 @@
-<form >
-  <h1>Find the hotel</h1>
-  <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>City</mat-label>
-    <input matInput formControlName="city">
-    <mat-error *ngIf="fil.controls.city.hasError('matStartDateInvalid')">Invalid city</mat-error>
-  </mat-form-field>
+<div style="display: block">
+  <div class="hotel-search-title-with-form">
+    <h1>Find the hotel</h1>
+    <form class="hotel-search-form">
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city">
+        <mat-error *ngIf="fil.controls.city.hasError('matStartDateInvalid')">Invalid city</mat-error>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>Rating</mat-label>
-    <mat-select formControlName="rating">
-      <mat-option value="1">1</mat-option>
-      <mat-option value="2">2</mat-option>
-      <mat-option value="3">3</mat-option>
-      <mat-option value="4">4</mat-option>
-      <mat-option value="5">5</mat-option>
-      <mat-option value="6">6</mat-option>
-      <mat-option value="7">7</mat-option>
-      <mat-option value="8">8</mat-option>
-      <mat-option value="9">9</mat-option>
-      <mat-option value="10">10</mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>Rating</mat-label>
+        <mat-select formControlName="rating">
+          <mat-option *ngFor="let rating of [0,1,2,3,4,5,6,7,8,9,10]">{{rating}}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>Price</mat-label>
-    <input matInput formControlName="price">
-    <mat-error *ngIf="fil.controls.price.hasError('matStartDateInvalid')">Invalid price</mat-error>
-  </mat-form-field>
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price">
+        <mat-error *ngIf="fil.controls.price.hasError('matStartDateInvalid')">Invalid price</mat-error>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill" [formGroup]="fil">
-    <mat-label>ApartmentType</mat-label>
-    <mat-select formControlName="type">
-      <mat-option value="SINGLE">Single</mat-option>
-      <mat-option value="DOUBLE">Double</mat-option>
-      <mat-option value="TRIPLE">Triple</mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>ApartmentType</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="SINGLE">Single</mat-option>
+          <mat-option value="DOUBLE">Double</mat-option>
+          <mat-option value="TRIPLE">Triple</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Enter a date range</mat-label>
-    <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
-      <input matStartDate formControlName="startDate" placeholder="Start date">
-      <input matEndDate formControlName="endDate" placeholder="End date">
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" placeholder="Start date">
+          <input matEndDate formControlName="endDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
 
-    <mat-error *ngIf="fil.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-    <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-  </mat-form-field>
+        <mat-error *ngIf="fil.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
 
-  <button mat-raised-button class="search-button"
-          (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">
-    Search
-  </button>
-
-
-</form>
-
-<div *ngIf="isDataLoaded">
-  <table mat-table [dataSource]="hotelsPreviews" class="mat-elevation-z8 demo-table">
-<button class="sort" mat-raised-button color="primary" (click)="filterAsc(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">
-  <!--<mat-icon aria-hidden="false" aria-label="Example edit icon">sort alt</mat-icon>-->
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up-alt" viewBox="0 0 16 16">
-    <path d="M3.5 13.5a.5.5 0 0 1-1 0V4.707L1.354 5.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 4.707V13.5zm4-9.5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z"/>
-  </svg>
-  Ascending rating</button>
-<button class="sort" mat-raised-button color="primary" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
-    <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
-  </svg>
-  Descending rating</button>
-
-<table mat-table [dataSource]="hotelsPreviews" class="mat-elevation-z8 demo-table">
-
-    <ng-container matColumnDef="photo">
-      <th mat-header-cell cdkDrag *matHeaderCellDef> Picture</th>
-      <td mat-cell *matCellDef="let element">
-        <ng-template [ngIf]="isImage">
-          <div class="picture-box">
-            <img width="150" height="150" [src]="getImageHotel(element.imageHotel.image, element.hotel.id)">
-          </div>
-        </ng-template>
-        <ng-template [ngIf]="!isImage">
-          <p>No photo</p>
-        </ng-template>
-      </td>
-    </ng-container>
-
-    <!--name Column -->
-    <ng-container matColumnDef="Name">
-      <th mat-header-cell *matHeaderCellDef> Name</th>
-      <td mat-cell *matCellDef="let element"> {{element.hotel.hotelName}} </td>
-    </ng-container>
-
-    <!--city Column -->
-    <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef> City</th>
-      <td mat-cell *matCellDef="let element"> {{element.hotel.city}} </td>
-    </ng-container>
-
-    <!--  rating Column -->
-    <ng-container matColumnDef="rating">
-      <th mat-header-cell *matHeaderCellDef> Rating</th>
-      <td mat-cell *matCellDef="let element"> {{element.hotel.rating}} </td>
-    </ng-container>
-
-    <!--  description Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description</th>
-      <td mat-cell *matCellDef="let element"> {{element.hotel.description}} </td>
-    </ng-container>
-
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <button mat-raised-button class="search-button"
+              (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">
+        Search
+      </button>
+    </form>
+  </div>
+  <div *ngIf="isDataLoaded" class="hotel-search-results">
+    <div style="margin: 10px 0 10px 15%">
+      <button mat-raised-button class="sort-button"
+              (click)="filterAsc(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">
+        <!--<mat-icon aria-hidden="false" aria-label="Example edit icon">sort alt</mat-icon>-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up-alt"
+             viewBox="0 0 16 16">
+          <path
+            d="M3.5 13.5a.5.5 0 0 1-1 0V4.707L1.354 5.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 4.707V13.5zm4-9.5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z"/>
+        </svg>
+        Ascending rating
+      </button>
+      <button mat-raised-button class="sort-button"
+              (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up"
+             viewBox="0 0 16 16">
+          <path
+            d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+        </svg>
+        Descending rating
+      </button>
+    </div>
     <tr mat-row *matRowDef="let hotelsPreview; columns: displayedColumns;"
         (click)="logFuncHotel(hotelsPreview.hotel.id)"></tr>
-  </table>
+    <mat-card class="hotel-preview-card" *ngFor="let hotelPreview of hotelPreviews | async" (click)="logFuncHotel(hotelPreview.hotel.id)">
+      <mat-card-content style="display: flex">
+        <div style="width: 20%">
+          <img class="hotel-preview-img" alt="Hotel preview photo"
+               [src]="getImageHotel(hotelPreview.imageHotel.image)">
+        </div>
+        <div style="width: 70%;">
+          <mat-card-header>
+            <div>
+              <mat-card-title>{{hotelPreview.hotel.hotelName}}</mat-card-title>
+              <mat-card-subtitle>{{hotelPreview.hotel.city}}</mat-card-subtitle>
+            </div>
+          </mat-card-header>
+          <div class="hotel-preview-text">
+            {{hotelPreview.hotel.description}}
+          </div>
+        </div>
+        <div>
+          <div>Rating: {{hotelPreview.hotel.rating}}</div>
+          <mat-card-actions>
+            <button mat-button>Show details</button>
+          </mat-card-actions>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-  <mat-paginator [length]="length"
-                 [pageSize]="pageSize"
-                 (page)="pageEvent[0] = $event"
-                 aria-label="Select page"
-                 (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
-                 showFirstLastButtons>
-  </mat-paginator>
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   (page)="pageEvent[0] = $event"
+                   (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   showFirstLastButtons>
+    </mat-paginator>
+  </div>
 </div>

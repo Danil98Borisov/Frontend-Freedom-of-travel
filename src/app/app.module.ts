@@ -45,7 +45,6 @@ import {authInterceptorProviders} from "./helpers/auth.interceptor";
 import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
 import {VerificationErrorComponent} from "./components/verification-error/verification-error.component";
 import {MatListModule} from "@angular/material/list";
-import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatCardModule} from "@angular/material/card";
 
 
@@ -91,9 +90,8 @@ import {MatCardModule} from "@angular/material/card";
     MatExpansionModule,
     MDBBootstrapModule.forRoot(),
     MatPaginatorModule,
-    MatSnackBarModule
+    MatSnackBarModule,
     MatListModule,
-    FlexLayoutModule,
     MatCardModule
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, authInterceptorProviders],
