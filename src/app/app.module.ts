@@ -45,6 +45,7 @@ import {authInterceptorProviders} from "./helpers/auth.interceptor";
 import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
 import {VerificationErrorComponent} from "./components/verification-error/verification-error.component";
 import {UserManagerComponent} from "./components/user-manager/user-manager.component";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -90,8 +91,8 @@ import {UserManagerComponent} from "./components/user-manager/user-manager.compo
     MatExpansionModule,
     MDBBootstrapModule.forRoot(),
     MatPaginatorModule,
-    MatSnackBarModule
-
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, authInterceptorProviders],
   bootstrap: [AppComponent]
