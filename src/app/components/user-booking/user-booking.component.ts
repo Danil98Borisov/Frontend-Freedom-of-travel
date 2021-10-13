@@ -40,14 +40,12 @@ export class UserBookingComponent implements OnInit {
     }
 }
   public cancel(id: number): void {
-    this.httpService.cancelReservation(id).pipe(map(reservation => this.reservationService.getAllReservationPage()))
-    // @ts-ignore
-    .subscribe((data: Reservation[]) => {
+    this.httpService.cancelReservation(id).subscribe((data: Reservation[]) => {
       this.reservation = data,
-        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.RESERVATION_CANCELED)
+        this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_CANCELED)
     }, error => {
       console.log('error: ', error);
-      this.notificationService.openSnackBarWithoutReload(AppNotificationConst.RESERVATION_NOT_CANCELED)
+      this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_NOT_CANCELED)
     })
   }
 
