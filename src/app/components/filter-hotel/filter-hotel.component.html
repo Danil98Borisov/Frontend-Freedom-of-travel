@@ -98,25 +98,12 @@
         </div>
       </mat-card-content>
     </mat-card>
-
-    <div *ngIf="isSortDESC">
-      <mat-paginator [length]="length"
-                     [pageSize]="pageSize"
-                     (page)="pageEvent[0] = $event"
-                     aria-label="Select page"
-                     (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
-                     showFirstLastButtons>
-      </mat-paginator>
-    </div>
-
-    <div *ngIf="!isSortDESC">
-      <mat-paginator [length]="length"
-                     [pageSize]="pageSize"
-                     (page)="pageEvent[0] = $event"
-                     aria-label="Select page"
-                     (click)="filterAsc(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
-                     showFirstLastButtons>
-      </mat-paginator>
-    </div>
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   (page)="pageEvent[0] = $event; handlePageEvent($event)"
+                   aria-label="Select page"
+                   (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0);"
+                   showFirstLastButtons>
+    </mat-paginator>
   </div>
 </div>
