@@ -7,8 +7,11 @@ export class Reservation {
     public hotel?: Hotel,
     public apartment?: Apartment,
     public status?: string,
-    public start_date?: string,
-    public end_date?: string,
+    public startDate?: string,
+    public endDate?: string,
+    public reservationDate?: string,
+    public modifiedWhen?: string,
+    public modifiedBy?: string,
   ) {
   }
 }

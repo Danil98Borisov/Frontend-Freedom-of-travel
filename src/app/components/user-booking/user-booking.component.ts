@@ -40,7 +40,8 @@ export class UserBookingComponent implements OnInit {
     }
 }
   public cancel(id: number): void {
-    this.httpService.cancelReservation(id).pipe(map(reservation => this.reservationService.getAllReservationPage()))
+    const cancelledBy = this.userService.getEmail();
+    this.httpService.cancelReservation(id, cancelledBy).pipe(map(reservation => this.httpService.getAllReservationUser(cancelledBy)))
     // @ts-ignore
     .subscribe((data: Reservation[]) => {
       this.reservation = data,
@@ -51,6 +52,5 @@ export class UserBookingComponent implements OnInit {
     })
   }
 
-
-  displayedColumns: string[] = ['Id', 'Hotel Name', 'Apartment Name', 'Status', 'Start date', 'End date', 'Email', 'Actions'];
+  displayedColumns: string[] = ['Id', 'Hotel Name', 'Apartment Name', 'Status', 'Start date', 'End date',  'Reservation date', 'Email', 'Actions'];
 }
