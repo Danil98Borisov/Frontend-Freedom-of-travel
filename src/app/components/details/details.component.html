@@ -14,19 +14,22 @@
 </div>
 <div class="block">
   <ul>
-    <button *ngIf="this.userService.isAdmin() || this.userService.isAdvertiser()" type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#exampleModal" mat-raised-button color="primary" >
+    <button *ngIf="this.userService.isAdmin() || this.userService.isAdvertiser()" type="button" class="button-edit" data-bs-toggle="modal"  data-bs-target="#exampleModal" mat-raised-button >
       <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
     </button>
 
-    <p>
-      Description of the apartments: {{details.apartment?.description}}
-    </p>
-    <p>
-      Apartment type: {{details.apartment?.type?.name}}
-    </p>
-    <p>
-      Price: {{details.apartment?.price}} $
-    </p>
+    <div class="detail-item">
+      <div style="font-weight: bold;">Description of the apartments: </div>
+      <div>{{details.apartment?.description}}</div>
+    </div>
+    <div class="detail-item">
+      <div style="font-weight: bold;">Apartment type:</div>
+      <div>{{details.apartment?.type?.name}}</div>
+    </div>
+    <div class="detail-item">
+      <div style="font-weight: bold;">Price:</div>
+      <div>{{details.apartment?.price}} $</div>
+    </div>
 
     <!--CHANGES TO APARTMENT PARAMETERS-->
 
@@ -94,7 +97,7 @@
 
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="bookingApartment(fil)">To Book
+      <button mat-raised-button class="button-book" (click)="bookingApartment(fil)">To Book
       </button>
 
       <div class="alert alert-warning" *ngIf="statusFailed">

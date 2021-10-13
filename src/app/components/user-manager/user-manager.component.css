@@ -14,3 +14,9 @@ table {
 .mat-header-cell {
   text-align: center;
 }
+
+.manage-user-button {
+  background-color: #21449fdb;
+  color: white;
+  margin-left: 10px;
+}

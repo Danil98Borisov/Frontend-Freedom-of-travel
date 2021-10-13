@@ -1,3 +1,16 @@
 table {
-  width: 100%;
+  width: 50%;
+  margin: 5% 10% 0 25%;
+  text-align: center
+}
+
+.mat-header-cell {
+  text-align: center;
+  color: #000000;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.mat-header-cell {
+  text-align: center;
 }

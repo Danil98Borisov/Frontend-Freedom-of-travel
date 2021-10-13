@@ -14,13 +14,21 @@
 </div>
 <div class="block">
   <ul>
-
-    <p>Description of the Hotel: {{detailsHotel.hotel?.description}}</p>
-    <p>Hotel rating: {{detailsHotel.hotel?.rating}}</p>
-    <p>City: {{detailsHotel.hotel?.city}}</p>
+    <div class="detail-item">
+      <div style="font-weight: bold;">Description of the Hotel:</div>
+      <div>{{detailsHotel.hotel?.description}}</div>
+    </div>
+    <div class="detail-item">
+      <div style="font-weight: bold;">Hotel rating:</div>
+      <div>{{detailsHotel.hotel?.rating}}</div>
+    </div>
+    <div class="detail-item">
+      <div style="font-weight: bold;">City:</div>
+      <div>{{detailsHotel.hotel?.city}}</div>
+    </div>
 
     <button *ngIf="isFlag || this.userService.isAdmin()" type="button"
-            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" mat-raised-button color="primary">
+            class="button-edit" data-bs-toggle="modal" data-bs-target="#exampleModal" mat-raised-button>
       <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
     </button>
 

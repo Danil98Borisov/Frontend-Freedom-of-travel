@@ -14,3 +14,16 @@ table {
 .mat-header-cell {
   text-align: center;
 }
+
+.manage-hotel-button {
+  color: white;
+  margin-left: 10px;
+}
+
+.manage-hotel-button.details {
+  background-color: #808081db;
+}
+
+.manage-hotel-button.delete {
+  background-color: #870f06db;
+}
