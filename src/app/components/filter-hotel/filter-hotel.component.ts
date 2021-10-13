@@ -30,15 +30,6 @@ export class FilterHotelComponent implements OnInit, AfterViewInit {
 
   isDataLoaded = false;
 
-  // @ts-ignore
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  // @ts-ignore
-  hotelPreviews: Observable<HotelPreview[]>;
-  dataSource: MatTableDataSource<HotelPreview> = new MatTableDataSource<HotelPreview>([]);
-  hotelsPreviews: HotelPreview[] = [];
-
-  isDataLoaded = false;
-
   // MatPaginator Inputs
   length = 30;
   pageSize = 5;
