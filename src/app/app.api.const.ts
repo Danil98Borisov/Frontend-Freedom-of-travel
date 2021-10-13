@@ -27,6 +27,7 @@ export class AppApiConst {
   public static HOTEL_PREVIEW_FIND = AppApiConst.API_ENDPOINT + '/hotelPreview/find/preview';
 
   public static RESERVATION_ALL = AppApiConst.API_ENDPOINT + '/reservation/all';
+  public static RESERVATION_ALL_PAGINATED = AppApiConst.API_ENDPOINT + '/reservation/all/paginated';
   public static RESERVATION_ADD = AppApiConst.API_ENDPOINT + '/reservation/add';
   public static RESERVATION_CANCEL = AppApiConst.API_ENDPOINT + '/reservation/cancel';
   public static EMAIL_TO_RESERVATION = AppApiConst.API_ENDPOINT +'/reservation-user-email';

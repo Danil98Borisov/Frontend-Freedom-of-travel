@@ -16,4 +16,9 @@ export class ReservationService {
     return this.http.get<Reservation[]>(AppApiConst.RESERVATION_ALL);
   }
 
+  public getAllReservationsPaginated(pageNum: number, pageSize: number): Observable<Reservation[]> {
+    console.log("getAllReservationPage invoked");
+    return this.http.get<Reservation[]>(AppApiConst.RESERVATION_ALL_PAGINATED + '?pageNumber=' + pageNum + '&pageSize=' + pageSize);
+  }
+
 }
