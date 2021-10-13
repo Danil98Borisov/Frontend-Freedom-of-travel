@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {AppApiConst} from "../../app.api.const";
 import {tap} from "rxjs/operators";
 import {Hotel} from "../models/hotel";
+import {User} from "../models/user";
 
 @Injectable()
 export class HotelManagementService {
@@ -32,6 +33,11 @@ export class HotelManagementService {
         console.log('error: ', error);
       })
     );
+  }
+
+  public getAllHotelsPaginated(pageNum: number, pageSize: number): Observable<Hotel[]> {
+    console.log("getAllHotelPage invoked");
+    return this.http.get<Hotel[]>(AppApiConst.HOTEL_ALL_PAGINATED + '?pageNumber=' + pageNum + '&pageSize=' + pageSize);
   }
 
 }

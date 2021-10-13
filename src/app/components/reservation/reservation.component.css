@@ -14,3 +14,9 @@ table {
 .mat-header-cell {
   text-align: center;
 }
+
+.pagi{
+  width: 50%;
+  margin: 1% 5% 0 25%;
+  text-align: center
+}

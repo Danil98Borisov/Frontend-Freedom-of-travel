@@ -1,5 +1,4 @@
-<table mat-table [dataSource]="reservation" class="mat-elevation-z8">
-
+<table mat-table [dataSource]="reservations" class="mat-elevation-z8">
   <!-- id Column -->
   <ng-container matColumnDef="Id">
     <th mat-header-cell *matHeaderCellDef>Id</th>
@@ -66,3 +65,12 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<mat-paginator class="pagi" [length]="length"
+               [pageSize]="pageSize"
+               (page)="pageEvent[0] = $event"
+               [pageSizeOptions]="[10]"
+               aria-label="Select page"
+               (click)="getReservationsPaginated(pageEvent[0]? pageEvent[0].pageIndex: 0)"
+               showFirstLastButtons>
+</mat-paginator>

@@ -27,3 +27,9 @@ table {
 .manage-hotel-button.delete {
   background-color: #870f06db;
 }
+
+.pagi{
+  width: 50%;
+  margin: 5% 10% 0 25%;
+  text-align: center
+}

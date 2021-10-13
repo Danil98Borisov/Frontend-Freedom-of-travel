@@ -20,3 +20,9 @@ table {
   color: white;
   margin-left: 10px;
 }
+
+.pagi{
+  width: 50%;
+  margin: 5% 10% 0 25%;
+  text-align: center
+}
