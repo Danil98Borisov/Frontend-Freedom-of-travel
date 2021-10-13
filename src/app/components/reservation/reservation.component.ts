@@ -19,5 +19,6 @@ export class ReservationComponent implements OnInit {
     this.httpService.getAllReservationPage().subscribe((data: Reservation[]) => this.reservation = data);
   }
 
-  displayedColumns: string[] = ['Id',  'Apartment Type', 'Status', 'Start Date', 'End Date', 'Email'];
+  displayedColumns: string[] = ['Id',  'Apartment Type', 'Status', 'Start Date', 'End Date',
+    'Reservation date', 'Modified When', 'Modified By', 'Email'];
 }
