@@ -8,7 +8,7 @@ import {ApartmentComponent} from "./components/apartment/apartment.component";
 import {AddHotelComponent} from 'src/app/components/add-hotel/add-hotel.component';
 import {HotelComponent} from 'src/app/components/hotel/hotel.component';
 import {EditHotelComponent} from "./components/edit-hotel/edit-hotel.component";
-import {FilterComponent} from "./components/filter/filter.component";
+import {ApartmentSearchComponent} from "./components/apartment-search/apartment-search.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {LoginComponent} from "./components/login/login.component";
 import {HotelPreviewComponent} from "./components/hotel-preview/hotel-preview.component";
@@ -44,6 +44,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
 import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
 import {VerificationErrorComponent} from "./components/verification-error/verification-error.component";
+import {MatListModule} from "@angular/material/list";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -55,7 +57,7 @@ import {VerificationErrorComponent} from "./components/verification-error/verifi
     ReservationComponent,
     HotelComponent,
     EditHotelComponent,
-    FilterComponent,
+    ApartmentSearchComponent,
     DetailsComponent,
     ApartmentPreviewComponent,
     HotelPreviewComponent,
@@ -88,8 +90,9 @@ import {VerificationErrorComponent} from "./components/verification-error/verifi
     MatExpansionModule,
     MDBBootstrapModule.forRoot(),
     MatPaginatorModule,
-    MatSnackBarModule
-
+    MatSnackBarModule,
+    MatListModule,
+    MatCardModule
   ],
   providers: [DatePipe, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, authInterceptorProviders],
   bootstrap: [AppComponent]

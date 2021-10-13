@@ -1,0 +1,99 @@
+<div style="text-align: center; margin-top: 5%">
+  <p class="search-title">Find deals on hotels, homes and much more..</p>
+  <form style="width: 100%;">
+    <div>
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city">
+        <mat-error *ngIf="fil.controls.city.hasError('matStartDateInvalid')">Invalid city</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>Rating</mat-label>
+        <mat-select formControlName="rating">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="5">5</mat-option>
+          <mat-option value="6">6</mat-option>
+          <mat-option value="7">7</mat-option>
+          <mat-option value="8">8</mat-option>
+          <mat-option value="9">9</mat-option>
+          <mat-option value="10">10</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price">
+        <mat-error *ngIf="fil.controls.price.hasError('matStartDateInvalid')">Invalid price</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" [formGroup]="fil">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="SINGLE">Single</mat-option>
+          <mat-option value="DOUBLE">Double</mat-option>
+          <mat-option value="TRIPLE">Triple</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="fil" [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" placeholder="Start date">
+          <input matEndDate formControlName="endDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-error *ngIf="fil.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="fil.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button class="search-button" (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)">
+        Search
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="isDataLoaded">
+  <mat-card class="hotel-preview-card">
+    <mat-card-content style="display: flex">
+      <div style="width: 20%">
+        <img class="hotel-preview-img"
+             src="https://pix8.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?s=1024x768"
+             alt="Hotel preview photo">
+      </div>
+      <div>
+        <mat-card-header>
+          <div>
+            <mat-card-title>Apartment</mat-card-title>
+            <mat-card-subtitle>City</mat-card-subtitle>
+            <!--<div mat-card-avatar class="example-header-image"></div>-->
+          </div>
+        </mat-card-header>
+        <div class="hotel-preview-text">
+          Built in 2016, L Hotel is a distinct addition to Khon Kaen and a smart choice for travelers.
+          From here, guests can enjoy easy access to all that the lively city has to offer.
+          With its convenient location, the hotel offers easy access to the city's must-see destinations.
+        </div>
+      </div>
+      <div>
+        <div>Rating</div>
+        <mat-card-actions>
+          <button mat-button>Show details</button>
+        </mat-card-actions>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 (page)="pageEvent[0] = $event"
+                 aria-label="Select page"
+                 (click)="filter(fil,pageEvent[0]? pageEvent[0].pageIndex: 0)"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>

@@ -10,9 +10,9 @@ import {HotelPreview} from "../models/hotelPreview";
 
 
 @Injectable()
-export class FilterService {
-   constructor(private http: HttpClient) {
-   }
+export class ApartmentSearchService {
+  constructor(private http: HttpClient) {
+  }
 
    httpOptions = {
      headers: new HttpHeaders({'Content-Type': 'application/json'})
