@@ -10,5 +10,7 @@ export class AppNotificationConst {
   public static HOTEL_NOT_BEEN_REMOVED = "Hotel NOT been removed"
   public static HOTEL_ADDED = "Hotel added"
   public static HOTEL_NOT_ADDED = "Hotel NOT added"
+  public static USER_ADMIN = "User admin"
+  public static USER_NOT_ADMIN = "User NOT admin"
 
 }
