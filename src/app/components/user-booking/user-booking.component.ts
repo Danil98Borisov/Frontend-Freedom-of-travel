@@ -6,12 +6,14 @@ import {UserService} from "../../services/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NotificationService} from "../../services/notification.service";
 import {AppNotificationConst} from "../../app.notification.const";
+import {map} from "rxjs/operators";
+import {ReservationService} from "../reservation/reservation.service";
 
 @Component({
   selector: 'app-user-booking',
   styleUrls: ['user-booking.component.css'],
   templateUrl: 'user-booking.component.html',
-  providers: [UserBookingService,NotificationService]
+  providers: [UserBookingService,NotificationService,ReservationService]
 })
 export class UserBookingComponent implements OnInit {
 
@@ -21,7 +23,8 @@ export class UserBookingComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private _snackBar: MatSnackBar,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private reservationService: ReservationService) {
   }
 
   ngOnInit() {
@@ -37,12 +40,14 @@ export class UserBookingComponent implements OnInit {
     }
 }
   public cancel(id: number): void {
-    this.httpService.cancelReservation(id).subscribe((data: Reservation[]) => {
+    this.httpService.cancelReservation(id).pipe(map(reservation => this.reservationService.getAllReservationPage()))
+    // @ts-ignore
+    .subscribe((data: Reservation[]) => {
       this.reservation = data,
-        this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_CANCELED)
+        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.RESERVATION_CANCELED)
     }, error => {
       console.log('error: ', error);
-      this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_NOT_CANCELED)
+      this.notificationService.openSnackBarWithoutReload(AppNotificationConst.RESERVATION_NOT_CANCELED)
     })
   }
 
