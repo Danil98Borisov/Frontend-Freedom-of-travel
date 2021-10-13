@@ -22,10 +22,11 @@ img {
 h2 {
   margin: 15px 0;
   font-family: 'Playfair Display', serif;
-  font-size: 30px;
+  font-size: 35px;
   text-align: center;
   letter-spacing: 2px;
-  color: #8a2db3;
+  color: black;
+  font-weight: bold;
 }
 
 h3 {
@@ -57,9 +58,8 @@ p {
   margin: 15px 0;
   font-family: 'Playfair Display', serif;
   font-size: 26px;
-  text-align: center;
   letter-spacing: 2px;
-  color: #8a2db3;
+  color: black;
 }
 
 /*Блок описания*/
@@ -130,7 +130,7 @@ p {
   margin: 15px 0;
   font-family: 'Playfair Display', serif;
   font-size: 20px;
-  text-align: center;
+  font-weight: bold;
   letter-spacing: 2px;
   color: #c2a77a;
 }
@@ -141,3 +141,17 @@ table {
   margin-right: auto;
 }
 
+.button-edit {
+   background-color: #336cffdb;
+   color: white;
+   margin-left: 10px;
+ }
+
+.detail-item {
+  display: flex;
+  margin: 15px 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  letter-spacing: 2px;
+  color: black;
+}

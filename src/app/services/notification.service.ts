@@ -8,9 +8,15 @@ export class NotificationService {
 
   openSnackBar(message: string) {
     let close = "Close";
-      this._snackBar.open(message, close);
+      this._snackBar.open(message, close, {duration: 3000});
     setTimeout(function () {
       window.location.reload(true);
     }, 500)
   }
+
+  openSnackBarWithoutReload(message: string) {
+    let close = "Close";
+    this._snackBar.open(message, close, {duration: 3000});
+  }
+
 }

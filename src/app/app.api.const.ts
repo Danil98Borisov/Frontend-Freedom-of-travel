@@ -40,4 +40,5 @@ export class AppApiConst {
 
   public static USER_NON_ADMINS = AppApiConst.API_ENDPOINT + '/user/all-non-admin';
   public static USER_UPDATE_ROLES_ADMIN = AppApiConst.API_ENDPOINT + '/user/make-admin';
+  public static USER_ALL = AppApiConst.API_ENDPOINT + '/user/all';
 }

@@ -80,11 +80,11 @@ export class DetailsComponent implements OnInit {
         .subscribe(editedApartment => {
           console.log("Апартамент изменён: ", editedApartment);
           this.details.apartment = editedApartment.apartment;
-          this.notificationService.openSnackBar(AppNotificationConst.APARTMENT_EDITED)
+          this.notificationService.openSnackBarWithoutReload(AppNotificationConst.APARTMENT_EDITED)
 
         }, error => {
           console.log('error: ', error);
-          this.notificationService.openSnackBar(AppNotificationConst.APARTMENT_NOT_EDITED)
+          this.notificationService.openSnackBarWithoutReload(AppNotificationConst.APARTMENT_NOT_EDITED)
 
         });
     }

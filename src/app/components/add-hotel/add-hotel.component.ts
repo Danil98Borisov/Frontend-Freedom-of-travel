@@ -24,10 +24,10 @@ export class AddHotelComponent {
     return this.http.put<Hotel>(AppApiConst.HOTEL_ADD, hotel)
       .subscribe(hotel => {
         console.log("Отель добавлен: ", hotel);
-        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_ADDED)
+        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.HOTEL_ADDED)
       }, error => {
         console.log('error: ', error);
-        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_NOT_ADDED)
+        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.HOTEL_NOT_ADDED)
       });
 
   }

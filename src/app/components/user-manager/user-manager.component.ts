@@ -13,7 +13,7 @@ import {AppNotificationConst} from "../../app.notification.const";
   providers: [UserManagerService,NotificationService]
 })
 export class UserManagerComponent implements OnInit {
-  user: User[]=[]
+  users: User[]=[]
 
   constructor(private httpService: UserManagerService,
               private notificationService: NotificationService
@@ -21,18 +21,23 @@ export class UserManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.httpService.getAllUser().subscribe((data: User[]) => this.user = data);
+    this.httpService.getAllUser().subscribe((data: User[]) => {
+      this.users = data;
+      console.log(JSON.stringify(data));
+    });
+  }
 
-}
   public roleAdmin(id: number): void {
-    this.httpService.adminRole(id).subscribe((data: User[]) => {
-      this.user = data,
-        this.notificationService.openSnackBar(AppNotificationConst.USER_ADMIN)
+    this.httpService.adminRole(id).subscribe((data: User) => {
+      this.notificationService.openSnackBarWithoutReload(AppNotificationConst.USER_ADMIN)
+      return this.httpService.getAllUser().subscribe((data: User[]) => {
+        this.users = data;
+      });
     }, error => {
       console.log('error: ', error);
-      this.notificationService.openSnackBar(AppNotificationConst.USER_NOT_ADMIN)
+      this.notificationService.openSnackBarWithoutReload(AppNotificationConst.USER_NOT_ADMIN)
     })
   }
 
-  displayedColumns: string[] = ['id', 'username','email'];
+  displayedColumns: string[] = ['Id', 'Name','Email', 'Role', 'Actions'];
 }

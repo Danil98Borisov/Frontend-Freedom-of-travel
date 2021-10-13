@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
 
   public username: string = '';
   public token: string = '';
-
   constructor(private userService: UserService,
               private authService: AuthService){}
 
@@ -33,4 +32,5 @@ export class AppComponent implements OnInit {
     this.authService.signOut();
     window.location.reload();
   }
+
 }

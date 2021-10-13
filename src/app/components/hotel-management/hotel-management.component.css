@@ -1,3 +1,29 @@
 table {
-  width: 100%;
+  width: 50%;
+  margin: 5% 10% 0 25%;
+  text-align: center
+}
+
+.mat-header-cell {
+  text-align: center;
+  color: #000000;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+
+.manage-hotel-button {
+  color: white;
+  margin-left: 10px;
+}
+
+.manage-hotel-button.details {
+  background-color: #808081db;
+}
+
+.manage-hotel-button.delete {
+  background-color: #870f06db;
 }

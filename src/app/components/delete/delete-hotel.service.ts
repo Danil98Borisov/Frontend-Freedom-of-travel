@@ -31,10 +31,10 @@ export class DeleteHotelService {
     return this.http.delete<Hotel>(url, this.httpOptions).pipe(
       tap(hotel => {
         console.log("Отель удалён: ", hotel);
-        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_BEEN_REMOVED)
+        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.HOTEL_BEEN_REMOVED)
       }, error => {
         console.log('error: ', error);
-        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_NOT_BEEN_REMOVED)
+        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.HOTEL_NOT_BEEN_REMOVED)
       })
     );
 

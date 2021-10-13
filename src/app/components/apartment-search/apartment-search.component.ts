@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FilterService} from './filter.service';
+import {Apartment} from "../models/apartment";
+import {ApartmentSearchService} from './apartment-search.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {Router} from "@angular/router";
@@ -14,11 +15,13 @@ import {HotelPreview} from "../models/hotelPreview";
 
 @Component({
   selector: 'app-filter',
-  templateUrl: 'filter.component.html',
-  styleUrls: ['filter.component.css'],
-  providers: [FilterService,ApartmentService, DetailsComponent, DetailsService, ApartmentPreviewService]
+  templateUrl: 'apartment-search.component.html',
+  styleUrls: ['apartment-search.component.css'],
+  providers: [ApartmentSearchService,ApartmentService, DetailsComponent, DetailsService, ApartmentPreviewService]
 })
-export class FilterComponent implements OnInit {
+export class ApartmentSearchComponent implements OnInit {
+
+  isDataLoaded: boolean =  false;
 
 
     // MatPaginator Inputs
@@ -42,11 +45,11 @@ export class FilterComponent implements OnInit {
     hotelsPreviews: HotelPreview[]=[];
 
 
-    constructor(private filterService: FilterService,
-                private datePipe: DatePipe,
-                private router: Router,
-                private authService: AuthService) {
-    }
+  constructor(private filterService: ApartmentSearchService,
+              private datePipe: DatePipe,
+              private router: Router,
+              private authService: AuthService) {
+  }
 
 
     public filter(fil: FormGroup,page: number): void {

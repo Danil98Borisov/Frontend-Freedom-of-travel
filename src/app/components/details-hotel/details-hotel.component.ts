@@ -83,10 +83,10 @@ export class DetailsHotelComponent implements OnInit {
       .subscribe(editedHotel => {
         console.log("Отель изменён: ", editedHotel);
         this.detailsHotel.hotel = editedHotel.hotel;
-        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_EDITED)
+        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.HOTEL_EDITED)
       }, error => {
         console.log('error: ', error);
-        this.notificationService.openSnackBar(AppNotificationConst.HOTEL_NOT_EDITED)
+        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.HOTEL_NOT_EDITED)
       });
   }
 
