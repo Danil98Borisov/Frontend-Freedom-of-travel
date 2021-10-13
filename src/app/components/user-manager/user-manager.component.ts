@@ -5,6 +5,7 @@ import {UserManagerService} from "./user-manager.service";
 import {User} from "../models/user";
 import {Reservation} from "../models/reservation";
 import {AppNotificationConst} from "../../app.notification.const";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-user-manager',
@@ -14,6 +15,13 @@ import {AppNotificationConst} from "../../app.notification.const";
 })
 export class UserManagerComponent implements OnInit {
   users: User[]=[]
+
+  // MatPaginator Inputs
+  length = 10;
+  pageSize = 10;
+
+  // MatPaginator Output
+  pageEvent: PageEvent[]=[];
 
   constructor(private httpService: UserManagerService,
               private notificationService: NotificationService
@@ -25,6 +33,13 @@ export class UserManagerComponent implements OnInit {
       this.users = data;
       console.log(JSON.stringify(data));
     });
+    this.httpService.getAllUsersPaginated(0, this.pageSize)
+      .subscribe((data: User[]) => this.users = data);
+  }
+
+  getUsersPaginated(pageNumber: number) {
+    this.httpService.getAllUsersPaginated(pageNumber, this.pageSize)
+      .subscribe((data: Reservation[]) => this.users = data);
   }
 
   public roleAdmin(id: number): void {

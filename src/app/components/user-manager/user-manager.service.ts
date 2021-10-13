@@ -26,4 +26,9 @@ export class UserManagerService {
     );
   }
 
+  public getAllUsersPaginated(pageNum: number, pageSize: number): Observable<User[]> {
+    console.log("getAllUserPage invoked");
+    return this.http.get<User[]>(AppApiConst.USER_ALL_PAGINATED + '?pageNumber=' + pageNum + '&pageSize=' + pageSize);
+  }
+
 }

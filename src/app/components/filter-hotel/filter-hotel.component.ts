@@ -31,7 +31,7 @@ export class FilterHotelComponent implements OnInit, AfterViewInit {
   isDataLoaded = false;
 
   // MatPaginator Inputs
-  length = 30;
+  length = 60;
   pageSize = 5;
 
   // MatPaginator Output
