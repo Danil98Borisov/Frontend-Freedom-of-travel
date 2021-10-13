@@ -1,4 +1,5 @@
-<table mat-table [dataSource]="reservations" class="mat-elevation-z8">
+<table mat-table [dataSource]="reservation" class="mat-elevation-z8">
+
   <!-- id Column -->
   <ng-container matColumnDef="Id">
     <th mat-header-cell *matHeaderCellDef>Id</th>
@@ -9,6 +10,18 @@
   <ng-container matColumnDef="Apartment Type">
     <th mat-header-cell *matHeaderCellDef>Apartment Type</th>
     <td mat-cell *matCellDef="let element">{{element.apartment.type.name}} </td>
+  </ng-container>
+
+  <!-- Hotel name Column -->
+  <ng-container matColumnDef="Hotel name">
+    <th mat-header-cell *matHeaderCellDef>Hotel name</th>
+    <td mat-cell *matCellDef="let element">{{element.apartment.hotel.hotelName}} </td>
+  </ng-container>
+
+  <!-- Hotel city Column -->
+  <ng-container matColumnDef="City">
+    <th mat-header-cell *matHeaderCellDef>City</th>
+    <td mat-cell *matCellDef="let element">{{element.apartment.hotel.city}} </td>
   </ng-container>
 
   <!-- status Column -->
@@ -53,12 +66,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-<mat-paginator [length]="length"
-               [pageSize]="pageSize"
-               (page)="pageEvent[0] = $event"
-               [pageSizeOptions]="[10]"
-               aria-label="Select page"
-               (click)="getReservationsPaginated(pageEvent[0]? pageEvent[0].pageIndex: 0)"
-               showFirstLastButtons>
-</mat-paginator>

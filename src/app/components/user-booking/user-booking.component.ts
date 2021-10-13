@@ -41,7 +41,7 @@ export class UserBookingComponent implements OnInit {
 }
   public cancel(id: number): void {
     const cancelledBy = this.userService.getEmail();
-    this.httpService.cancelReservation(id, cancelledBy).pipe(map(reservation => this.reservationService.getAllReservationPage()))
+    this.httpService.cancelReservation(id, cancelledBy).pipe(map(reservation => this.httpService.getAllReservationUser(cancelledBy)))
     // @ts-ignore
     .subscribe((data: Reservation[]) => {
       this.reservation = data,
