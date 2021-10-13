@@ -14,7 +14,7 @@ export class UserManagerService {
   }
 
   public getAllUser(): Observable<User[]> {
-    return this.http.get<User[]>(AppApiConst.USER_ALL);
+    return this.http.get<User[]>(AppApiConst.USER_NON_ADMINS);
   }
   adminRole(id: number){
     return this.http.get<User[]>(AppApiConst.USER_UPDATE_ROLES_ADMIN+"/" + `${id}`).pipe(

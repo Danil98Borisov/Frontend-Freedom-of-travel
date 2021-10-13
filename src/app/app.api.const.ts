@@ -38,6 +38,6 @@ export class AppApiConst {
   public static HOTEL_MANAGEMENT = AppApiConst.API_ENDPOINT + '/hotel/manage-hotel';
   public static HOTEL_MANAGEMENT_ALL = AppApiConst.API_ENDPOINT + '/hotel/manage-hotel/all';
 
-  public static USER_ALL = AppApiConst.API_ENDPOINT + '/user/all';
-  public static USER_UPDATE_ROLES_ADMIN = AppApiConst.API_ENDPOINT + '/user/update-roleAdmin';
+  public static USER_NON_ADMINS = AppApiConst.API_ENDPOINT + '/user/all-non-admin';
+  public static USER_UPDATE_ROLES_ADMIN = AppApiConst.API_ENDPOINT + '/user/make-admin';
 }
