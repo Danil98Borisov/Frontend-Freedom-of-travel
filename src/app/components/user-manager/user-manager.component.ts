@@ -21,18 +21,20 @@ export class UserManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.httpService.getAllUser().subscribe((data: User[]) => this.user = data);
-
+    this.httpService.getAllUser().subscribe((data: User[]) => {
+      this.user = data;
+      console.log(JSON.stringify(data));
+    });
 }
   public roleAdmin(id: number): void {
     this.httpService.adminRole(id).subscribe((data: User[]) => {
-      this.user = data,
-        this.notificationService.openSnackBar(AppNotificationConst.USER_ADMIN)
+      this.user = data;
+      this.notificationService.openSnackBar(AppNotificationConst.USER_ADMIN)
     }, error => {
       console.log('error: ', error);
       this.notificationService.openSnackBar(AppNotificationConst.USER_NOT_ADMIN)
     })
   }
 
-  displayedColumns: string[] = ['id', 'username','email'];
+  displayedColumns: string[] = ['Id', 'Name','Email', 'Role', 'Actions'];
 }
