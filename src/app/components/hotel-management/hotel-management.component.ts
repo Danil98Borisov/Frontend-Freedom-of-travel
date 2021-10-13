@@ -6,6 +6,8 @@ import {Hotel} from "../models/hotel";
 import {DeleteHotelService} from "../delete/delete-hotel.service";
 import {NotificationService} from "../../services/notification.service";
 import {map} from "rxjs/operators";
+import {PageEvent} from "@angular/material/paginator";
+import {Reservation} from "../models/reservation";
 
 @Component({
   selector: 'app-user-booking',
@@ -16,6 +18,12 @@ import {map} from "rxjs/operators";
 export class HotelManagementComponent implements OnInit {
 
   hotels: Hotel[] = [];
+  // MatPaginator Inputs
+  length = 40;
+  pageSize = 10;
+
+  // MatPaginator Output
+  pageEvent: PageEvent[]=[];
 
   constructor(private httpService: HotelManagementService,
               private activatedRoute: ActivatedRoute,
@@ -34,7 +42,13 @@ export class HotelManagementComponent implements OnInit {
           //console.log("data" + JSON.stringify(data));
           this.hotels = data
         });
+
+      this.httpService.getAllHotelsPaginated(0, this.pageSize)
+        .subscribe((data: Hotel[]) => this.hotels = data);
     }
+
+
+
 
     if (this.userService.isLoggedIn() && this.userService.isAdmin()) {
       const email = this.userService.getEmail();
@@ -49,6 +63,10 @@ export class HotelManagementComponent implements OnInit {
         });
     }
 }
+  getHotelsPaginated(pageNumber: number) {
+    this.httpService.getAllHotelsPaginated(pageNumber, this.pageSize)
+      .subscribe((data: Hotel[]) => this.hotels = data);
+  }
 
   logFunc(id: any) {
     console.log("Hi, I'm hotelPreviews " + id);
