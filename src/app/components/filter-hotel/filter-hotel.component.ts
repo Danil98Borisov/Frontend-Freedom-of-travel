@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {FilterHotelService} from './filter-hotel.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HotelPreview} from "../models/hotelPreview";
@@ -19,14 +19,14 @@ import {Observable} from "rxjs";
   styleUrls: ['filter-hotel.component.css'],
   providers: [FilterHotelService, HotelService, DetailsHotelComponent, DetailsHotelService, HotelPreviewService]
 })
-export class FilterHotelComponent implements OnInit {
+export class FilterHotelComponent implements OnInit, AfterViewInit {
 
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
   hotelPreviews: Observable<HotelPreview[]>;
-  dataSource: MatTableDataSource<HotelPreview> = new MatTableDataSource<HotelPreview>([]);
   hotelsPreviews: HotelPreview[] = [];
+  dataSource: MatTableDataSource<HotelPreview> = new MatTableDataSource<HotelPreview>(this.hotelsPreviews);
 
   isDataLoaded = false;
 
@@ -64,6 +64,10 @@ export class FilterHotelComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator
+  }
+
   ngOnDestroy() {
     if (this.dataSource) {
       this.dataSource.disconnect();
@@ -83,10 +87,10 @@ export class FilterHotelComponent implements OnInit {
         this.hotelsPreviews = data;
         this.isSortDESC = true;
         this.isDataLoaded = true;
-        this.changeDetectorRef.detectChanges();
+
         this.dataSource = new MatTableDataSource<HotelPreview>(this.hotelsPreviews);
-        this.dataSource.paginator = this.paginator;
         this.hotelPreviews = this.dataSource.connect();
+        this.changeDetectorRef.detectChanges();
       });
   }
 
@@ -101,12 +105,12 @@ export class FilterHotelComponent implements OnInit {
     this.filterHotelService.filterHotel(fil.value.price, fil.value.type, startDate, endDate, fil.value.city, fil.value.rating, sort, page)
       .subscribe((data: HotelPreview[]) => {
         this.hotelsPreviews = data;
-        this.isSortDESC = false;
+        this.isSortDESC = true;
         this.isDataLoaded = true;
-        this.changeDetectorRef.detectChanges();
+
         this.dataSource = new MatTableDataSource<HotelPreview>(this.hotelsPreviews);
-        this.dataSource.paginator = this.paginator;
         this.hotelPreviews = this.dataSource.connect();
+        this.changeDetectorRef.detectChanges();
       });
   }
 
@@ -124,4 +128,8 @@ export class FilterHotelComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['photo', 'Name', 'city', 'rating', 'description'];
+
+  handlePageEvent(pageEvent: PageEvent) {
+    console.log("PageEvent: ", pageEvent)
+  }
 }
