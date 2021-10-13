@@ -27,8 +27,8 @@ export class UserBookingService {
     );
   }
 
-  cancelReservation(id: number){
-    return this.http.get<Reservation[]>(AppApiConst.RESERVATION_CANCEL+"/" + `${id}`).pipe(
+  cancelReservation(id: number, cancelledBy: string){
+    return this.http.post<Reservation[]>(AppApiConst.RESERVATION_CANCEL+"/" + `${id}`,  cancelledBy).pipe(
       tap(reservation => {
         console.log("Reservation delete: ", reservation);
       }, error => {

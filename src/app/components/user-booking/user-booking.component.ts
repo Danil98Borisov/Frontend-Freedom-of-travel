@@ -40,15 +40,17 @@ export class UserBookingComponent implements OnInit {
     }
 }
   public cancel(id: number): void {
-    this.httpService.cancelReservation(id).subscribe((data: Reservation[]) => {
+    const cancelledBy = this.userService.getEmail();
+    this.httpService.cancelReservation(id, cancelledBy).pipe(map(reservation => this.httpService.getAllReservationUser(cancelledBy)))
+    // @ts-ignore
+    .subscribe((data: Reservation[]) => {
       this.reservation = data,
-        this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_CANCELED)
+        this.notificationService.openSnackBarWithoutReload(AppNotificationConst.RESERVATION_CANCELED)
     }, error => {
       console.log('error: ', error);
-      this.notificationService.openSnackBar(AppNotificationConst.RESERVATION_NOT_CANCELED)
+      this.notificationService.openSnackBarWithoutReload(AppNotificationConst.RESERVATION_NOT_CANCELED)
     })
   }
 
-
-  displayedColumns: string[] = ['Id', 'Hotel Name', 'Apartment Name', 'Status', 'Start date', 'End date', 'Email', 'Actions'];
+  displayedColumns: string[] = ['Id', 'Hotel Name', 'Apartment Name', 'Status', 'Start date', 'End date',  'Reservation date', 'Email', 'Actions'];
 }
