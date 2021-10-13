@@ -44,6 +44,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
 import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
 import {VerificationErrorComponent} from "./components/verification-error/verification-error.component";
+import {UserManagerComponent} from "./components/user-manager/user-manager.component";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 
@@ -68,7 +69,8 @@ import {MatCardModule} from "@angular/material/card";
     NotFoundComponent,
     UserBookingComponent,
     HotelManagementComponent,
-    VerificationErrorComponent
+    VerificationErrorComponent,
+    UserManagerComponent
   ],
   imports: [
     BrowserModule,

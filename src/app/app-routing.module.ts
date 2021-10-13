@@ -18,6 +18,7 @@ import {NotFoundComponent} from "./components/errors/not-found.component";
 import {UserBookingComponent} from "./components/user-booking/user-booking.component";
 import {HotelManagementComponent} from "./components/hotel-management/hotel-management.component";
 import {VerificationErrorComponent} from "./components/verification-error/verification-error.component";
+import {UserManagerComponent} from "./components/user-manager/user-manager.component";
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'hotel/manage-hotel', component: HotelManagementComponent},
   {path: '404', component: NotFoundComponent},
   {path: 'verification-error', component: VerificationErrorComponent},
+  {path: 'user', component: UserManagerComponent},
   {path: '**',component: NotFoundComponent}
 ];
 
