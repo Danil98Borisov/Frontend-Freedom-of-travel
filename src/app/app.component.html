@@ -1,26 +1,16 @@
 <div class="app">
   <div class="topnav">
-
-    <a *ngIf="isAdmin" class="nav-item" routerLink="reservation">Reservation</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="hotel/add">Add Hotel</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="hotel/edit">Edit Hotel</a>
-    <a *ngIf="isAdmin" class="nav-item" routerLink="delete">Delete</a>
-    <a *ngIf="isAdmin || isAdvertiser || username" class="nav-item" routerLink="user/booking">My bookings</a>
-    <a *ngIf="isAdmin || isAdvertiser" class="nav-item" routerLink="hotel/manage-hotel">Manage Hotels</a>
-    <a *ngIf="isAdmin " class="nav-item" routerLink="user">Manage User</a>
-    <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="login">Login</a>
-    <a *ngIf="!isLoggedIn" class="nav-item" style="display: flex; float: right" routerLink="register">Sign Up</a>
-    <a *ngIf="isLoggedIn" class="nav-item" style="display: flex; float: right" (click)="signOut()">Sign Out</a>
-
     <a class="nav-item" routerLink="filter-hotel" routerLinkActive="active">Home</a>
-    <a class="nav-item" routerLink="filter" routerLinkActive="active">Apartments</a>
-    <a class="nav-item" routerLink="hotel" routerLinkActive="active">Hotels</a>
-    <!--<a class="nav-item" routerLink="hotel/add" routerLinkActive="active">Add Hotel*</a>
-    <a class="nav-item" routerLink="hotel/edit" routerLinkActive="active">Edit Hotel*</a>
-    <a class="nav-item" routerLink="delete" routerLinkActive="active">Delete Hotel*</a>-->
-    <a class="nav-item" routerLink="reservation" routerLinkActive="active">Reservations</a>
-    <a class="nav-item" routerLink="user/booking" routerLinkActive="active">My bookings</a>
-    <a class="nav-item" routerLink="hotel/manage-hotel" routerLinkActive="active">Manage hotels</a>
+    <!--<a class="nav-item" routerLink="filter" routerLinkActive="active">Apartments</a>-->
+    <a class="nav-item" routerLink="hotel/all" routerLinkActive="active">Hotels</a>
+    <!--<a class="nav-item" routerLink="hotel/add" routerLinkActive="active" *ngIf="isAdmin">Add Hotel*</a>
+    <a class="nav-item" routerLink="hotel/edit" routerLinkActive="active" *ngIf="isAdmin">Edit Hotel*</a>
+    <a class="nav-item" routerLink="delete" routerLinkActive="active" *ngIf="isAdmin">Delete Hotel*</a>-->
+    <a class="nav-item" routerLink="reservation" routerLinkActive="active" *ngIf="isAdmin">Reservations</a>
+    <a class="nav-item" routerLink="user/booking" routerLinkActive="active"
+       *ngIf="isAdmin || isAdvertiser || username">My bookings</a>
+    <a class="nav-item" routerLink="hotel/manage-hotel" routerLinkActive="active" *ngIf="isAdmin || isAdvertiser">Manage hotels</a>
+    <a class="nav-item" routerLink="user/manage" routerLinkActive="active" *ngIf="isAdmin">Manage User</a>
 
     <ng-template [ngIf]="!isLoggedIn">
       <a class="nav-item-right" routerLink="register">Sign Up</a>

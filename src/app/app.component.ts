@@ -10,18 +10,6 @@ import {UserService} from "./services/user.service";
 })
 export class AppComponent implements OnInit {
 
-  public navLinks: any = [
-    {label: "Home", path: "filter-hotel"}, //todo Stays?
-    {label: "Apartments*", path: "filter"},
-    {label: "Hotels", path: "hotel"},
-    {label: "Add Hotel*", path: "hotel/add"},
-    {label: "Edit Hotel*", path: "hotel/edit"},
-    {label: "Delete Hotel*", path: "delete"},
-    {label: "Reservations", path: "reservation"},
-    {label: "My bookings", path: "user/booking"},
-    {label: "Manage hotels", path: "hotel/manage-hotel"}
-  ];
-
   isLoggedIn: boolean = false;
   isAdmin: boolean =  false;
   isAdvertiser: boolean = false;

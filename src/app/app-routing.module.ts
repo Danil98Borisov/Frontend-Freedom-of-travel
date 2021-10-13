@@ -30,16 +30,16 @@ const routes: Routes = [
   {path: 'apartment', component: ApartmentComponent},
   {path: 'hotel/add', component: AddHotelComponent},
   {path: 'reservation', component: ReservationComponent},
-  {path: 'hotel', component: HotelComponent},
+  {path: 'hotel/all', component: HotelComponent},
   {path: 'hotel/edit', component: EditHotelComponent},
   {path: 'filter', component: ApartmentSearchComponent},
   {path: 'filter-hotel', component: FilterHotelComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'user/booking', component: UserBookingComponent},
+  {path: 'user/manage', component: UserManagerComponent},
   {path: 'hotel/manage-hotel', component: HotelManagementComponent},
   {path: '404', component: NotFoundComponent},
   {path: 'verification-error', component: VerificationErrorComponent},
-  {path: 'user', component: UserManagerComponent},
   {path: '**',component: NotFoundComponent}
 ];
 
